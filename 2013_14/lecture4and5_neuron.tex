@@ -1,0 +1,167 @@
+\documentclass[11pt,a4paper]{scrartcl}
+\typearea{12}
+\usepackage{graphicx}
+\usepackage{pstricks}
+\usepackage{listings}
+\lstset{language=python}
+\pagestyle{headings}
+\markright{Computation Neuroscience - Lecture 2}
+\begin{document}
+
+\subsection*{Introduction}
+These notes are about the dynamics of a single neuron, it will cover
+the Hodgkin Huxley equation, the Integrate and Fire model and the
+behavior of synapses. I offer an error bounty of between 20p and 2
+pounds for mistakes. Contact me at
+\texttt{conor.houghton@bristol.ac.uk} or come up after a lecture.
+
+\subsection*{Electrical properties of a neuron}
+The potential inside a neuron is lower than the potential on the
+outside; this difference is created by ion pumps, small molecular
+machines that use energy to pump ions across the membrane seperating
+the inside and outside of the cell. One typical ion pump is
+Na+/K+-ATPase (Sodium-potassium adenosine triphosphatase); this uses
+energy in the form of ATP, the energy carrying molecule in the body,
+and through each cycle, it moves three sodium ions out of the cell and
+two potassium ions into the cell. Since both sodium and potassium ions
+have a charge of plus one, this leads to a net loss of one atomic
+charge to the inside of the cell lowering its potential. It also
+creates an excess of sodium outside the cell and an excess of
+potassium inside it. We will return to these chemical imbalances
+later. The potential difference across the membrane is called the
+\textbf{membrane potential}. At rest a typical value of the membrane
+potential is $E_L=-70 $mV.
+
+There is an interesting argument that explains the voltage scales for
+the electrodynamics of neurons; it is useful because it touches on
+themes we will return to in our study of neurons. Basically we will
+see that neurons work partly due to diffusion, which in turn depends
+on ions fly around because of their thermal energy. We know the
+thermal energy of an ion at temperature $T$, it is $k_BT$ where $k_B$
+is the Boltzmann constant. Now, consider the potential difference with
+that corresponding energy, the energy required to move an ion of
+charge one across a voltage $V_0$ is $qV_0$, so for neurons to work we
+would expect the scale of the voltages involve to be of the order
+where the thermal energy was similar to the energy required to
+overcome the voltage gap, that is, we expect the voltage gap to be able to modulate that flow. Hence $qV_0\approx k_BT$ or
+\begin{equation}
+V_0\approx \frac{k_BT}{q}\approx 27\,\mbox{mV}
+\end{equation}
+at room temperature.
+
+\subsection*{Spikes}
+
+So the summary is that \textbf{synapses} cause a small increase or
+decrease in the voltage; \textbf{excitatory synapses} cause an
+increase, \textbf{inhibitory synapses} a decrease. This drives the
+internal voltage dynamics of the cell, these dynamics are what we will
+learn about here. If the voltage exceeds a threshold, say $V_T=-55$ mV
+there is a nonlinear cascade which produces a \textbf{spike} or
+\textbf{action potential}, a spike in voltage 1-2 ms wide which rises
+above 0 mV before, in the usual description, falling to a reset value
+of $V_R=-65$ mV, the cell then remains unable to produce another spike
+for a \textbf{refractory period} which may last about 5 ms.
+
+\subsection*{Buckets of water}
+
+In the simplest model of neurons their voltage dynamics is similar to
+the dynamics of a bucket with a leak. In this analogy a bucket, with
+straight sides, is filled to a height $V$, water pours in the top at a
+rate $I$, which might depend on time, so $I(t)$, and water leaks out a hole
+in the bottom. The amount of water leaking out is $GV$, $V$ bacause
+the more water there is, the higher the pressure at the hole and $G$
+so that we can specify the size of the hole.
+
+Now, the $V$ is the height of the water not the volume, the confusing
+use of $V$ is to aid the analogy with neurons where $V$ is the
+voltage. The volume is $VC$ where $C$ is the cross-sectional area of the bucket. The rate of change of the volume is the water flowing in $I$, hence
+\begin{equation}
+\frac{dCV}{dt}=I-GV
+\end{equation}
+or
+\begin{equation}
+\frac{dV}{dt}=\frac{1}{C}(I-GV)
+\end{equation}
+
+Lets solve this equation for constant $I$ before going on to look at
+neurons. Probably best to do this using an integrating factor, let
+$\tau=C/G$ and $\tilde{I}=I/G$
+\begin{equation}
+\tau\frac{dV}{dt}+V=\tilde{I}
+\end{equation}
+then we multiply across by $\exp{t/tau}$
+\begin{equation}
+\tau e^{t/\tau}\frac{dV}{dt}+e^{t/tau}V=\tilde{I}e^{t/tau}
+\end{equation}
+Now we can rewrite the left hand side using the product rule
+\begin{equation}
+\frac{d}{dx}(uv)=u\frac{dv}{dx}+v\frac{du}{dx}
+\end{equation}
+to give
+\begin{equation}
+\tau\frac{d}{dt}\left(e^{t/\tau}V\right)=\tilde{I}e^{t/tau}
+\end{equation}
+Now integrating both sides gives
+\begin{equation}
+e^{t/\tau}V=\tilde{I}e^{t/tau}+A
+\end{equation}
+where $A$ is an integration constant. This gives
+\begin{equation}
+V=Ae^{-t/\tau}+\tilde{I}
+\end{equation}
+and putting $t=0$ shows $A=V(0)-\tilde{I}$ so
+\begin{equation}
+V=[V(0)-\tilde{I}]e^{-t/\tau}+\tilde{I}
+\end{equation}
+so, basically, the value of $V$ decays exponentially until it equilibriates with $\tilde{I}$.
+
+\subsection*{The bucket-like equation for neurons}
+
+We will now try to extend this equation so that it applies to
+neurons. First off $V$ is now voltage and $C$ will be replaced by
+$c_m$, the capacitance of the membrane, the amount of electrical
+charge that can be stored at the membrane is $C_mV$, the amount of
+electrical charge is the analog of the volume of water. The charge
+leak is a bit more complicated, because of the chemical gradients,
+that is the effects of the differing levels of ions inside and outside
+the cell along and their propensity to diffuse, the voltage at which
+there is no leaking of charge is not zero, it is $E_L=-70 $mV,
+roughly.  $G$ is now $G_m$, a conductance, the leak current
+is $G_m(V-E_L)$, as above, we actually divide across by it, and write
+$R_m=1/G_m$, the resistance. Finally, we write $\tau_m=C_m/G_m$ to get
+\begin{equation}
+\tau_m\frac{dV}{dt}=E_L-V+R_mI
+\end{equation}
+$I$ might end up being synaptic input, but traditionally we write the
+equation to match the \textsl{in vivo} experiment where $I$ is an
+injected current from an electrode, so we write $I_e$, \lq{}e\rq{} for
+electrode.
+
+This leaves out the possibility that there are other non-linear
+changes in the currents through the membrane as $V$ changes. This is a
+problem since there are other non-linear changes in the currents
+through the membrane as $V$ changes. The equation above leaves these
+out, in fact, the nonlinear effects are strongest for values of $V$
+near where a spike is produced, so one approach is to use the linear
+equation unless $V$ reaches a threshold value and then add a spike \lq{}by
+hand\rq{}. This is the \textbf{leaky integrate and fire model}.
+
+\begin{itemize}
+\item $V$ satisfies
+\begin{equation}
+\tau_m\frac{dV}{dt}=E_L-V+R_mI_e
+\end{equation}
+\item If $V\ge V_T$ a spike is recorded and the voltage is set to $V_R$.
+\end{itemize}
+
+This model is easy to solve; if $I_e$ is constant we have already
+solved it above up to messing around with constants. If $I_e$ is not
+constant it may still be possible to solve the equation, but in any
+case the equation can be solved numerically on a computer. Basically
+you divide time up into small steps, assume $I_e$ is constant for each
+small step and use the analytic constant-input equation to get from
+one time step to another. Alternatively the equation can be solved
+using a numerical approach to solving differential equations, such as
+the Euler method, or Runge Kutta.
+\end{document}
+

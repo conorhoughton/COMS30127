@@ -1,0 +1,19 @@
+AUTHOR=Koepsell Kilian, Wang Xin , Hirsch Judith, Sommer Friedrich T     
+     
+TITLE=Exploring the function of neural oscillations in early sensory systems      
+    
+JOURNAL=Frontiers in Neuroscience      
+    
+VOLUME=3      
+    
+YEAR=2010      
+    
+NUMBER=00010   
+        
+URL=http://www.frontiersin.org/Journal/Abstract.aspx?f=55&name=neuroscience&ART_DOI=10.3389/neuro.01.010.2010     
+      
+DOI=10.3389/neuro.01.010.2010      
+    
+ISSN=1662-453X      
+    
+ABSTRACT=Neuronal oscillations appear throughout the nervous system, in structures as diverse as the cerebral cortex, hippocampus, subcortical nuclei and sense organs. Whether or not neural rhythms contribute to normal function, are merely epiphenomena, or even interfere with physiological processing are topics of vigorous debate.  Sensory pathways are ideal for investigation of oscillatory activity because their inputs can be defined. Thus, we will focus on sensory systems as we ask how neural oscillations arise and how they might encode information about the stimulus. We will highlight recent work in the early visual pathway that shows how oscillations can multiplex different types of signals to increase the amount of information that spike trains encode and transmit. Last, we will describe oscillation-based models of visual processing and explore how they might guide further research.

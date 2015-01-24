@@ -4,7 +4,7 @@ contain the individual sections of the course: the course is mostly
 taught on the board from the notes given as a pdf in the folder, the
 source folder contains the LaTeX file used to generate the pdf.
 
-The file "Lectures.org" will list which sections where taught in which
+The file "lectures.org" will list which sections where taught in which
 lectures.
 
 A number of papers are references in the notes, I have tried to

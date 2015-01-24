@@ -10,3 +10,7 @@ lectures.
 A number of papers are references in the notes, I have tried to
 collect them together in the folder "papers"; these are not required
 reading but some of you might find them interesting.
+
+There is an error bounty of between 20p and two pounds, if you spot an
+error in any of the notes come up after a lecture or email me at
+conor.houghton@bristol.ac.uk.

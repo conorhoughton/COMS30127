@@ -1,2 +1,5 @@
 
 * Lecture 1 
+** Description of the course organization.
+** Motivation for studying computational neuroscience.
+** 1_anatomy_introduction up to but not including the synapse slide.

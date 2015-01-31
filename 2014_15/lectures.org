@@ -1,2 +1,12 @@
 
+
 * Lecture 1 
+** Description of the course organization.
+** Motivation for studying computational neuroscience.
+** 1_anatomy_introduction up to but not including the synapse slide.
+
+* Lecture 2
+** Took apart the mini brain model
+** Synapse, brief overview
+** The brain and its parts: hippocampus / cerebellum / basal ganglia / amgydala / thalamus
+** 1_anatomy_introduction up to and including the Luria slide

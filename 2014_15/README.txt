@@ -7,9 +7,12 @@ source folder contains the LaTeX file used to generate the pdf.
 The file "lectures.org" will list which sections where taught in which
 lectures.
 
-A number of papers are references in the notes, I have tried to
+A number of papers are referenced in the notes, I have tried to
 collect them together in the folder "papers"; these are not required
 reading but some of you might find them interesting.
+
+The wiki has a page of links to other resources, interesting videos
+and the like.
 
 There is an error bounty of between 20p and two pounds, if you spot an
 error in any of the notes come up after a lecture or email me at

@@ -10,3 +10,7 @@
 ** Synapse, brief overview
 ** The brain and its parts: hippocampus / cerebellum / basal ganglia / amgydala / thalamus
 ** 1_anatomy_introduction up to and including the Luria slide
+* Lecture 3
+** Finished off the gross organization of the brain, the visual system and the sensory and motor cortex.
+** Brief discussion of computational neuroscience and its tools
+** Introduction to python as far map in functional programming

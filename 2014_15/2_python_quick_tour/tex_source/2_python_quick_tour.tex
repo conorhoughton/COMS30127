@@ -5,10 +5,10 @@
 \usepackage{listings}
 \lstset{language=python}
 \pagestyle{headings}
-\markright{Computation Neuroscience - Lecture 2}
+\markright{Computation Neuroscience - 2 python quick tour}
 \begin{document}
 \subsection*{Introduction}
-These are getting started notes on Python.
+These are getting started notes on Python, the name of the corresponding example program is given in brackets in a fixed width font (\texttt{fixed width font}) just before the code listing.
 \subsection*{Computing in Computational Neuroscience}
 People in computational neuroscience usually use either MATLAB or
 Python or they use a specialized simulation tool such as GENESIS or
@@ -70,7 +70,7 @@ It has big numbers which can be useful sometimes
 \end{lstlisting}
 The \texttt{L} at the end is because it is a long number. To get
 special functions and so forth you need to \texttt{import} the math
-package
+package 
 \begin{lstlisting}[numbers=right]
 >>> import math
 >>> math.tan(math.pi/4.0)
@@ -116,12 +116,12 @@ something else on your machine, it depends on the output of
 
 \subsection*{Python - some basics}
 There are lots of introductions to Python on the web and that's
-probably the best place to look. Variables are not declared
+probably the best place to look. Variables are not declared (\texttt{hello\_world.py})
 \begin{lstlisting}[numbers=right]
 hello = "hello world"
 print hello
 \end{lstlisting}
-prints hello. It has a nice slice notation
+prints hello. It has a nice slice notation  (\texttt{hello\_world\_slice.py})
 \begin{lstlisting}[numbers=right]
 hello = "hello world"
 print hello[0]
@@ -132,7 +132,7 @@ prints \texttt{h}, \texttt{ell} and \texttt{d}, \texttt{hello[-1]}
 gives the last character. 
 
 One of the most distinctive features is that blocks are created by
-indenting rather than brackets. In
+indenting rather than brackets. In  (\texttt{hello\_world\_for.py})
 \begin{lstlisting}[numbers=right]
 hello = "hello world"
 
@@ -143,7 +143,7 @@ print
 the block for the for loop is \texttt{print a,} because of the indent,
 note the colon after the \texttt{for} statement too. This sort of for
 loop, looping over parts of an object, is considered more pythonic
-than the indexed loops in C++ and so on, this is possible though
+than the indexed loops in C++ and so on, this is possible though  (\texttt{hello\_world\_indexed.py})
 \begin{lstlisting}[numbers=right]
 hello = "hello world"
 
@@ -152,7 +152,7 @@ for i in range(0,len(hello)):
 print 
 \end{lstlisting}
 If you do want the index and the object it refers to you should use an
-enumeration:
+enumeration  (\texttt{hello\_world\_enumeration.py}):
 \begin{lstlisting}[numbers=right]
 hello = "hello world"
 
@@ -160,7 +160,7 @@ for i,a in enumerate(hello):
     print i,a
 print 
 \end{lstlisting}
-The if statement is also indented, well all blocks are, but for completeness
+The if statement is also indented, well all blocks are, but for completeness  (\texttt{if.py})
 \begin{lstlisting}[numbers=right]
 import random
 
@@ -176,7 +176,7 @@ else:
 
 
 For some reason what are called arrays or vectors in other languages
-are called lists in python
+are called lists in python  (\texttt{if.py})
 \begin{lstlisting}[numbers=right]
 hello = "hello world"
 
@@ -187,14 +187,14 @@ for a in hello:
 
 print letters
 \end{lstlisting}
-Lists need not be heterogenous
+Lists need not be heterogenous  (\texttt{hetro\_list.py})
 \begin{lstlisting}[numbers=right]
 list=[72,79,86,96,103,"Catheral Parkway"]
 print list
 \end{lstlisting}
 Python also has a tuple type, like a list but immutable. The
 \texttt{enumerate} we saw above makes an \texttt{enumerate} object,
-but you can cast it to a list of tuples:
+but you can cast it to a list of tuples (\texttt{enumerate\_object.py}):
 \begin{lstlisting}[numbers=right]
 hello = "hello world"
 
@@ -206,7 +206,7 @@ print list(enumerate(hello))
 One thing about Python that is hard to get used to if you are used to
 C or C++ is that what I keep calling variables are more correctly
 labels, they name memory locations rather than pieces of data. This
-often catches me out, to see the difference look at
+often catches me out, to see the difference look at (\texttt{labels.py})
 \begin{lstlisting}[numbers=right]
 a = [0,1,2]
 b = a
@@ -225,7 +225,7 @@ and note that changing \texttt{b[1]} has changed the value of \texttt{a[1]}.
 
 Python has some stylish functional programming feactures for working
 with lists, for example \texttt{map} does a function on all the
-elements in a sequence so
+elements in a sequence so (\texttt{map.py})
 \begin{lstlisting}[numbers=right]
 def cube(x):
     return x*x*x
@@ -240,7 +240,7 @@ where you should also note the syntax for defining functions, there
 are functions and classes in the usual way, though classes have no
 private members. In fact this code can be made more streamlined, there
 is a construction for avoiding giving names to things that don't need
-to be named:
+to be named  (\texttt{map\_lambda.py}):
 \begin{lstlisting}[numbers=right]
 numbers = [1,2,3,4,5]
 
@@ -264,7 +264,7 @@ you.
 
 The class construction has a few annoyances; for example each class
 can only have one constructor, which is defined using the
-\texttt{\_\_init\_\_} function.
+\texttt{\_\_init\_\_} function  (\texttt{class\_example.py}).
 \begin{lstlisting}[numbers=right]
 class Counter:
 
@@ -307,7 +307,7 @@ introduce packages commonly used in scientific computing
 \item \textsl{matplotlib} Plots stuff.
 \end{itemize}
 
-Here \texttt{numpy} is imported with the name \texttt{np}
+Here \texttt{numpy} is imported with the name \texttt{np}  (\texttt{np\_array.py})
 \begin{lstlisting}[numbers=right]
 import numpy as np
 d1=np.array([1,-1,1])
@@ -317,7 +317,7 @@ print d2
 print d1*d2
 print np.dot(d1,d2)
 \end{lstlisting}
-so we define two numpy arrays, we see that \texttt{*} gives element-by-element multiplication, whereas \texttt{np.dot(d1,d2)} gives the dot product. We can do matrix multiplication as well
+so we define two numpy arrays, we see that \texttt{*} gives element-by-element multiplication, whereas \texttt{np.dot(d1,d2)} gives the dot product. We can do matrix multiplication as well  (\texttt{np\_matrix.py})
 \begin{lstlisting}[numbers=right]
 import numpy as np
 d1=np.array([(1,-1,1),(1,2,1),(1,-1,1)])
@@ -326,14 +326,14 @@ d2=np.array([1,3,1])
 print d2
 print np.dot(d1,d2)
 \end{lstlisting}
-and lots of linear algebra
+and lots of linear algebra  (\texttt{np\_det.py})
 \begin{lstlisting}[numbers=right]
 import numpy as np
 d1=np.array([(1,-1,3),(1,2,1),(3,1,1)])
 print np.linalg.det(d1)
 \end{lstlisting}
 
-As for \texttt{matplotlib} here is a simple example
+As for \texttt{matplotlib} here is a simple example  (\texttt{plot.py})
 \begin{lstlisting}[numbers=right]
 import numpy as np
 import matplotlib.pyplot as plt

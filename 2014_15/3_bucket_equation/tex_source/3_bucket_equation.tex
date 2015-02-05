@@ -77,9 +77,9 @@ $\tau=C/G$ and $\tilde{\i}=i/G$
 \begin{equation}
 \tau\frac{dh}{dt}+h=\tilde{\i}
 \end{equation}
-then we multiply across by $\exp{t/tau}$
+then we multiply across by $\exp{t/tau}$ and divide by $\tau$
 \begin{equation}
-\tau e^{t/\tau}\frac{dh}{dt}+e^{t/\tau}h=\tilde{\i}e^{t/tau}
+\tau e^{t/\tau}\frac{dh}{dt}+\frac{1}{\tau}e^{t/\tau}h=\frac{\tilde{\i}e^{t/tau}}{\tau}
 \end{equation}
 Now we can rewrite the left hand side using the product rule
 \begin{equation}
@@ -87,7 +87,7 @@ Now we can rewrite the left hand side using the product rule
 \end{equation}
 to give
 \begin{equation}
-\tau\frac{d}{dt}\left(e^{t/\tau}h\right)=\tilde{\i}e^{t/tau}
+\tau\frac{d}{dt}\left(e^{t/\tau}h\right)=\frac{\tilde{\i}e^{t/tau}}{\tau}
 \end{equation}
 Now integrating both sides gives
 \begin{equation}

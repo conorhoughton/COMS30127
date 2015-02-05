@@ -14,3 +14,6 @@
 ** Finished off the gross organization of the brain, the visual system and the sensory and motor cortex.
 ** Brief discussion of computational neuroscience and its tools
 ** Introduction to python as far map in functional programming
+* Lecture 4
+** Finished the python quick tour
+** Started ODEs, solved the constant inout case.

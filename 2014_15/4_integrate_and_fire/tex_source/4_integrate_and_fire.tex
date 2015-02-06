@@ -1,0 +1,150 @@
+\documentclass[11pt,a4paper]{scrartcl}
+\typearea{12}
+\usepackage{graphicx}
+\usepackage{pstricks}
+\usepackage{listings}
+\lstset{language=python}
+\pagestyle{headings}
+\markright{Computation Neuroscience - Lecture 4}
+\begin{document}
+
+\subsection*{Introduction}
+This note is about the dynamics of a single neuron, it will cover
+one of the simplest such models: the leaky integrate and fire model.
+
+\subsection*{Electrical properties of a neuron}
+The potential inside a neuron is lower than the potential on the
+outside; this difference is created by ion pumps, small molecular
+machines that use energy to pump ions across the membrane seperating
+the inside and outside of the cell. One typical ion pump is
+Na+/K+-ATPase (Sodium-potassium adenosine triphosphatase); this uses
+energy in the form of ATP, the energy carrying molecule in the body,
+and through each cycle, it moves three sodium ions out of the cell and
+two potassium ions into the cell. Since both sodium and potassium ions
+have a charge of plus one, this leads to a net loss of one atomic
+charge to the inside of the cell lowering its potential. It also
+creates an excess of sodium outside the cell and an excess of
+potassium inside it. We will return to these chemical imbalances
+later. The potential difference across the membrane is called the
+\textbf{membrane potential}. At rest a typical value of the membrane
+potential is $E_L=-70 $mV.
+
+There is an interesting argument that explains the voltage scales for
+the electrodynamics of neurons; it is useful because it touches on
+themes we will return to in our study of neurons. Basically we will
+see that neurons work partly due to diffusion, which in turn depends
+on ions fly around because of their thermal energy. We know the
+thermal energy of an ion at temperature $T$, it is $k_BT$ where $k_B$
+is the Boltzmann constant. Now, consider the potential difference with
+that corresponding energy, the energy required to move an ion of
+charge one across a voltage $V_0$ is $qV_0$, so for neurons to work we
+would expect the scale of the voltages involve to be of the order
+where the thermal energy was similar to the energy required to
+overcome the voltage gap, that is, we expect the voltage gap to be able to modulate that flow. Hence $qV_0\approx k_BT$ or
+\begin{equation}
+V_0\approx \frac{k_BT}{q}\approx 27\,\mbox{mV}
+\end{equation}
+at room temperature.
+
+\subsection*{Spikes}
+
+So the summary is that \textbf{synapses} cause a small increase or
+decrease in the voltage; \textbf{excitatory synapses} cause an
+increase, \textbf{inhibitory synapses} a decrease. This drives the
+internal voltage dynamics of the cell, these dynamics are what we will
+learn about here. If the voltage exceeds a threshold, say $V_T=-55$ mV
+there is a nonlinear cascade which produces a \textbf{spike} or
+\textbf{action potential}, a spike in voltage 1-2 ms wide which rises
+above 0 mV before, in the usual description, falling to a reset value
+of $V_R=-65$ mV, the cell then remains unable to produce another spike
+for a \textbf{refractory period} which may last about 5 ms.
+
+\subsection*{Buckets of water}
+
+In the simplest model of neurons their voltage dynamics is similar to
+the dynamics of a bucket with a leak. In this analogy a bucket, with
+straight sides, is filled to a height $V$, water pours in the top at a
+rate $I$, which might depend on time, so $I(t)$, and water leaks out a hole
+in the bottom. The amount of water leaking out is $GV$, $V$ bacause
+the more water there is, the higher the pressure at the hole and $G$
+so that we can specify the size of the hole.
+
+Now, the $V$ is the height of the water not the volume, the confusing
+use of $V$ is to aid the analogy with neurons where $V$ is the
+voltage. The volume is $VC$ where $C$ is the cross-sectional area of the bucket. The rate of change of the volume is the water flowing in $I$, hence
+\begin{equation}
+\frac{dCV}{dt}=I-GV
+\end{equation}
+or
+\begin{equation}
+\frac{dV}{dt}=\frac{1}{C}(I-GV)
+\end{equation}
+
+Lets solve this equation for constant $I$ before going on to look at
+neurons. Probably best to do this using an integrating factor, let
+$\tau=C/G$ and $\tilde{I}=I/G$
+\begin{equation}
+\tau\frac{dV}{dt}+V=\tilde{I}
+\end{equation}
+then we multiply across by $\exp{t/tau}$
+\begin{equation}
+\tau e^{t/\tau}\frac{dV}{dt}+e^{t/tau}V=\tilde{I}e^{t/tau}
+\end{equation}
+Now we can rewrite the left hand side using the product rule
+\begin{equation}
+\frac{d}{dx}(uv)=u\frac{dv}{dx}+v\frac{du}{dx}
+\end{equation}
+to give
+\begin{equation}
+\tau\frac{d}{dt}\left(e^{t/\tau}V\right)=\tilde{I}e^{t/tau}
+\end{equation}
+Now integrating both sides gives
+\begin{equation}
+e^{t/\tau}V=\tilde{I}e^{t/tau}+A
+\end{equation}
+where $A$ is an integration constant. This gives
+\begin{equation}
+V=Ae^{-t/\tau}+\tilde{I}
+\end{equation}
+and putting $t=0$ shows $A=V(0)-\tilde{I}$ so
+\begin{equation}
+V=[V(0)-\tilde{I}]e^{-t/\tau}+\tilde{I}
+\end{equation}
+so, basically, the value of $V$ decays exponentially until it
+equilibriates with $\tilde{I}$.
+
+These dynamics make good intuitive sense; the more water there is in
+the bucket, the higher the pressure will be at the leak and the
+quicker the water will pour out. If there is just the right about of
+water the rate the water pours out the leak will precisely match the
+rate it pours in, this is the equilibrium. If there is more water than required for equilibrium it will pour out faster than the flow coming in, if there is less, it will pour out slower. Either way, as time passes the height of the water will reach the equilibrium. The plot in Fig.~\ref{bucket_v} illustrates this.
+
+\begin{figure}
+\begin{center}
+\include{bucket_v}
+\end{center}
+\caption{Exponential relaxation. The dynamics described by the
+  \lq{}bucket equation\rq{} is very common. Here $V=[V(0)-I]\exp(-t/\tau)+I$ is plotted with $I=1$, $\tau=1$ and three different values of $V(0)$. $V(t)$ relaxes towards the equilibrium value $I=1$, the closer it gets, the slower it approaches.\label{bucket_v}}
+\end{figure}
+
+We have only discussed constant inputs; the variable input case is
+harder and although it can sometimes be solved it is often easier just
+to compute it numerically. This can be done either numerically, using
+the Euler method or Runga-Kutta or approximating the variable input by
+one that is constant for each discrete time step and then using the
+solution for constant input. In any case, the effect is that the
+solution kind of chases the input with a timescale set by $\tau$, that
+is for very small $\tau$ is chases it quickly, so it is close to the
+input, but for large $\tau$ it lags behind it and smooths it out. This
+is sometimes described by saying that it \textsl{filters} the inout. There is an illustration in Fig.~\ref{chasing}.
+
+\begin{figure}
+\begin{center}
+\include{chasing}
+\end{center}
+\caption{Variable input. Here the input is a sine wave $I=\sin{t}$ and the equation is evolved with $V(0)$ and three different $\tau$ values. For $\tau=0.25$ we see $V(t)$ closely matches the input whereas for larger $\tau$ it is smoother and lags behind.\label{chasing}}
+\end{figure}
+
+
+\end{document}
+

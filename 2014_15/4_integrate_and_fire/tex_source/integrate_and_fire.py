@@ -1,3 +1,5 @@
+#simple program used to make the integrate and fire figure 
+
 from math import *
 
 e_l = -70

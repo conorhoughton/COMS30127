@@ -5,7 +5,7 @@
 \usepackage{listings}
 \lstset{language=python}
 \pagestyle{headings}
-\markright{Computation Neuroscience - Lecture 4}
+\markright{Computation Neuroscience -  4 integrate and fire}
 \begin{document}
 
 \subsection*{Introduction}
@@ -100,23 +100,33 @@ the currents through the membrane as $V$ changes. The equation above
 leaves these out, in fact, the nonlinear effects are strongest for
 values of $V$ near where a spike is produced, so one approach is to
 use the linear equation unless $V$ reaches a threshold value and then
-add a spike \lq{}by hand\rq{}.
+add a spike \lq{}by hand\rq{}. This has the effect of changing the
+voltage to a reset value, this mimics what happens in the neuron, or
+in the Hodgkin Huxley model which we will look at next and which
+includes the full non-linear dynamics which makes the spike. Anyway,
+in summary
 \begin{itemize}
 \item $V$ satisfies
 \begin{equation}
 \tau_m\frac{dV}{dt}=E_L-V+R_mI_e
 \end{equation}
-\item If $V\ge V_T$ a spike is recorded and the voltage is set to $V_R$.
+\item If $V\ge V_T$ a spike is recorded and the voltage is set to a
+  reset value $V_R$.
 \end{itemize}
- This is the \textbf{leaky integrate and fire model}, a surprisingly
- old model first introduced in \cite{Lapicque1907a}. It lacks lots of
- the details important in the dynamics of neurons, but is useful and
- often used for modeling the behavior of large neuronal networks or
- for exploring ideas about neuronal computation in a relatively
- straight-forward setting.
+The reset value, the voltage after the spike is often set equal to the
+ leak potential. This is the \textbf{leaky integrate and fire model}, a surprisingly
+old model first introduced in \cite{Lapicque1907a}. It lacks lots of
+the details important in the dynamics of neurons, but is useful and
+often used for modeling the behavior of large neuronal networks or for
+exploring ideas about neuronal computation in a relatively
+straight-forward setting.
 
 This model is easy to solve; if $I_e$ is constant we have already
-solved it above up to messing around with constants. If $I_e$ is not
+solved it above up to messing around with constants:
+\begin{equation}
+V(t)=E_L+R_mI_e+[V(0)-E_L-R_mI_e]e^{-t/\tau_m}
+\end{equation}
+If $I_e$ is not
 constant it may still be possible to solve the equation, but in any
 case the equation can be solved numerically on a computer. An example
 in given in Fig.~\ref{v_i_f}.

@@ -74,20 +74,22 @@ what happens, there is a high concentration of potassium inside the
 cell and because of the random motion of particles associated with
 temperature, these have a tendency to diffuse, that is to increase the
 entropy of the situation by spreading out. It takes a force to
-counteract this. This is the reversal potential, $E_L$, the voltage required
-for zero current even if there is some conductivity.
+counteract this. This is the reversal potential, $E_L$, the voltage
+required for zero current even if there is some conductivity. It turns
+out that the normal Ohm's law applies around the reversal potential so
+that the current out of the cell is proportional to $V-E_L$.
 
 $G$ is now $G_m$, a conductance, measuring the porousness of the
-membrane to the flow of ions. The leak current is $G_m(V-E_L)$, as
-above, we actually divide across by it, and write $R_m=1/G_m$, the
-resistance. Finally, we write $\tau_m=C_m/G_m$ to get
+membrane to the flow of ions, in other words, it gives the constant of proportionality for the leak current: the leak current out of the cell is
+$G_m(V-E_L)$. We actually divide across by the conductance, and write
+$R_m=1/G_m$, the resistance. Finally, we write $\tau_m=C_m/G_m$ to get
 \begin{equation}
 \tau_m\frac{dV}{dt}=E_L-V+R_mI
 \end{equation}
 $I$ might end up being synaptic input, but traditionally we write the
 equation to match the \textsl{in vivo} experiment where $I$ is an
 injected current from an electrode, so we write $I_e$, \lq{}e\rq{} for
-electrode. $tau_m$ is a time constant, using the notation of
+electrode. $\tau_m$ is a time constant, using the notation of
 dimensional analysis we have $[\tau_m]=T$. To check this note that the
 units of capacitance are charge per voltage: $[C_m]=QV^{-1}$, the
 units of resistance is voltage per current $[R_m]=VI^{-1}$ and current

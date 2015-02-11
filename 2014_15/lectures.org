@@ -17,3 +17,8 @@
 * Lecture 4
 ** Finished the python quick tour
 ** Started ODEs, solved the constant inout case.
+* Lecture 5
+** Finished odes, ie variable input, Euler, mention of Runge Kutta
+** Started Integrate and Fire
+** Described ion pumps, diffusion, chemical gradients
+** Wrote down I&F ode but didn't discuss the spike

@@ -31,10 +31,10 @@ int main(){
   double onset1=0*mS;
   double offset1=0*mS;
   double onset2=100*mS;
-  double offset2=170*mS;
+  double offset2=500*mS;
 
-  double amplitude1=27;
-  double amplitude2=70;
+  double amplitude1=0;
+  double amplitude2=6;
 
   Electrode electrode(deltaT,onset1,offset1,onset2,offset2,amplitude1,amplitude2);
   

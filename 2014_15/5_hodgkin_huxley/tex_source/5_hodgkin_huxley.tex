@@ -20,7 +20,7 @@
 The nonlinear dynamics that neurons rely on to form spikes arise from
 the \textbf{voltage-gated channels}; these are ion channels whose
 conductance varies as the voltage varies. They are tiny molecular
-machines whici, crucially, are ion selective: only sodium ions can
+machines which, crucially, are ion selective: only sodium ions can
 pass through a sodium gate, only potassium ions through a potassium
 gate. Each individual gate has a number of different gating states, we
 will briefly examine this, but ultimately each one is either open or
@@ -58,7 +58,7 @@ If $\tau_n(V)$ and $n_\infty(V)$ where constant this would be simple,
 $n(t)$ would decay to $n_\infty$ with a timescale of $\tau_n$, however
 they aren't constants, they are functions of the membrane potential. 
 
-A graph of $n_\infty(V)$ is shown in Figure 2. We can see that $n$ is
+A graph of $n_\infty(V)$ is shown in Fig.~\ref{fig:asymp_vals}. We can see that $n$ is
 small when the voltage is near the resting value but climbs towards
 one as $V$ increases. Now, $n$ isn't equal to $n_\infty$, rather it
 decays towards it with a time constant given by $\tau_n(V)$, but we
@@ -70,9 +70,10 @@ zero, $n^4$ is very small indeed. This is illustrated in
 Fig.~\ref{fig:nfour}. 
 
 We also need to discuss reversal potentials. You would expect the flow
-of potassium to be dermined by $g_KV$, but it isn't; because there are
-more potassiums inside the cell than outside they would flow out even
-if $V=0$. In fact we assume this doesn't change Ohm's law, the
+of potassium to be determined by $g_KV$, but it isn't; because there
+are more potassium ions inside the cell than outside they would flow
+out even if $V=0$. In fact, as we discussed when looking at the
+integrate and flow model, we assume this doesn't change Ohm's law, the
 relationship between potential difference and current, rather, it just
 changes the zero point:
 \begin{equation}
@@ -97,6 +98,18 @@ and can be calculated using an equation called the Nernst equation.
 \end{figure}
 
 
+\begin{figure}
+\begin{center}
+\includegraphics{ChannelsBlack.eps}
+\end{center}
+\caption{A cartoon of the two types of voltage gated channel we are
+  discussing; the persistent potassium channels open as the voltage
+  rise, the transient sodium channel opens and then closes
+  again.\label{ChannelsBlack}}
+\end{figure}
+
+
+
 The sodium channel is called a transient channel because it has two
 closed states and one open one; generally its dynamics during the
 spike is
@@ -108,9 +121,9 @@ gate that is closed to give the initial closed state is very like the
 sodium gate, but with three subgates; the probability of these
 subgates being open is usually called $m$; the other part, the gate
 that closes to give the second closed state is different in that it is
-not made of subgates, its pobability of being open is usually called
+not made of subgates, its probability of being open is usually called
 $h$ and its asymptotic value, $h_\infty$, is near one for lower $V$
-and near zero for larger. Figure 2 includes graphs of $m_\infty(V)$
+and near zero for larger. A cartoon of all this is given in Fig.~\ref{ChannelsBlack}. Fig.~\ref{fig:asymp_vals} includes graphs of $m_\infty(V)$
 and $h_\infty(V)$. Finally, the reversal potential for sodium is
 $E_{Na}=50$ mV. The sodium current is therefore
 \begin{equation}
@@ -121,22 +134,6 @@ with
 g_{Na}=\bar{g}_{Na}m^3h
 \end{equation}
 
-We can now give a rough description of how spikes are formed. The time
-constants $\tau$ for the three gating probabilities are given in
-Figure 3, these are quite complicated, but the key thing is that
-$\tau_m$ is very small, no matter what the value of $V$ is. This means
-that $m$ stays very close to its asymptotic value $m_\infty$. As $V$
-approaches the threshold of about $-55$ mV, $m$ increases towards one,
-with $m^3$ increasing even more dramatically. Opening the sodium gates
-allows sodium to flood the cell, increasing the $V$ further and
-further opening the gates. This gives the rapid upswing in voltage,
-the rising part of the spike. The other two gating probabilities have
-slower dynamics and it takes $n$ and $h$ a while to catch up with
-$n_\infty$ and $h_\infty$. However, as $h$ decreases, it closes the
-sodium gates again, preventing more sodium getting in to the cell; $n$
-increases opens the potassium gates, potassium flows out reducing the
-$V$ again, back towards -70 mV. This gives the downswing of the
-spike. Afterwards everything resets.
 
 All of this together gives the Hodgkin-Huxley equation, basically it
 equates the rate of change of $V$ to a set of currents, the leak
@@ -146,6 +143,39 @@ spike.
 \begin{equation}
 C_m\frac{dV}{dt}=\mbox{currents}
 \end{equation}
+
+We can now give a rough description of how spikes are formed. The time
+constants $\tau$ for the three gating probabilities are given in
+Fig.~\ref{fig:tau_vals}, these are quite complicated, but the key
+thing is that $\tau_m$ is very small, no matter what the value of $V$
+is. This means that $m$ stays very close to its asymptotic value
+$m_\infty$. As $V$ approaches the threshold of about $-55$ mV, $m$
+increases towards one, with $m^3$ increasing even more
+dramatically. Opening the sodium gates allows sodium to flood the
+cell, increasing the $V$ further and further opening the gates. This
+gives the rapid upswing in voltage, the rising part of the spike. The
+other two gating probabilities have slower dynamics and it takes $n$
+and $h$ a while to catch up with $n_\infty$ and $h_\infty$. However,
+as $h$ decreases, it closes the sodium gates again, preventing more
+sodium getting in to the cell; $n$ increases opens the potassium
+gates, potassium flows out reducing the $V$ again, back towards -70
+mV. This gives the downswing of the spike. Afterwards everything
+resets. An example spike is shown in Fig.~\ref{fig:HH_spike}.
+
+\begin{figure}
+\textbf{A}
+\begin{center}
+\include{HH_spike}
+\end{center}
+\textbf{B}
+\begin{center}
+\include{gates_spike}
+\end{center}
+\caption{Some spikes in the HH model. \textbf{A} shows the spikes produced by a standard HH model in response to a current input. \textbf{B} shows how the gating probabilities vary during the spike.\label{fig:HH_spike}}
+\end{figure}
+
+
+
 For a more accurate model further channels, and therefore further
 currents, can be added, other sodium and potassium channels with
 different dynamics, or a calcium channel. It is also common to

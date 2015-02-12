@@ -22,3 +22,6 @@
 ** Started Integrate and Fire
 ** Described ion pumps, diffusion, chemical gradients
 ** Wrote down I&F ode but didn't discuss the spike
+* Lecture 6
+** Finished integrate and fire neurons - threshold, f-I curve.
+** Start of HH, description of the persistient K^+ gate

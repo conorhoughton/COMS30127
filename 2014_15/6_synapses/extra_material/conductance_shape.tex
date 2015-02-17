@@ -96,5 +96,61 @@ x(t)=\bar{o}te^{-ct}+Ae^{-ct}
 where $A$ is an integration constant that gets set to zero if
 $x(0)=0$. Thus, there is a derivation for the $\alpha$ function, just not a paritcularly good one!
 
+Another model describes the period of time that the neurotransmitter
+is in the cleft as a square pulse, this might not be all that
+realistic either, but it is a simplification that makes it easier to
+deal with how the conductance changes in response to more than one
+spike. Say there is a spike at $t=0$:
+\begin{equation}
+o(t)=\left\{\begin{array}{ll}\bar{o}&0<t<\tau_o\\0&\mbox{otherwise}\end{array}\right.
+\end{equation}
+Imagine $\bar{o}$ is much bigger than $c$ so that in $0<t<\tau_o$ 
+\begin{equation}
+\frac{dx}{dt}=(1-x)\bar{o}=-\bar{o}x-\bar{o}
+\end{equation}
+We can solve this:
+\begin{equation}
+x(t)=\bar{o}+[x(0)-\bar{o}]e^{-\bar{o}t}
+\end{equation}
+For $t>\tau_o$ 
+\begin{equation}
+\frac{dx}{dt}=-cx
+\end{equation}
+so 
+\begin{equation}
+x(t)=x(\tau_o)e^{-ct}
+\end{equation}
+
+Now, a useful approximation here is to ignore the short time $o$ is
+non-zero, in other words, to assume that the dynamics during the
+period the cleft is full of neurotransmitter is uninteresting, we have
+in any case approximated it rather crudely. Now between the spike
+arriving and the end of this short period $x(t)$ has gone from $x(0)$ to
+\begin{equation}
+x(\tau_o)=\bar{o}+[x(0)-\bar{o}]e^{-\bar{o}t}
+\end{equation}
+which can be rearranged to give
+\begin{equation}
+x(\tau_o)=x(0)+[\bar{o}-x(0)]\left(1-e^{-\bar{o}t}\right)
+\end{equation}
+If there hasn't be a spike in a long time $x(0)=0$ and in that case
+\begin{equation}
+x(\tau_o)=\bar{o}\left(1-e^{-\bar{o}t}\right)
+\end{equation}
+This is actually the largest increase in the conductance that is
+possible, call this value $x_m$ and substitute back into the general
+equation for $x(\tau_o)$:
+\begin{equation}
+x(\tau_o)=x(0)+\frac{[\bar{o}-x(0)]x_m}{\bar{o}}
+\end{equation}
+This gives another popular model for synapses where 
+\begin{equation}
+\frac{dx}{dt}=-cx
+\end{equation}
+but everything there is a spike
+\begin{equation}
+x(t)\rightarrow x(t)+\frac{[\bar{o}-x(t)]x_m}{\bar{o}}
+\end{equation}
+
 
 \end{document}

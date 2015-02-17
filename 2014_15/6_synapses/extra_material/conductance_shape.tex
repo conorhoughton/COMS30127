@@ -18,7 +18,11 @@
 \markright{Computation Neuroscience - 6 extra material - conductance shape}
 \begin{document}
 
-It has been claimed in the leture notes that the synaptic conductance is well described by an $\alpha$ function so after a spike arrives $g_s\propto s(t)$ where
+\section*{Modelling the synaptic conductance}
+This is a quick note on modelling the synaptic conductance. It has
+been claimed in the leture notes that the synaptic conductance is well
+described by an $\alpha$ function so after a spike arrives $g_s\propto
+s(t)$ where
 \begin{equation}
 s(t)=te^{-t/\tau_s}
 \end{equation}
@@ -147,10 +151,20 @@ This gives another popular model for synapses where
 \begin{equation}
 \frac{dx}{dt}=-cx
 \end{equation}
-but everything there is a spike
+but every time there is a spike
 \begin{equation}
 x(t)\rightarrow x(t)+\frac{[\bar{o}-x(t)]x_m}{\bar{o}}
 \end{equation}
+This becomes a bit easier to interpret if we write $x(t)=\bar{o}p(t)$ and $x_m=\bar{o}p(t)$, then
+\begin{equation}
+\frac{dp}{dt}=-cp
+\end{equation}
+but every time there is a spike
+\begin{equation}
+p(t)\rightarrow p(t)+[1-p(t)]p_m
+\end{equation}
+and we can see that $p_m$ is the fraction of available gates that open
+with each spike.
 
 
 \end{document}

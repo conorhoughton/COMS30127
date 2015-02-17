@@ -1,0 +1,100 @@
+\documentclass[11pt,a4paper]{scrartcl}
+\typearea{12}
+\usepackage{graphicx}
+\usepackage{pstricks}
+\usepackage{listings}
+
+
+\usepackage{graphicx}
+
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+\usetikzlibrary{arrows,automata}
+\usetikzlibrary{decorations.markings}
+\usetikzlibrary{calc}
+
+\lstset{language=python}
+\pagestyle{headings}
+\markright{Computation Neuroscience - 6 extra material - conductance shape}
+\begin{document}
+
+It has been claimed in the leture notes that the synaptic conductance is well described by an $\alpha$ function so after a spike arrives $g_s\propto s(t)$ where
+\begin{equation}
+s(t)=te^{-t/\tau_s}
+\end{equation}
+where $\tau_s$ is a time scale, see Fig.~\ref{fig:alpha}. Mostly this
+is used because it has roughly the right shape. Here we will outline
+how synaptic conductances might be modelled.
+
+\begin{figure}
+\begin{center}
+\include{alpha}
+\end{center}
+\caption{The $\alpha$-function profile often used to model synaptic
+  conductances, shown here with $\tau_m=10$ ms.\label{fig:alpha}}
+\end{figure}
+
+The basic idea is that a closed ligand gated channel has a probability
+of opening which depends on the concentration of the
+neurotransmitter. Lets call this opening rate $o$; since the level of
+neurotransmitter varies, $o(t)$. Conversely when a channel is open
+there is a chance the neurotransmitter will unbind because of thermal
+fluctuations, lets call this closing rate $c$, $c$ is a constant. Now
+if $x$ is the fraction of gates that are open
+\begin{equation}
+\frac{dx}{dt}=(1-x)o-xc
+\end{equation}
+since $(1-x)$ is the number of open gates and $o$ is the opening rate.
+
+Now we need to have some description of how $o$ varies with time. One
+idea is that $o$ might be an exponential: perhaps the more
+neurotransmitter there is the faster it gets transported away by the
+neurotransmitter reuptake pumps. Let
+\begin{equation}
+o(t)=\bar{o}e^{-t/\tau_o}
+\end{equation}
+in response to a spike at time $t=0$. Hence
+\begin{equation}
+\frac{dx}{dt}+(\bar{o}e^{-t/\tau_o}+c)x=\bar{o}e^{-t/\tau_o}
+\end{equation}
+Clearly this is going to be a complete pain to solve, we can make it easier with a few approximations, say $c>>\bar{o}$, that is, because of the decay in the exponential, the coefficient of $x$ is quickly dominated by $c$
+\begin{equation}
+\frac{dx}{dt}+cx=\bar{o}e^{-t/\tau_o}
+\end{equation}
+This can be solved, it is an inhomogenous first order differential
+equation and using an integrating factor the solution with $x(0)=0$ is
+\begin{equation}
+x(t)=\tau_o\bar{o}\left(e^{-ct}-e^{-t/tau_o}\right)
+\end{equation}
+
+This is quite complicated, it has three timescales in it, $\tau_o$,
+the decay time for the neurotransmitter, the maximum opening rate
+$1/\bar{o}$ and the closing rate $1/c$. Often this is simplified by
+assuming $1/c=\tau_o$, there is no particular reason for doing this
+except that, maybe, the precise shape, as opposed to amplitude or
+overall duration, of the synapse conductance does not have much
+consequence and so it is reasonable to simplify. If $1/c=\tau_o$ the
+equation becomes
+\begin{equation}
+\frac{dx}{dt}+cx=\bar{o}e^{-ct}
+\end{equation}
+and the previous solution is uniformly zero. In the language of
+ordinary differential equations this is called the critically damped
+case. It can also be solved by integating factor, multiplying both
+sides by $\exp{(ct)}$ gives
+\begin{equation}
+e^{ct}\frac{dx}{dt}+ce^{ct}x=\bar{o}
+\end{equation}
+or
+\begin{equation}
+\frac{d}{dt}\left[e^{ct}x\right]=\bar{o}
+\end{equation}
+Integrating gives
+\begin{equation}
+x(t)=\bar{o}te^{-ct}+Ae^{-ct}
+\end{equation}
+where $A$ is an integration constant that gets set to zero if
+$x(0)=0$. Thus, there is a derivation for the $\alpha$ function, just not a paritcularly good one!
+
+
+\end{document}

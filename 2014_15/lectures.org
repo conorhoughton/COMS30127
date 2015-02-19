@@ -25,3 +25,12 @@
 * Lecture 6
 ** Finished integrate and fire neurons - threshold, f-I curve.
 ** Start of HH, description of the persistient K^+ gate
+* Lecture 7
+** The transient sodium gate
+** Finished HH and spikes
+** Brief discussion of synapses
+* Lecture 8
+** Synapses - gap junctions and chemical synapses
+** How synapses work
+** Inhibitory and excitatory synapses
+** Mention of plasticity

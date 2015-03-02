@@ -34,3 +34,10 @@
 ** How synapses work
 ** Inhibitory and excitatory synapses
 ** Mention of plasticity
+* Lecture 9
+** Plasticity, general introduction and discussion
+** Explanation of STDP - Bi and Poo
+** Started describing Song and Abbott
+* Lecture 10
+** Song and Abbott - careful explanation
+** Visual illusions slide show

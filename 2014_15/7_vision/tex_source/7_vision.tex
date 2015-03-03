@@ -287,7 +287,10 @@ where $r_0$ is the background firing rate and $w_{ij}$ give the
 receptive field. Of course the firing rate of a neuron doesn't satisfy
 a linear model but the idea is to choose the linear model which best
 approximates the neuron, that is, for example, to choose $w_{ij}$ to
-minimize the average square error $\langle (r-\tilde{r})^2\rangle$
+minimize the average square error 
+\begin{equation}
+\mbox{average square error}=\langle (r-\tilde{r})^2\rangle
+\end{equation}
 between $r$, the observed firing rate and $\tilde{r}$ is the estimated
 firing rate from the linear model.
 
@@ -545,7 +548,19 @@ I_{ij}=\sum_{s} a^sW^s_{ij}
 \end{equation}
 
 \subsubsection*{Confusing aside - rate versus reconstruction}
-The slightly confusing thing here is that we are moving between the linear model and the reconstruction. We do this all the time with vectors:
+The slightly confusing thing here is that we are moving between the linear model 
+\begin{equation}
+a_s=\sum_{ij} w^s_{ij}I_{ij}
+\end{equation}
+with $a_s$ the firing rate, we have changed to $a$s rather than $r$s
+to be consistient with the papers this is based on, and the
+reconstruction
+\begin{equation}
+I_{ij}=\sum_{s} a_sW^s_{ij}
+\end{equation}
+which estimates the image using the firing rates $a_s$.
+
+ We do this all the time with vectors:
 \begin{equation}
 \textbf{v}=v_1\textbf{i}+v_2\textbf{j}+v_3\textbf{k}
 \end{equation}
@@ -570,11 +585,7 @@ relationship between involves vectorizing the matrix indices $i$ and
 $j$, so we won't go into it here, morally one is the inverse transpose
 of the other. In fact, here we will consider an example where the
 dimensions are different, where the image patches are $3\times 3$ but
-there are only six features, so $s=1\ldots 6$. This means that the
-reconstructed image may not be equal the original image and will just
-be an approximation to it.
-
-As an example, lets have
+there are only six features, 
 \begin{center}
 \begin{tikzpicture}
 \node at (-1,0.5){$W^1=$};
@@ -659,61 +670,25 @@ where the almost-black corresponds to one and white to zero, so put another way
 \begin{equation}
 [W^1_{ij}]=\left(\begin{array}{lll}1&0&0\\1&0&0\\1&0&0\end{array}\right)
 \end{equation}
-Now consider the example visual input
-\begin{center}
-\begin{tikzpicture}
-\node at (-1,0.5){$I=$};
-\node at (0,0)[rectangle,text width=0.25cm,text height=0.25cm,draw=black,fill=black!40,align=center](00){};
-\node at (0,0.5)[rectangle,text width=0.25cm,text height=0.25cm,draw=black,fill=black!40,align=center](01){};
-\node at (0,1)[rectangle,text width=0.25cm,text height=0.25cm,draw=black,fill=black!80,align=center](02){};
-\node at (0.5,0)[rectangle,text width=0.25cm,text height=0.25cm,draw=black,fill=black!0,align=center](10){};
-\node at (0.5,0.5)[rectangle,text width=0.25cm,text height=0.25cm,draw=black,fill=black!0,align=center](11){};
-\node at (0.5,1)[rectangle,text width=0.25cm,text height=0.25cm,draw=black,fill=black!40,align=center](12){};
-\node at (1,0)[rectangle,text width=0.25cm,text height=0.25cm,draw=black,fill=black!0,align=center](20){};
-\node at (1,0.5)[rectangle,text width=0.25cm,text height=0.25cm,draw=black,fill=black!0,align=center](21){};
-\node at (1,1)[rectangle,text width=0.25cm,text height=0.25cm,draw=black,fill=black!40,align=center](22){};
-\end{tikzpicture}
-\end{center}
-This would correspond to $a=(0.5,0,0,0,0,0.5)$ or
-\begin{center}
-\begin{tikzpicture}
-\node at (-1,0.5){$I=$};
-\node at (0,0)[rectangle,text width=0.25cm,text height=0.25cm,draw=black,fill=black!0,align=center](00){};
-\node at (0,0.5)[rectangle,text width=0.25cm,text height=0.25cm,draw=black,fill=black!40,align=center](01){};
-\node at (0,1)[rectangle,text width=0.25cm,text height=0.25cm,draw=black,fill=black!0,align=center](02){};
-\node at (0.5,0)[rectangle,text width=0.25cm,text height=0.25cm,draw=black,fill=black!40,align=center](10){};
-\node at (0.5,0.5)[rectangle,text width=0.25cm,text height=0.25cm,draw=black,fill=black!80,align=center](11){};
-\node at (0.5,1)[rectangle,text width=0.25cm,text height=0.25cm,draw=black,fill=black!40,align=center](12){};
-\node at (1,0)[rectangle,text width=0.25cm,text height=0.25cm,draw=black,fill=black!0,align=center](20){};
-\node at (1,0.5)[rectangle,text width=0.25cm,text height=0.25cm,draw=black,fill=black!40,align=center](21){};
-\node at (1,1)[rectangle,text width=0.25cm,text height=0.25cm,draw=black,fill=black!0,align=center](22){};
-\end{tikzpicture}
-\end{center}
-corresponds to $a=(0,0.5,0,0,0.5,0)$ whereas
-\begin{center}
-\begin{tikzpicture}
-\node at (-1,0.5){$I=$};
-\node at (0,0)[rectangle,text width=0.25cm,text height=0.25cm,draw=black,fill=black!80,align=center](00){};
-\node at (0,0.5)[rectangle,text width=0.25cm,text height=0.25cm,draw=black,fill=black!0,align=center](01){};
-\node at (0,1)[rectangle,text width=0.25cm,text height=0.25cm,draw=black,fill=black!80,align=center](02){};
-\node at (0.5,0)[rectangle,text width=0.25cm,text height=0.25cm,draw=black,fill=black!0,align=center](10){};
-\node at (0.5,0.5)[rectangle,text width=0.25cm,text height=0.25cm,draw=black,fill=black!0,align=center](11){};
-\node at (0.5,1)[rectangle,text width=0.25cm,text height=0.25cm,draw=black,fill=black!0,align=center](12){};
-\node at (1,0)[rectangle,text width=0.25cm,text height=0.25cm,draw=black,fill=black!0,align=center](20){};
-\node at (1,0.5)[rectangle,text width=0.25cm,text height=0.25cm,draw=black,fill=black!0,align=center](21){};
-\node at (1,1)[rectangle,text width=0.25cm,text height=0.25cm,draw=black,fill=black!80,align=center](22){};
-\end{tikzpicture}
-\end{center}
-lies outside the six-dimensional subspace spanned by the features.
+This means that the
+reconstructed image may not be equal the original image and will just
+be an approximation to it. 
+
 
 \subsubsection*{Sparseness}
 
-The question now is what principle to use to select the features. One
-idea, due to \cite{OlshausenField1996a.OlshausenField1997a}, is to use sparseness. Going back to the example
-with creatures with patterned bellies, looking at flee-from animal,
-for example, three dots are black so among neurons that code for
-individual dots three would be active, but among neurons coding for
-vertical or horizontal lines, only one would be active. 
+The question now is what principle to use to select these features. In
+considering the mythical creatures we decided that features should be
+horizonal and vertical lines since that's the pattern that the
+creatures have. The question is how to find these features in general.
+
+
+One idea, due to \cite{OlshausenField1996a,OlshausenField1997a}, is to
+use sparseness. Continuing with the example with creatures with patterned
+bellies, looking at flee-from animal, for example, three dots are
+black so among neurons that code for individual dots three would be
+active, but among neurons coding for vertical or horizontal lines,
+only one would be active.
 
 Of course this is a very artificial made-up example, the it thought
 that \lq{}sparseness\rq{} is a good way to define features

@@ -8,7 +8,7 @@
 \markright{Computation Neuroscience - 7 vision}
 
 \usepackage{tikz}
-\usepackage{tikzscale}
+%\usepackage{tikzscale}
 \usepackage{pgfplots}
 \usepackage{color}
 \usepackage{pgf}
@@ -22,24 +22,22 @@
 \section*{Vision}
 
 \subsection*{Introduction} 
-This lecture is about vision, when they are complete they will discuss
-how simple cells in V1 are modelled and how their behavior may be
-explained by sparseness, at the moment they only contain the
-introduction.
+This lecture is about vision, they discuss how simple cells in V1 are
+modelled and how their behavior may be explained by sparseness.
 
 \subsection*{The visual pathway}
 The visual system starts at the eye, where photons are detected and
 some denoising occurs; the optical nerve then carries the information
 to the thalamus, in the very center of the brain, there it is further
 processed and denoised before being relayed on to the visual cortex,
-at the very back of the cortex. As it is processed in stages in the
-cortex the information is passed forward through the cortex, as
-objects are recognized the information fans out and is integrated with
-other signals, from memory, from other sensory modalities and other
-aspect of our cognition. The basic pathway is shown in an very old
-drawing in Fig.~\ref{fig:Fabrica} and is summarized in
-Fig.~\ref{fig:pathway}. One notable aspect is that different sides
-of the brain deal with different sides of the visual field, so signal
+at the very back of the cortex. It is processed in stages in the
+cortex with the information being passed forward, as objects are
+recognized the information fans out and is integrated with other
+signals, from memory, from other sensory modalities and other aspect
+of our cognition. The basic pathway is shown in an very old drawing in
+Fig.~\ref{fig:Fabrica} and is summarized in
+Fig.~\ref{fig:pathway}. One notable aspect is that different sides of
+the brain deal with different sides of the visual field, so signal
 from the left sides of the retina of both eyes go to the right side of
 the brain and signals from the right sides so to the left side.
 
@@ -54,18 +52,22 @@ the brain and signals from the right sides so to the left side.
   primary visual cortex. [Image from Wikipedia].\label{fig:Fabrica}}
 \end{figure}
 
-
 Light is detected at the retina, the retina is a surprising organ in
 that it is backwards compared to how you'd expect it to be organized;
 the layer with light detectors is at the back instead of the
 front. Leaving that aside though, basically light is detected in
 specialized cells called \textsl{photoreceptors}, these don't spike,
-but they do convert light into electrical activity; this is passed
-forward though \textsl{bipolar cells} to \textsl{ganglion
-  cells}. Ganglion cells aggregate activity from a number of
-photoreptors, along with activity from some inhibitory cells in the
-intermediate layer and their axons form the optic nerve, carrying
-information to the thalamus. A sketch of the retina is given in Fig.~\ref{fig:retina}.
+but they do convert light into electrical activity. There are two
+types of photoreceptors, the rods, which are important for vision in
+low light, and the cones, which are responsible for color vision and
+important for vision in normal lighting conditions. The electrically
+activity of the photorecptors is passed forward though \textsl{bipolar
+  cells} to \textsl{ganglion cells}.
+
+Ganglion cells aggregate activity from a number of photoreptors, along
+with activity from some inhibitory cells in the intermediate layer and
+their axons form the optic nerve, carrying information to the
+thalamus. A sketch of the retina is given in Fig.~\ref{fig:retina}.
 
 \begin{figure}
 \begin{center}
@@ -88,7 +90,19 @@ information to the thalamus. A sketch of the retina is given in Fig.~\ref{fig:re
  \begin{center}
 \includegraphics[width=12cm]{retina.png}
 \end{center}
-\caption{Rods, cones and nerve layers in the retina. The front of the eye is on the left. Light (from the left) passes through several transparent nerve layers to reach the rods and cones (far right). A chemical change in the rods and cones send a signal back to the nerves. The signal goes first to the bipolar and horizontal cells (yellow layer), then to the amacrine cells and ganglion cells (purple layer), then to the optic nerve fibres. The signals are processed in these layers. First, the signals start as raw outputs of points in the rod and cone cells. Then the nerve layers identify simple shapes, such as bright points surrounded by dark points, edges, and movement. (Based on a drawing by Ramón y Cajal, 1911.) [Caption and drawing taken from Wikipedia: Cajal derivative work: Anka Friedrich via Wikimedia Commons]\label{fig:retina}}
+\caption{Rods, cones and nerve layers in the retina. The front of the
+  eye is on the left. Light (from the left) passes through several
+  transparent nerve layers to reach the rods and cones (far right). A
+  chemical change in the rods and cones send a signal back to the
+  nerves. The signal goes first to the bipolar and horizontal cells
+  (yellow layer), then to the amacrine cells and ganglion cells
+  (purple layer), then to the optic nerve fibres. The signals are
+  processed in these layers. First, the signals start as raw outputs
+  of points in the rod and cone cells. Then the nerve layers identify
+  simple shapes, such as bright points surrounded by dark points,
+  edges, and movement. (Based on a drawing by Ramón y Cajal, 1911.)
+  [Caption and drawing taken from Wikipedia: Cajal derivative work:
+    Anka Friedrich via Wikimedia Commons]\label{fig:retina}}
 \end{figure}
 
 \subsection*{Receptive fields}
@@ -101,7 +115,101 @@ different cells will respond to different locations. The width of the
 receptive fields vary from the size of full stop at reading distance
 in the center, to the size of a page near the periphery. In
 \textsl{off-cells} the contrast is reverse, the cell responds to an
-unilluminated region surrounded by an illuminated region. In V1 there
+unilluminated region surrounded by an illuminated region. In practice
+these patterns are the result of excitatory and inhibitory synapses
+relaying information from these regions of the visual field.
+\begin{center}
+\begin{tikzpicture}
+\node[](r1){};
+\node[right of = r1](r2){};
+\node[right of = r2](r3){};
+\node[right of = r3](r4){};
+\node[right of = r4](r5){};
+\node[right of = r5](r6){};
+\node[right of = r6](r7){};
+\node[right of = r7](r8){};
+\node[right of = r8](r9){};
+\node[below of = r1](b1){};
+\node[right of = b1](b2){};
+\node[right of = b2](b3){};
+\node[right of = b3](b4){};
+\node[right of = b4](b5){};
+\node[right of = b5](b6){};
+\node[right of = b6](b7){};
+\node[right of = b7](b8){};
+\node[right of = b8](b9){};
+\node[above right = -1mm of b1](bb1){ -};
+\node[above right = -1mm of b2](bb2){ -};
+\node[above right = -1mm of b3](bb3){ -};
+\node[above right = -1mm of b4](bb4){ +};
+\node[above right = -1mm of b5](bb5){ +};
+\node[above right = -1mm of b6](bb6){ +};
+\node[above right = -1mm of b7](bb7){ -};
+\node[above right = -1mm of b8](bb8){ -};
+\node[above right = -1mm of b9](bb9){ -};
+\draw (r1) edge[-o] (b1);
+\draw (r2) edge[-o] (b2);
+\draw (r3) edge[-o] (b3);
+\draw (r4) edge[-<] (b4);
+\draw (r5) edge[-<] (b5);
+\draw (r6) edge[-<] (b6);
+\draw (r7) edge[-o] (b7);
+\draw (r8) edge[-o] (b8);
+\draw (r9) edge[-o] (b9);
+\node[below = -3mm of b1](c1){};
+\node[left of  =c1](c0){};
+\node[below = -3mm of b9](c9){};
+\node[right of =c9](c10){};
+\draw (c0) edge (c10);
+\node[below = -4mm of b5](c5){};
+\node[below of = c5](d5){ganglion cell};
+\draw (c5) edge (d5);
+
+%% \node[circle,draw=black, fill=black](a1){};
+%% \node[circle,draw=black, fill=white,right of =a1](b1){};
+%% \node[circle,draw=black, fill=white,left of =a1](c1){};
+%% \node[circle,draw=black, fill=black,below of=a1](a2){};
+%% \node[circle,draw=black, fill=white,right of =a2](b2){};
+%% \node[circle,draw=black, fill=white,left of =a2](c2){};
+%% \node[circle,draw=black, fill=black,above of =a1](a3){};
+%% \node[circle,draw=black, fill=white,right of =a3](b3){};
+%% \node[circle,draw=black, fill=white,left of =a3](c3){};
+%% \node[circle,draw=black,right =3cm of b2](fl){};
+%% \node[circle,draw=black,right =3cm of b1](fi){};
+%% \node[circle,draw=black,right =3cm of b3,fill=black](fu){};
+%% \node[right of=fl](flee){flee};
+%% \node[right of=fi](fight){fight};
+%% \node[right of=fu](mate){mate};
+%% \draw (a1) edge[-o] (fl);
+%% \draw (b1) edge[-o] (fl);
+%% \draw (c1) edge[-o] (fl);
+%% \draw (a2) edge[-o] (fl);
+%% \draw (b2) edge[-o] (fl);
+%% \draw (c2) edge[-o] (fl);
+%% \draw (a3) edge[-o] (fl);
+%% \draw (b3) edge[-o] (fl);
+%% \draw (c3) edge[-o] (fl);
+%% \draw (a1) edge[-o] (fi);
+%% \draw (b1) edge[-o] (fi);
+%% \draw (c1) edge[-o] (fi);
+%% \draw (a2) edge[-o] (fi);
+%% \draw (b2) edge[-o] (fi);
+%% \draw (c2) edge[-o] (fi);
+%% \draw (a3) edge[-o] (fi);
+%% \draw (b3) edge[-o] (fi);
+%% \draw (c3) edge[-o] (fi);
+%% \draw (a1) edge[-o] (fu);
+%% \draw (b1) edge[-o] (fu);
+%% \draw (c1) edge[-o] (fu);
+%% \draw (a2) edge[-o] (fu);
+%% \draw (b2) edge[-o] (fu);
+%% \draw (c2) edge[-o] (fu);
+%% \draw (a3) edge[-o] (fu);
+%% \draw (b3) edge[-o] (fu);
+%% \draw (c3) edge[-o] (fu);
+\end{tikzpicture}
+\end{center}
+In V1 there
 are cells called \textsl{simple cells} and cells called
 \textsl{complex cells}; we will concentrate on the simple cells, these
 have edge-like receptive fields; different cells respond to particular

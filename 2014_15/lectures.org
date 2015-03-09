@@ -1,5 +1,4 @@
 
-
 * Lecture 1 
 ** Description of the course organization.
 ** Motivation for studying computational neuroscience.
@@ -41,3 +40,10 @@
 * Lecture 10
 ** Song and Abbott - careful explanation
 ** Visual illusions slide show
+* Lecture 11
+** The visual system, organization and receptive fields.
+* Lecture 12
+** The visual system, recap of receptive fields.
+** Sparseness, the sneach analogy.
+* Lecture 13
+** Sparse coding in the visual system, Fields and Olshausen

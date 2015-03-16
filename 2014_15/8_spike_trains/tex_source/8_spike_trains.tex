@@ -190,13 +190,19 @@ and
 \begin{equation}
 \mu_2=\frac{24+30+36}{3}=30
 \end{equation}
-Now, these data don't have the same variances, so we assume the underlying distributions have the same variance and we average to estimate this variance:
+Now, these data don't have the same variances, so we assume the
+underlying distributions have the same variance and we average to
+estimate this variance, so, using the unbiased estimator of the population average
+\begin{equation}
+\sigma^2=\frac{\sum_i(x_i-\mu)^2}{n-1}
+\end{equation}
+where there are $n$ data points $\{x_1,x_2,\ldots,x_n\}$, we get
 \begin{equation}
 \sigma_1^2=\frac{5^2+5^2}{2}=25
 \end{equation}
 and
 \begin{equation}
-\sigma_2^2=\frac{^^2+^^2}{2}=36
+\sigma_2^2=\frac{6^2+6^2}{2}=36
 \end{equation}
 hence $\sigma^2=30.5$. So
 \begin{equation}

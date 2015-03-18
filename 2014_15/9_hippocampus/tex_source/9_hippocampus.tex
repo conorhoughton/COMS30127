@@ -76,7 +76,7 @@ since it partiticipates in hippocampal processing.
 
 \begin{figure}
 \begin{center}
-\includegraphics[width=10cm]{640px-CajalHippocampus_(modified).png}
+\includegraphics[width=10cm]{640px:CajalHippocampus_(modified).png}
 \end{center}
 \caption{The hippocampus. This is a modified image originally due to
   Cajal, probably from his 1911 book, the inset shows the approximate
@@ -549,9 +549,69 @@ EC-DG-CA3 pathway and that the role of the dentate gyrus is to
 randomize the connectivity between EC and CA3. In short, during
 learning neurons in EC and CA3 are matched via DG and that the
 connections from EC to DG and from DG to EC are essentially
-random. This reduces overlap and may explain why neurons in DG are
-being born all the time, perhaps their role is to create these random
-connections.
+random. This reduces overlap through a $k$-winner takes all
+mechanism. Roughly, this supposed that local inhibition ensures that
+the $k$ most active neurons in the DG layer \lq{}win\rq and supress
+the activity of the other neurons \cite{OReillyMcClelland1994a}. The
+way this might reduce overlap is shown in this cartoon where $k=1$ and
+two similar patters result in a different neuron being active:
+\begin{center}
+\begin{tikzpicture}
+\node[on, text width=0.2cm](EC0){};
+\node[on, text width=0.2cm, right of =EC0](EC1){};
+\node[on, text width=0.2cm, right of =EC1](EC2){};
+\node[off, text width=0.2cm, right of =EC2](EC3){};
+\node[right of =EC3](EC){EC};
+\node[off, text width=0.2cm, below of =EC0](DG0){};
+\node[off, text width=0.2cm,right of = DG0](DG1){};
+\node[off, text width=0.2cm,right of = DG1](DG2){};
+\node[on, text width=0.2cm,right of =DG2](DG3){};
+\node[right of =DG3](DG){DG};
+\path (EC0) edge (DG1);
+\path (EC0) edge (DG2);
+\path (EC0) edge (DG3);
+\path (EC1) edge (DG0);
+\path (EC1) edge (DG2);
+\path (EC1) edge (DG3);
+\path (EC2) edge (DG1);
+\path (EC2) edge (DG0);
+\path (EC2) edge (DG3);
+\path (EC3) edge (DG1);
+\path (EC3) edge (DG2);
+\path (EC3) edge (DG0);
+\end{tikzpicture}
+\end{center}
+versus
+\begin{center}
+\begin{tikzpicture}
+\node[on, text width=0.2cm](EC0){};
+\node[on, text width=0.2cm, right of =EC0](EC1){};
+\node[off, text width=0.2cm, right of =EC1](EC2){};
+\node[on, text width=0.2cm, right of =EC2](EC3){};
+\node[right of =EC3](EC){EC};
+\node[off, text width=0.2cm, below of =EC0](DG0){};
+\node[off, text width=0.2cm,right of = DG0](DG1){};
+\node[on, text width=0.2cm,right of = DG1](DG2){};
+\node[off, text width=0.2cm,right of =DG2](DG3){};
+\node[right of =DG3](DG){DG};
+\path (EC0) edge (DG1);
+\path (EC0) edge (DG2);
+\path (EC0) edge (DG3);
+\path (EC1) edge (DG0);
+\path (EC1) edge (DG2);
+\path (EC1) edge (DG3);
+\path (EC2) edge (DG1);
+\path (EC2) edge (DG0);
+\path (EC2) edge (DG3);
+\path (EC3) edge (DG1);
+\path (EC3) edge (DG2);
+\path (EC3) edge (DG0);
+\end{tikzpicture}
+\end{center}
+with the idea being that this randomization might be repeated in the
+subsequent connection between DG and CA3. This mechanism may explain
+why neurons in DG are being born all the time, perhaps their role is
+to create these random connections.
 
 \subsection*{Models of the whole hippocampus}
 
@@ -613,8 +673,7 @@ that the role of CA1 is to relay patterns back to EC. In learning, according to 
 \end{tikzpicture}
 \end{center}
 Connections, possibily random, between EC and DG and between DG and
-CA3, along with a \lq{}$k$-winner takes all\rq{} mechanism, which
-hasn't been discussed, causes activity in CA3.
+CA3, along with the \lq{}$k$-winner takes all\rq{} mechanism, causes activity in CA3.
 \begin{center}
 \begin{tikzpicture}
 \node[on,text width=0.1cm](EC0){};

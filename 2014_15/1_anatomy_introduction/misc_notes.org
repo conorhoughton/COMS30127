@@ -20,6 +20,8 @@
 ** AKATHASIA - an inability to be still.
 ** APRAXIA - an acquired disorder in motor planning.
 
+* PDF VERSION
+** I will try to keep these synchronized but it may fall behind the odf version
 
   
 

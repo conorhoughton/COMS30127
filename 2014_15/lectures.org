@@ -3,7 +3,7 @@
 ** Description of the course organization.
 ** Motivation for studying computational neuroscience.
 ** 1_anatomy_introduction up to but not including the synapse slide.
-
+ 
 * Lecture 2
 ** Took apart the mini brain model
 ** Synapse, brief overview
@@ -47,3 +47,18 @@
 ** Sparseness, the sneach analogy.
 * Lecture 13
 ** Sparse coding in the visual system, Fields and Olshausen
+* Lecture 14 
+** Spike train analysis
+** Peristimulus time histogram
+** Spike triggered average
+** Autocorrellogram
+* Lecture 15 
+** Spike train analysis
+** Crosscorrellogram
+** Tuning cruves
+** d'
+* Lecture 16
+** Hippocampus
+** Anatomy
+** Cognitive maps
+** CA3 as an auto-associative network

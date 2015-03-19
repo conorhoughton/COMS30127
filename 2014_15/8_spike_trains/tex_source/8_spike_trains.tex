@@ -243,22 +243,34 @@ the observer is correct is the probability that the number chosen from
 the right-preferring neuron (r) is higher than the one from the left-preferring
 neuron (l). It is
 \begin{equation}
-P(\mbox{right})=P[(\mbox{spikes from r neuron})>(\mbox{spikes from l neuron})]
+P(\mbox{correct})=P[(\mbox{spikes from r neuron})>(\mbox{spikes from l neuron})]
 \end{equation}
 or, putting in the distributions
 \begin{equation}
-P(\mbox{right})=P(\mathcal{N}(\mu_+,\sigma)>\mathcal{N}(\mu_-,\sigma))
+P(\mbox{correct})=P(\mathcal{N}(\mu_+,\sigma)>\mathcal{N}(\mu_-,\sigma))
 \end{equation}
 which, using the rules governing normal distributions
 \begin{equation}
-P(\mbox{right})=P(\mathcal{N}(\mu_+-\mu_-,\sqrt{2}\sigma)>0)
+P(\mbox{correct})=P(\mathcal{N}(\mu_+-\mu_-,\sqrt{2}\sigma)>0)
+\end{equation}
+and, again using the identities for normal distributions this means
+\begin{equation}
+P(\mbox{correct})=P(\mathcal{N}(0,1)<\frac{\mu_+-\mu_-}{\sqrt{2}\sigma})
 \end{equation}
 By some algebra it turns out
 \begin{equation}
-P(\mbox{right})=\Phi(d'/\sqrt{2})
+P(\mbox{correct})=\Phi(d'/\sqrt{2})
 \end{equation}
-where $\Phi(t)$ is the cumulative for the normal distribution; it
-starts at zero, for low $d'$ it is very hard to distinguish, and rises
+where $\Phi(t)$ is the cumulative for the normal distribution:
+\begin{equation}
+\Phi(t)=\int_{-\infty}^{t}p(\tau)d\tau
+\end{equation}
+where
+\begin{equation}
+p(\tau)=\frac{1}{\sqrt{2\pi}}e^{-\tau^2/2}
+\end{equation}
+is the probability mass function for $\mathcal{N}(0,1)$. It
+starts at zero, for low $d'$ where it is very hard to distinguish it is near a half, and rises
 to one for large $d'$, which is when you would expect it to be easy to
 distinguish. In fact, in the Britten et al. paper
 \cite{BrittenEtAl1992} they show that this curve matches the actual,

@@ -5,6 +5,7 @@
 \usepackage{listings}
 
 \usepackage{tikz}
+\usepackage{amsmath}
 
 
 
@@ -43,12 +44,12 @@
 \markright{PHPH20007 - 17 computational neuroscience 1 - Conor Houghton}
 \begin{document}
 
-\subsection*{Introduction}
+\section*{Introduction}
 
 In neuroscience computational methods are used in analyzing data and
 in modeling, which is what we aim to discuss here. Modeling, in turn,
 is both a tool for testing out ideas about the functional significance
-of an experimental discover and a language for phrasing ideas about
+of an experimental discovery and a language for phrasing ideas about
 brain function. This lecture is about the first of these two: modeling
 as a tool for testing functional significance. The idea here is that a
 neuroscience might be interested in a neuroscientific phenomenon, for
@@ -66,7 +67,7 @@ described in \cite{TraubBibbig2000}.
 The challenge then is to simulate the behavior of neurons and networks
 of neurons. In fact, a lot is known about how neurons behave, but when
 simulating a trade-off needs to be made between a very accurate and
-detailed model which may be very slow to simulate, or may contains
+detailed model which may be very slow to simulate and may contains
 lots of parameters which are hard to fix using experimental data, and
 very simple models that are easier to simulate and contain few
 parameters, but are inaccurate and may not incorporate important
@@ -185,7 +186,11 @@ Fig.~\ref{chasing}.
 \begin{center}
 \include{chasing}
 \end{center}
-\caption{Variable input. Here the input is a sine wave $\tilde{\i}=\sin{t}$ and the equation is evolved with $h(0)$ and three different $\tau$ values. For $\tau=0.25$ we see $h(t)$ closely matches the input whereas for larger $\tau$ it is smoother and lags behind.\label{chasing}}
+\caption{Variable input. Here the input is a sine wave $i(t)=\sin{t}$
+  and the equation is evolved with $h(0)=0$ and three different $\tau$
+  values. For $\tau=0.25$ we see $h(t)$ closely matches the input
+  whereas for larger $\tau$ it is smoother and lags
+  behind.\label{chasing}}
 \end{figure}
 
 
@@ -217,7 +222,7 @@ so approximating $f(t+\delta t)$ with $f(t)+\delta t F(f,t)$ is actual
 to first order in the time step $\delta t$. This is the Euler
 approximation. More formally if we have an initial condition $f(t_0)$ and write
 \begin{align}
-f_n&=f(t_0+n\delta t)
+f_n&=f(t_0+n\delta t)\\
 t_n&=t_0+n\delta t
 \end{align}
 then the Euler approximation is
@@ -248,28 +253,25 @@ charge to the inside of the cell lowering its potential. It also
 creates an excess of sodium outside the cell and an excess of
 potassium inside it. We will return to these chemical imbalances
 later. The potential difference across the membrane is called the
-\textbf{membrane potential}. At rest a typical value of the membrane
-potential is $E_L=-70 $mV. It is useful to remember that the excessive
-sodium is outside the cell and potassium inside; I think of islands
-which are surrounded by salty water.
+membrane potential. At rest a typical value of the membrane
+potential is $E_L=-70 $mV. 
 
 \subsection*{Spikes}
 
-So the summary version of what happens in neuons is that
-\textbf{synapses} cause a small increase or decrease in the voltage;
-\textbf{excitatory synapses} cause an increase, \textbf{inhibitory
-  synapses} a decrease. This drives the internal voltage dynamics of
-the cell, these dynamics are what we will learn about here. If the
-voltage exceeds a threshold, say $V_T=-55$ mV there is a nonlinear
-cascade which produces a \textbf{spike} or \textbf{action potential},
-a spike in voltage 1-2 ms wide which rises above 0 mV before, in the
-usual description, falling to a reset value of $V_R=-65$ mV, the cell
-then remains unable to produce another spike for a \textbf{refractory
-  period} which may last about 5 ms. We will examine how spikes are
-formed later, this involves the nonlinear dynamics of ion channels in
-the membrane; first though we will consider the integrate and fire
-model which ignores the details of how spikes are produced and
-simplifies the voltage dynamics.
+So the summary version of what happens in neuons is that synapses
+cause a small increase or decrease in the voltage; excitatory synapses
+cause an increase, inhibitory synapses a decrease. This drives the
+internal voltage dynamics of the cell, these dynamics are what we will
+learn about here. If the voltage exceeds a threshold, say $V_T=-55$ mV
+there is a nonlinear cascade which produces a spike or
+action potential, a spike in voltage 1-2 ms wide which rises
+above 0 mV before, in the usual description, falling to a reset value
+of $V_R=-65$ mV, the cell then remains unable to produce another spike
+for a refractory period which may last about 5 ms. We will
+examine how spikes are formed later, this involves the nonlinear
+dynamics of ion channels in the membrane; first though we will
+consider the integrate and fire model which ignores the details of how
+spikes are produced and simplifies the voltage dynamics.
 
 \section*{The bucket-like equation for neurons}
 
@@ -285,8 +287,7 @@ The leak is a bit more complicated, because of the chemical gradients,
 that is the effects of the differing levels of ions inside and outside
 the cell along and their propensity to diffuse, the voltage at which
 there is no leaking of charge is not zero, it is $E_L=-70 $mV,
-roughly. This is an important aspect of how neurons behave, and one we
-will encounter again looking at the Hodgkin-Huxley equation: you might
+roughly. This is an important aspect of how neurons behave: you might
 at first expect that if the voltage inside the cell was, say, -60 mV
 then even if there was a high conductivity for potassium at the
 membrane, the potassium ions would stay in the cell: they are positive
@@ -311,11 +312,7 @@ $R_m=1/G_m$, the resistance. Finally, we write $\tau_m=C_m/G_m$ to get
 $I$ might end up being synaptic input, but traditionally we write the
 equation to match the \textsl{in vivo} experiment where $I$ is an
 injected current from an electrode, so we write $I_e$, \lq{}e\rq{} for
-electrode. $\tau_m$ is a time constant, using the notation of
-dimensional analysis we have $[\tau_m]=T$. To check this note that the
-units of capacitance are charge per voltage: $[C_m]=QV^{-1}$, the
-units of resistance is voltage per current $[R_m]=VI^{-1}$ and current
-is charge per time, $[I]=QT^{-1}$ so $[C_mR_m]=T$, time.
+electrode. $\tau_m$ is a time constant.
 
 The equation above leaves out the possibility that there are other
 non-linear changes in the currents through the membrane as $V$
@@ -338,22 +335,21 @@ in summary
   reset value $V_R$.
 \end{itemize}
 The reset value, the voltage after the spike is often set equal to the
- leak potential. This is the \textbf{leaky integrate and fire model}, a surprisingly
-old model first introduced in \cite{Lapicque1907a}. It lacks lots of
-the details important in the dynamics of neurons, but is useful and
-often used for modeling the behavior of large neuronal networks or for
-exploring ideas about neuronal computation in a relatively
-straight-forward setting.
+leak potential. This is the leaky integrate and fire model, a
+surprisingly old model first introduced in \cite{Lapicque1907a}. It
+lacks lots of the details important in the dynamics of neurons, but is
+useful and often used for modeling the behavior of large neuronal
+networks or for exploring ideas about neuronal computation in a
+relatively straight-forward setting.
 
 This model is easy to solve; if $I_e$ is constant we have already
 solved it above up to messing around with constants:
 \begin{equation}
 V(t)=E_L+R_mI_e+[V(0)-E_L-R_mI_e]e^{-t/\tau_m}
 \end{equation}
-If $I_e$ is not
-constant it may still be possible to solve the equation, but in any
-case the equation can be solved numerically on a computer. An example
-in given in Fig.~\ref{v_i_f}.
+If $I_e$ is not constant it may still be possible to solve the
+equation, but in any case the equation can be solved numerically on a
+computer. An example in given in Fig.~\ref{v_i_f}.
 
 \begin{figure}
 \begin{center}

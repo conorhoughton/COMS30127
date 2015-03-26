@@ -1,0 +1,533 @@
+\documentclass[11pt,a4paper]{scrartcl}
+\typearea{12}
+\usepackage{graphicx}
+\usepackage{pstricks}
+\usepackage{listings}
+
+\usepackage{tikz}
+
+\usepackage{pgf}
+\usepackage[utf8]{inputenc}
+\usetikzlibrary{arrows,automata}
+\usetikzlibrary{positioning}
+
+
+\tikzset{
+    state/.style={
+           rectangle,
+           rounded corners,
+           draw=black, very thick,
+           inner sep=2pt,
+           text centered,
+           },
+}
+\tikzset{
+    on/.style={
+           circle,
+           draw=red, very thick,
+           inner sep=2pt,
+           fill=red!25,
+           },
+}
+
+
+\tikzset{
+    off/.style={
+           circle,
+           draw=blue, very thick,
+           inner sep=2pt,
+           text centered,
+           },
+}
+
+
+
+
+
+\lstset{language=python}
+\pagestyle{headings}
+\markright{PHPH20007 - 18 computational neuroscience 2 - Conor Houghton}
+\begin{document}
+
+\section*{Introduction}
+These notes are about the hippocampus and introduce a more top down
+style of modelling.
+
+\section*{Anatomy of the hippocampus}
+
+The hippocampus is situated at the edge of the cortex and is divided
+into two main areas. The hippocampus complex is distinctive in shape
+and these are named for the shape
+\begin{itemize}
+\item Cornu Ammonis (CA) - meaning the \textsl{horn of Ammon}, an
+  Egypian god of ferility with curved horns. The CA is usually divided
+  into four regions, labelled CA1 through to CA4.
+\item Dentate Gyrus (DG)- gyrus is the name given to the ridges in the
+  cortex, dentate means \textsl{with teeth}. The dentate gyrus is one
+  of the few areas of the adult brain that exhibits neurogenesis.
+\end{itemize}
+In addition, the main input to the hippocampus comes from the
+\begin{itemize}
+\item Entorhinal Cortex (EC) - entorhinal means \textsl{near the smell processing area}. 
+\end{itemize}
+and in this discussion this will be treated along with the hippocampus
+since it partiticipates in hippocampal processing.
+
+One key aspect of the anatomy we are going to consider here is that
+the excitatory neurons in DG are feedforward, that means they lack
+lateral connections, that is connections between themselves. CA3 in
+contrast is a recurrent network, the excitatory neurons are
+interconnected. DG is often called feedforward and CA3 recurrent even
+though in a way this ignores the recurrent connections in DG between
+excitatory and inhibitory cells.
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=10cm]{640px:CajalHippocampus_(modified).png}
+\end{center}
+\caption{The hippocampus. This is a modified image originally due to
+  Cajal, probably from his 1911 book, the inset shows the approximate
+  connectivity. [From
+    \texttt{http://en.wikipedia.org/wiki/File:CajalHippocampus\_(modified).png}]\label{fig:hippocampus}}
+\end{figure}
+
+
+\begin{figure}
+\begin{tikzpicture}[->,>=stealth']
+
+ \node[state,text width=3cm](DG) 
+ {\textbf{DG}
+  };
+  
+ \node[state, 
+ node distance=6cm,
+ text width=3cm,  
+ right of=DG,     
+ yshift=+3cm](CA3)
+ {\textbf{CA3}
+ };
+ 
+ \node[state,
+  below of=CA3,
+  yshift=-2cm,
+  anchor=center,
+  text width=3cm] (EC) 
+ {\textbf{EC}
+ };
+
+ \node[state,
+  right of=CA3,
+  node distance=5cm,
+  anchor=center,
+text width=3cm] (CA1) 
+ {\textbf{CA1}
+ };
+
+ \path (DG) 	edge[bend left=20]  (CA3)
+       (EC)  edge (DG)
+ (EC)  edge (CA3)
+ (EC)  edge[bend left=20] (CA1)
+ (CA1)  edge[bend left=20] (EC)
+ (CA3)  edge (CA1)
+ (CA3)  	edge[loop above]   (CA3)
+;
+
+\end{tikzpicture}
+\caption{Connectivity of the hippocampus. A rough diagram showing the
+  major connections between the areas of the connectivity. The set of
+  axons running from EC to DG, CA3 and CA1 is called the perforant
+  pathway, the mossy fibres run from DG to CA3 and the Schaffer
+  collateral fibers go from CA3 to CA1. The loop on CA3 is supposed to
+  represent the high level of recurrent connections in that
+  regio.\label{fig:connectivity}}
+\end{figure}
+
+\section*{Auto-associative memory}
+A standard paradigm for memory in the hippocampus is
+\textsl{auto-associative} memory. Auto-associative memories are
+patterns representing memories along with some dynamics that complete
+partial patters. Imagine a sequence of on-off neurons
+\begin{center}
+\begin{tikzpicture}
+\filldraw[color=red!60, fill=red!25, very thick](0,0) circle (.25);
+\filldraw[color=blue!60, fill=red!0, very thick](1,0) circle (.25);
+\filldraw[color=red!60, fill=red!25, very thick](2,0) circle (.25);
+\filldraw[color=blue!60, fill=red!0, very thick](3,0) circle (.25);
+\filldraw[color=blue!60, fill=red!0, very thick](4,0) circle (.25);
+\filldraw[color=red!60, fill=red!25, very thick](5,0) circle (.25);
+\filldraw[color=blue!60, fill=red!0, very thick](6,0) circle (.25);
+\filldraw[color=blue!60, fill=red!0, very thick](7,0) circle (.25);
+\filldraw[color=blue!60, fill=red!0, very thick](8,0) circle (.25);
+\end{tikzpicture}
+\end{center}
+where the filled circles correspond to on. Recall occurs when the
+network is presented with a partial pattern and evolves into the
+complete patterns.
+\begin{center}
+\begin{tikzpicture}
+\filldraw[color=red!60, fill=red!25, very thick](0,2) circle (.25);
+\filldraw[color=blue!60, fill=red!0, very thick](1,2) circle (.25);
+\filldraw[color=blue!60, fill=red!0, very thick](2,2) circle (.25);
+\filldraw[color=blue!60, fill=red!0, very thick](3,2) circle (.25);
+\filldraw[color=blue!60, fill=red!0, very thick](4,2) circle (.25);
+\filldraw[color=red!60, fill=red!25, very thick](5,2) circle (.25);
+\filldraw[color=blue!60, fill=red!0, very thick](6,2) circle (.25);
+\filldraw[color=blue!60, fill=red!0, very thick](7,2) circle (.25);
+\filldraw[color=blue!60, fill=red!0, very thick](8,2) circle (.25);
+\coordinate (a) at (4,1.5);
+\coordinate (b) at (4,0.5);
+\draw[->, >=latex, black!20!white, line width=4pt]   (a) to (b) ;
+\filldraw[color=red!60, fill=red!25, very thick](0,0) circle (.25);
+\filldraw[color=blue!60, fill=red!0, very thick](1,0) circle (.25);
+\filldraw[color=red!60, fill=red!25, very thick](2,0) circle (.25);
+\filldraw[color=blue!60, fill=red!0, very thick](3,0) circle (.25);
+\filldraw[color=blue!60, fill=red!0, very thick](4,0) circle (.25);
+\filldraw[color=red!60, fill=red!25, very thick](5,0) circle (.25);
+\filldraw[color=blue!60, fill=red!0, very thick](6,0) circle (.25);
+\filldraw[color=blue!60, fill=red!0, very thick](7,0) circle (.25);
+\filldraw[color=blue!60, fill=red!0, very thick](8,0) circle (.25);
+\end{tikzpicture}
+\end{center}
+The idea is that the hippocampus implements a network which performs auto-associative memory.
+
+\subsection*{A model of CA3}
+Here a highly simplified model of CA3 is presented
+\cite{Amit1992a}. In this model CA3 is all-to-all connected and made
+up of McCulloch-Pitts neurons \cite{McCullochPitts1943a}. We will
+consider the dynamics of these neurons shortly, for now it is enough
+to note that they are binary neurons with on and off states, this
+would correspond, biologically, to firing and not firing and obviously
+abstracts away all the details of firing along with the possibility of
+there being different firing rates. We will call the on state
+\lq{}1\rq{} and the off state \lq{}0\rq{}. Now let $N$ be the number
+of neurons, $x_i$ the activity of neuron $i$ and $w_{ij}$ the strength
+of the connection for $i$ to $j$. The sparseness, the average
+proportion of neurons active at any one time is $a$, this is believed
+to be very small in actual neurons. For this simple model
+$w_{ij}=w_{ji}$.
+
+During learning the patterns are activated and plastic changes are
+made to the synapse strength according to a simple correlation based Hebbian plasticity rule.
+\begin{equation}
+\Delta w_{ij}=\eta (x_i-a)(x_j-a)
+\end{equation}
+where $\eta$ is the learning rate, often a small number, but, in
+hippocampus were memories need to be learned quickly, possibly during
+a single presentation, $\eta$ is large. Since $a$ is very small too
+for real networks there will be a large increase for the connection
+between two neurons that are active at the same time, a tiny increase
+for pairs neurons that are inactive at the same time and a medium size
+decrease for pairs of neurons where one is active and one
+inactive. See Fig.~\ref{fig:hebb}.
+
+\begin{figure}
+\begin{center}
+\begin{tikzpicture}
+\node[on,text width=0.35cm](0){};
+\node[off,text width=0.35cm,right of = 0](1){};
+\node[on,text width=0.35cm,right of = 1](2){};
+\node[off,text width=0.35cm,right of = 2](3){};
+\node[off,text width=0.35cm,right of = 3](4){};
+\node[on,text width=0.35cm,right of = 4](5){};
+\node[off,text width=0.35cm,right of = 5](6){};
+\node[off,text width=0.35cm,right of = 6](7){};
+\node[off,text width=0.35cm,right of = 7](8){};
+\path (0) edge[bend left,color=yellow] (1);
+\path (0) edge[bend right,color=red] (2);
+\path (0) edge[bend left,color=yellow] (3);
+\path (0) edge[bend right,color=yellow] (4);
+\path (0) edge[bend left,color=red] (5);
+\path (0) edge[bend right,color=yellow] (6);
+\path (0) edge[bend left,color=yellow] (7);
+\path (0) edge[bend right,color=yellow] (8);
+\path (1) edge[bend left,color=gray] (2);
+\path (1) edge[bend right,color=gray] (3);
+\path (1) edge[bend left,color=gray] (4);
+\path (1) edge[bend right,color=gray] (5);
+\path (1) edge[bend left,color=gray] (6);
+\path (1) edge[bend right,color=gray] (7);
+\path (2) edge[bend left,color=yellow] (3);
+\path (2) edge[bend left,color=yellow] (4);
+\path (2) edge[bend right,color=red] (5);
+\path (2) edge[bend left,color=yellow] (6);
+\path (2) edge[bend right,color=yellow] (7);
+\path (2) edge[bend left,color=yellow] (8);
+\path (3) edge[bend left,color=gray] (4);
+\path (3) edge[bend left,color=gray] (5);
+\path (3) edge[bend right,color=gray] (6);
+\path (3) edge[bend left,color=gray] (7);
+\path (3) edge[bend right,color=gray] (8);
+\path (4) edge[bend left,color=gray] (5);
+\path (4) edge[bend right,color=gray] (6);
+\path (4) edge[bend left,color=gray] (7);
+\path (4) edge[bend right,color=gray] (8);
+\path (5) edge[bend right,color=yellow] (6);
+\path (5) edge[bend left,color=yellow] (7);
+\path (5) edge[bend right,color=yellow] (8);
+\path (6) edge[bend left,color=gray] (7);
+\path (6) edge[bend right,color=gray] (8);
+\path (7) edge[bend right,color=gray] (8);
+\end{tikzpicture}
+\end{center}
+\caption{Learning in the associate network. The pattern has been imposed and connection strengths are changed. The red links increase by $\eta(1-a)^2$ and the gray by $\eta(-a)^2$, the yellow links decrease by $\eta a(1-a)$.\label{fig:hebb}}
+\end{figure}
+
+During recall some of the neurons are held in the active state and the
+rest of the network evolves according to a threshold input rule. That
+means each neuron has an input given by
+\begin{equation}
+h_i=\sum{w_{ij}x_j}
+\end{equation}
+and is set in the active state if $h_i>\theta$ where $\theta$ is a
+threshold which is set to different values for different networks. The idea is that after learning the pattern $\{0,2,5\}$ 
+\begin{center}
+\begin{tikzpicture}
+\node[on,text width=0.35cm](0){0};
+\node[off,text width=0.35cm,right of = 0](1){1};
+\node[on,text width=0.35cm,right of = 1](2){2};
+\node[off,text width=0.35cm,right of = 2](3){3};
+\node[off,text width=0.35cm,right of = 3](4){4};
+\node[on,text width=0.35cm,right of = 4](5){5};
+\node[off,text width=0.35cm,right of = 5](6){6};
+\node[off,text width=0.35cm,right of = 6](7){7};
+\node[off,text width=0.35cm,right of = 7](8){8};
+\end{tikzpicture}
+\end{center}
+the connections between these nodes will be strong, so if the network has nodes $\{0,5\}$ activated
+\begin{center}
+\begin{tikzpicture}
+\node[on,text width=0.35cm](0){0};
+\node[off,text width=0.35cm,right of = 0](1){1};
+\node[off,text width=0.35cm,right of = 1](2){2};
+\node[off,text width=0.35cm,right of = 2](3){3};
+\node[off,text width=0.35cm,right of = 3](4){4};
+\node[on,text width=0.35cm,right of = 4](5){5};
+\node[off,text width=0.35cm,right of = 5](6){6};
+\node[off,text width=0.35cm,right of = 6](7){7};
+\node[off,text width=0.35cm,right of = 7](8){8};
+\end{tikzpicture}
+\end{center}
+the value $h_{2}=w_{12}+w_{52}$ will be larger than threshold and the
+subsequent dynamics will switch neuron 2 on. However, in this network,
+if a different initial set of neurons are activated, the activity will
+die away because the $h_i$ will all be sub-threshold.
+
+\subsection*{Capacity}
+
+When many patterns are stored it is likely that there will be
+interference between them. This is illustrated in
+Fig.~\ref{fig:interfere}. Although the figure shows how a single
+neuron fails to participate in two patterns, for larger networks some
+overlap is possible, but too much overlap prevents retrieval. In fact
+the capacity is proportional to the number of neurons, $N$. A
+hand-waving argument goes like this: the number of connections is
+roughly $N^2$ and the amount of information in a pattern is $N$ so the
+number of patterns that can be stored is $N^2/N=N$ \cite{Amit1992a}.
+
+\begin{figure}
+\begin{center}
+\begin{tikzpicture}
+\node[on,text width=0.35cm](0){0};
+\node[off,text width=0.35cm,right of = 0](1){1};
+\node[on,text width=0.35cm,right of = 1](2){2};
+\node[off,text width=0.35cm,right of = 2](3){3};
+\node[off,text width=0.35cm,right of = 3](4){4};
+\node[on,text width=0.35cm,right of = 4](5){5};
+\node[off,text width=0.35cm,right of = 5](6){6};
+\node[off,text width=0.35cm,right of = 6](7){7};
+\node[off,text width=0.35cm,right of = 7](8){8};
+\path (5) edge[bend left,color=red] (0);
+\path (5) edge[bend right,color=yellow] (1);
+\path (5) edge[bend left,color=red] (2);
+\path (5) edge[bend right,color=yellow] (3);
+\path (5) edge[bend left,color=yellow] (4);
+\path (5) edge[bend right,color=yellow] (6);
+\path (5) edge[bend left,color=yellow] (7);
+\path (5) edge[bend right,color=yellow] (8);
+\end{tikzpicture}
+\begin{tikzpicture}
+\node[off,text width=0.35cm](0){0};
+\node[on,text width=0.35cm,right of = 0](1){1};
+\node[off,text width=0.35cm,right of = 1](2){2};
+\node[off,text width=0.35cm,right of = 2](3){3};
+\node[off,text width=0.35cm,right of = 3](4){4};
+\node[on,text width=0.35cm,right of = 4](5){5};
+\node[on,text width=0.35cm,right of = 5](6){6};
+\node[off,text width=0.35cm,right of = 6](7){7};
+\node[off,text width=0.35cm,right of = 7](8){8};
+\path (5) edge[bend left,color=yellow] (0);
+\path (5) edge[bend right,color=red] (1);
+\path (5) edge[bend left,color=yellow] (2);
+\path (5) edge[bend right,color=yellow] (3);
+\path (5) edge[bend left,color=yellow] (4);
+\path (5) edge[bend right,color=red] (6);
+\path (5) edge[bend left,color=yellow] (7);
+\path (5) edge[bend right,color=yellow] (8);
+\end{tikzpicture}
+\end{center}
+\caption{Interference in an associate network. Neuron 5 is involved in two patterns and, as a consequence, some of its connections are strengthen for one pattern and weakened for the other, if these strengthening and weakening effects are similar in size it makes it unlikely that either pattern will be accurately retrieved.\label{fig:interfere}}
+\end{figure}
+
+\subsection*{Correlated patterns}
+
+The estimates above assume that the patterns are all independent. If
+they aren't the capacity is reduced. If patterns share some fragments
+or subpatterns then the connections in these subpatterns become very
+strong, perhaps dominating other elements in the patterns, the
+elements that make them different. Consider the four patterns
+\begin{center}
+\begin{tikzpicture}
+\node[on,text width=0.35cm](0){0};
+\node[on,text width=0.35cm,right of = 0](1){1};
+\node[off,text width=0.35cm,right of = 1](2){2};
+\node[off,text width=0.35cm,right of = 2](3){3};
+\node[off,text width=0.35cm,right of = 3](4){4};
+\node[on,text width=0.35cm,right of = 4](5){5};
+\node[off,text width=0.35cm,right of = 5](6){6};
+\node[off,text width=0.35cm,right of = 6](7){7};
+\node[off,text width=0.35cm,right of = 7](8){8};
+\end{tikzpicture}
+\begin{tikzpicture}
+\node[on,text width=0.35cm](0){0};
+\node[on,text width=0.35cm,right of = 0](1){1};
+\node[off,text width=0.35cm,right of = 1](2){2};
+\node[off,text width=0.35cm,right of = 2](3){3};
+\node[off,text width=0.35cm,right of = 3](4){4};
+\node[off,text width=0.35cm,right of = 4](5){5};
+\node[on,text width=0.35cm,right of = 5](6){6};
+\node[off,text width=0.35cm,right of = 6](7){7};
+\node[off,text width=0.35cm,right of = 7](8){8};
+\end{tikzpicture}
+\begin{tikzpicture}
+\node[on,text width=0.35cm](0){0};
+\node[on,text width=0.35cm,right of = 0](1){1};
+\node[off,text width=0.35cm,right of = 1](2){2};
+\node[off,text width=0.35cm,right of = 2](3){3};
+\node[off,text width=0.35cm,right of = 3](4){4};
+\node[off,text width=0.35cm,right of = 4](5){5};
+\node[off,text width=0.35cm,right of = 5](6){6};
+\node[on,text width=0.35cm,right of = 6](7){7};
+\node[off,text width=0.35cm,right of = 7](8){8};
+\end{tikzpicture}
+\begin{tikzpicture}
+\node[on,text width=0.35cm](0){0};
+\node[off,text width=0.35cm,right of = 0](1){1};
+\node[on,text width=0.35cm,right of = 1](2){2};
+\node[off,text width=0.35cm,right of = 2](3){3};
+\node[off,text width=0.35cm,right of = 3](4){4};
+\node[off,text width=0.35cm,right of = 4](5){5};
+\node[off,text width=0.35cm,right of = 5](6){6};
+\node[off,text width=0.35cm,right of = 6](7){7};
+\node[on,text width=0.35cm,right of = 7](8){8};
+\end{tikzpicture}
+\end{center}
+The connection between neurons 0 and 1 will become very strong because
+this connection is present in three patterns out of four. It is likely
+that this will result in this erroneous completion
+\begin{center}
+\begin{tikzpicture}
+\filldraw[color=red!60, fill=red!25, very thick](0,2) circle (.25);
+\filldraw[color=blue!60, fill=red!0, very thick](1,2) circle (.25);
+\filldraw[color=blue!60, fill=red!0, very thick](2,2) circle (.25);
+\filldraw[color=blue!60, fill=red!0, very thick](3,2) circle (.25);
+\filldraw[color=blue!60, fill=red!0, very thick](4,2) circle (.25);
+\filldraw[color=blue!60, fill=red!0, very thick](5,2) circle (.25);
+\filldraw[color=blue!60, fill=red!0, very thick](6,2) circle (.25);
+\filldraw[color=blue!60, fill=red!0, very thick](7,2) circle (.25);
+\filldraw[color=red!60, fill=red!25, very thick](8,2) circle (.25);
+\coordinate (a) at (4,1.5);
+\coordinate (b) at (4,0.5);
+\draw[->, >=latex, black!20!white, line width=4pt]   (a) to (b) ;
+\filldraw[color=red!60, fill=red!25, very thick](0,0) circle (.25);
+\filldraw[color=red!60, fill=red!25, very thick](1,0) circle (.25);
+\filldraw[color=red!60, fill=red!25, very thick](2,0) circle (.25);
+\filldraw[color=blue!60, fill=red!0, very thick](3,0) circle (.25);
+\filldraw[color=blue!60, fill=red!0, very thick](4,0) circle (.25);
+\filldraw[color=blue!60, fill=red!0, very thick](5,0) circle (.25);
+\filldraw[color=blue!60, fill=red!0, very thick](6,0) circle (.25);
+\filldraw[color=blue!60, fill=red!0, very thick](7,0) circle (.25);
+\filldraw[color=red!60, fill=red!25, very thick](8,0) circle (.25);
+\end{tikzpicture}
+\end{center}
+or even
+\begin{center}
+\begin{tikzpicture}
+\filldraw[color=red!60, fill=red!25, very thick](0,2) circle (.25);
+\filldraw[color=blue!60, fill=red!0, very thick](1,2) circle (.25);
+\filldraw[color=blue!60, fill=red!0, very thick](2,2) circle (.25);
+\filldraw[color=blue!60, fill=red!0, very thick](3,2) circle (.25);
+\filldraw[color=blue!60, fill=red!0, very thick](4,2) circle (.25);
+\filldraw[color=blue!60, fill=red!0, very thick](5,2) circle (.25);
+\filldraw[color=blue!60, fill=red!0, very thick](6,2) circle (.25);
+\filldraw[color=blue!60, fill=red!0, very thick](7,2) circle (.25);
+\filldraw[color=red!60, fill=red!25, very thick](8,2) circle (.25);
+\coordinate (a) at (4,1.5);
+\coordinate (b) at (4,0.5);
+\draw[->, >=latex, black!20!white, line width=4pt]   (a) to (b) ;
+\filldraw[color=red!60, fill=red!25, very thick](0,0) circle (.25);
+\filldraw[color=red!60, fill=red!25, very thick](1,0) circle (.25);
+\filldraw[color=blue!60, fill=red!0, very thick](2,0) circle (.25);
+\filldraw[color=blue!60, fill=red!0, very thick](3,0) circle (.25);
+\filldraw[color=blue!60, fill=red!0, very thick](4,0) circle (.25);
+\filldraw[color=blue!60, fill=red!0, very thick](5,0) circle (.25);
+\filldraw[color=blue!60, fill=red!0, very thick](6,0) circle (.25);
+\filldraw[color=blue!60, fill=red!0, very thick](7,0) circle (.25);
+\filldraw[color=blue!60, fill=red!0, very thick](8,0) circle (.25);
+\end{tikzpicture}
+\end{center}
+This means that auto-associative networks are not able to effectively
+store anything except random patterns! This is why they have never
+proved useful for machine learning; we will see later, when looking at
+cortical memory, that if there are multiple presentations, the memory
+system would have the opportunity to learn different, similar,
+memories. The goal here, however, is to learn the memory quickly after
+a small number of presentations.
+
+In the case of hippocampus it has been proposed,
+\cite{OReillyMcClelland1994a}, that this problem is solved through the
+EC-DG-CA3 pathway and that the role of the dentate gyrus is to
+randomize the connectivity between EC and CA3. In short, during
+learning neurons in EC and CA3 are matched via DG and that the
+connections from EC to DG and from DG to EC are essentially random. In
+other words in this simple model CA3 is an auto-associative memory
+store and DG, as a feedforward network just passes the pattern along,
+but randomizes it a bit on the way to help keep similar patterns
+seperate. This is referred to as pattern seperation.
+
+\begin{thebibliography}{10}
+
+\bibitem{OKeefeDostrovsky1971a}
+O'Keefe J, Dostrovsky J. (1971) The hippocampus as a spatial map. Preliminary evidence from unit activity in the freely-moving rat.
+\newblock Brain Research 34: 171--5.
+
+\bibitem{QuianQuirogalEtAl2005a}
+Quian Quiroga R, Reddy L, Kreiman G, Koch C, Fried I. (2005) Invariant visual representation by single neurons in the human brain.
+\newblock Nature 435: 1102--7.
+
+\bibitem{McCullochPitts1943a}
+McCulloch W, Pitts W. (1943). A logical calculus of the ideas immanent in nervous activity. 
+\newblock Bulletin of Mathematical Biophysics 7: 115--33.
+
+\bibitem{Amit1992a} Amit D. (1992) Modeling Brain Function: The World
+  of Attractor Neural Networks.
+\newblock Cambridge University Press, Cambridge England.
+
+\bibitem{OReillyMunakata2000a}
+O'Reilly RC, Munakata Y (2000) Computational explorations in cognitive neuroscience: Understanding the mind by simulating the brain.
+\newblock MIT press, Cambridge MA.
+
+\bibitem{OReillyMcClelland1994a}
+O’Reilly RC, McClelland JL (1994) Hippocampal conjunctive encoding, storage, and recall: Avoiding a tradeoff.
+\newblock Hippocampus 4: 661--82.
+
+\bibitem{Hasselmo2006a}
+Hasselmo ME. (2006) The role of acetylcholine in learning and memory.
+\newblock Current Opinion in Neurobiology 16: 710--71
+
+\bibitem{LismanGrace2005a}
+Lisman JE, Grace AA. (2005) The hippocampal-VTA loop: controlling the entry of information into long-term memory.
+\newblock Neuron, 46: 703--713.
+
+\end{thebibliography}
+
+\end{document}

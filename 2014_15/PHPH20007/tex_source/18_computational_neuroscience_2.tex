@@ -142,7 +142,20 @@ text width=3cm] (CA1)
   regio.\label{fig:connectivity}}
 \end{figure}
 
+
+\subsection*{The role of the hippocampus}
+The role of any brain region is complex and the hippocampus is no
+exception. It may play a role in olefaction for example, however, it
+is widely believed that its principle role is in memory and in
+constructing spatial maps. Studying patients with hippocampal damage
+shows that it is involved in declarative memory, that is the sort of
+memory that can be described in words. It does not play a role in
+procedural memory, the memory process which allows us to learn new
+motor skills. It appears, again from patients with hippocampal damage,
+that some long term memories are stored outside the hippocampus.
+
 \section*{Auto-associative memory}
+
 A standard paradigm for memory in the hippocampus is
 \textsl{auto-associative} memory. Auto-associative memories are
 patterns representing memories along with some dynamics that complete
@@ -188,7 +201,9 @@ complete patterns.
 \filldraw[color=blue!60, fill=red!0, very thick](8,0) circle (.25);
 \end{tikzpicture}
 \end{center}
-The idea is that the hippocampus implements a network which performs auto-associative memory.
+
+The idea is that the hippocampus implements a network which performs
+auto-associative memory.
 
 \subsection*{A model of CA3}
 Here a highly simplified model of CA3 is presented
@@ -203,8 +218,7 @@ there being different firing rates. We will call the on state
 of neurons, $x_i$ the activity of neuron $i$ and $w_{ij}$ the strength
 of the connection for $i$ to $j$. The sparseness, the average
 proportion of neurons active at any one time is $a$, this is believed
-to be very small in actual neurons. For this simple model
-$w_{ij}=w_{ji}$.
+to be very small in actual neurons. For this simple model $w_{ij}=w_{ji}$.
 
 During learning the patterns are activated and plastic changes are
 made to the synapse strength according to a simple correlation based Hebbian plasticity rule.
@@ -269,7 +283,7 @@ inactive. See Fig.~\ref{fig:hebb}.
 \path (7) edge[bend right,color=gray] (8);
 \end{tikzpicture}
 \end{center}
-\caption{Learning in the associate network. The pattern has been imposed and connection strengths are changed. The red links increase by $\eta(1-a)^2$ and the gray by $\eta(-a)^2$, the yellow links decrease by $\eta a(1-a)$.\label{fig:hebb}}
+\caption{Learning in the auto-associative network. The pattern has been imposed and connection strengths are changed. The red links increase by $\eta(1-a)^2$ and the gray by $\eta(-a)^2$, the yellow links decrease by $\eta a(1-a)$.\label{fig:hebb}}
 \end{figure}
 
 During recall some of the neurons are held in the active state and the
@@ -475,24 +489,29 @@ or even
 \filldraw[color=blue!60, fill=red!0, very thick](8,0) circle (.25);
 \end{tikzpicture}
 \end{center}
+
+
 This means that auto-associative networks are not able to effectively
 store anything except random patterns! This is why they have never
-proved useful for machine learning; we will see later, when looking at
-cortical memory, that if there are multiple presentations, the memory
-system would have the opportunity to learn different, similar,
-memories. The goal here, however, is to learn the memory quickly after
-a small number of presentations.
-
-In the case of hippocampus it has been proposed,
-\cite{OReillyMcClelland1994a}, that this problem is solved through the
-EC-DG-CA3 pathway and that the role of the dentate gyrus is to
-randomize the connectivity between EC and CA3. In short, during
-learning neurons in EC and CA3 are matched via DG and that the
+proved useful for machine learning. In the case of hippocampus it has
+been proposed, \cite{OReillyMcClelland1994a}, that this problem is
+solved through the EC-DG-CA3 pathway and that the role of the dentate
+gyrus is to randomize the connectivity between EC and CA3. In short,
+during learning neurons in EC and CA3 are matched via DG and that the
 connections from EC to DG and from DG to EC are essentially random. In
 other words in this simple model CA3 is an auto-associative memory
 store and DG, as a feedforward network just passes the pattern along,
 but randomizes it a bit on the way to help keep similar patterns
 seperate. This is referred to as pattern seperation.
+
+\subsection*{Summary}
+\begin{enumerate}
+\item CA3 - many recurrent connections, that is excitatory neurons connected to each other.
+\item CA3 - an auto-associative memory store - patterns are completed.
+\item CA3 - capacity proportional to $N$.
+\item DG - feedforward, that is few, or even no, lateral connections between the excitatory neurons.
+\item DG - seperates patterns ready for EC to store them by randomizing them.
+\end{enumerate}
 
 \begin{thebibliography}{10}
 

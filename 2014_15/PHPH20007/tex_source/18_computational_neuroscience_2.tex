@@ -49,10 +49,11 @@
 \markright{PHPH20007 - 18 computational neuroscience 2 - Conor Houghton}
 \begin{document}
 
-\subsection*{Introduction}
-These notes are about the hippocampus.
+\section*{Introduction}
+These notes are about the hippocampus and introduce a more top down
+style of modelling.
 
-\subsection*{Anatomy of the hippocampus}
+\section*{Anatomy of the hippocampus}
 
 The hippocampus is situated at the edge of the cortex and is divided
 into two main areas. The hippocampus complex is distinctive in shape
@@ -71,6 +72,14 @@ In addition, the main input to the hippocampus comes from the
 \end{itemize}
 and in this discussion this will be treated along with the hippocampus
 since it partiticipates in hippocampal processing.
+
+One key aspect of the anatomy we are going to consider here is that
+the excitatory neurons in DG are feedforward, that means they lack
+lateral connections, that is connections between themselves. CA3 in
+contrast is a recurrent network, the excitatory neurons are
+interconnected. DG is often called feedforward and CA3 recurrent even
+though in a way this ignores the recurrent connections in DG between
+excitatory and inhibitory cells.
 
 \begin{figure}
 \begin{center}
@@ -133,6 +142,7 @@ text width=3cm] (CA1)
   regio.\label{fig:connectivity}}
 \end{figure}
 
+
 \subsection*{The role of the hippocampus}
 The role of any brain region is complex and the hippocampus is no
 exception. It may play a role in olefaction for example, however, it
@@ -144,7 +154,8 @@ procedural memory, the memory process which allows us to learn new
 motor skills. It appears, again from patients with hippocampal damage,
 that some long term memories are stored outside the hippocampus.
 
-\subsection*{Auto-associative memory}
+\section*{Auto-associative memory}
+
 A standard paradigm for memory in the hippocampus is
 \textsl{auto-associative} memory. Auto-associative memories are
 patterns representing memories along with some dynamics that complete
@@ -190,6 +201,7 @@ complete patterns.
 \filldraw[color=blue!60, fill=red!0, very thick](8,0) circle (.25);
 \end{tikzpicture}
 \end{center}
+
 The idea is that the hippocampus implements a network which performs
 auto-associative memory.
 
@@ -477,19 +489,20 @@ or even
 \filldraw[color=blue!60, fill=red!0, very thick](8,0) circle (.25);
 \end{tikzpicture}
 \end{center}
+
+
 This means that auto-associative networks are not able to effectively
 store anything except random patterns! This is why they have never
-proved useful for machine learning. It has been proposed,
-\cite{OReillyMcClelland1994a}, that this problem is solved through the
-EC-DG-CA3 pathway and that the role of the dentate gyrus is to
-randomize the connectivity between EC and CA3. DG is a feedforward
-network, this means that there is few lateral connections between the
-principle excitatory cells so the message just gets passed
-forward. This makes the role of the DG not so clear and the idea that
-has been proposed is that going through DG randomizes the patterns and this seperates them for storage. In
-short, during learning neurons in EC and CA3 are matched via DG and
-that the connections from EC to DG and from DG to EC are essentially
-random. This reduces overlap in the patterns being stored in DG.
+proved useful for machine learning. In the case of hippocampus it has
+been proposed, \cite{OReillyMcClelland1994a}, that this problem is
+solved through the EC-DG-CA3 pathway and that the role of the dentate
+gyrus is to randomize the connectivity between EC and CA3. In short,
+during learning neurons in EC and CA3 are matched via DG and that the
+connections from EC to DG and from DG to EC are essentially random. In
+other words in this simple model CA3 is an auto-associative memory
+store and DG, as a feedforward network just passes the pattern along,
+but randomizes it a bit on the way to help keep similar patterns
+seperate. This is referred to as pattern seperation.
 
 \subsection*{Summary}
 \begin{enumerate}

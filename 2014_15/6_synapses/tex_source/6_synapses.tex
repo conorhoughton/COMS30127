@@ -161,7 +161,7 @@ depends on the number of bound molecules, giving an exponential decay.
 Often the post-synaptic condutivity is taken to be a what is called an
 $alpha$ function:
 \begin{equation}
-I_s(t)=g_ss(t)(V-E_s)
+I_s(t)=g_ss(t)(E_s-V)
 \end{equation}
 where $I_s(t)$ is the synpatic current, $E_s$ is the reversal
 potential of the synapse and $g_ss(t)$ is the conductance, $g_s$ is a
@@ -177,7 +177,16 @@ where the unbound neurotransmitter has been cleared from the cleft and
 the bound neurotransmitter is unbinding randomly due to the thermal
 motion of molecules. It is possible to understand these dynamics in
 terms of the bucket-like equations we have examined before, but this
-won't be done here.
+won't be done here. It is also common to leave out the rising part and
+just model the conductance as
+\begin{equation}
+\tau_s\frac{ds}{dt}=-s
+\end{equation}
+with
+\begin{equation}
+s(t)\rightarrow s(t)+1
+\end{equation}
+whenever there is a spike.
 
 \begin{figure}
 \begin{center}

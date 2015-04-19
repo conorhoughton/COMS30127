@@ -23,6 +23,17 @@
 }
 
 
+
+\tikzset{
+    area/.style={
+           rectangle,
+           draw=black, very thick,
+           inner sep=2pt,
+           text centered,
+           },
+}
+
+
 \tikzset{
     gc/.style={
            rectangle,
@@ -49,7 +60,6 @@
 \tikzset{
     io/.style={
            rectangle,
-           rounded corners,
            draw=green, very thick,
            inner sep=2pt,
            text centered,
@@ -123,10 +133,10 @@ contacts with it, see Fig.~\ref{fig:cerebellum}.
 \node[scale =0.2,fill=green,above = 0.25cm of IO](IOa){};
 \node[scale =0.2,fill=green,left = 1.75cm of IOa](IOl){};
 \node[scale =0.01,below = 2.6cm of IOl](IOlb){};
-\node[neuron,text width=1cm, text height=0.35cm,below  = 3.5cm of PC](DCN){DCN};
+\node[area,text width=1cm, text height=0.35cm,below  = 3.5cm of PC](DCN){DCN};
 \node[scale=0.2,fill=black,right= 1.5cm of DCN](DCNr){};
-\node[neuron,text height=0.35cm,right = 2cm of DCNr](ma){motor areas};
-\node[neuron,text height=0.35cm,left = 2cm of GCb](ew){elsewhere};
+\node[area,text height=0.35cm,right = 2cm of DCNr](ma){motor areas};
+\node[area,text height=0.35cm,left = 2cm of GCb](ew){elsewhere};
 \path (PCdd) edge[-,line width=2pt](PC);
 \path (PC) edge[-o,line width=2pt] (DCN);
 \path (IO) edge[-,green,line width=2pt] node[anchor=west]{CF} (PCcr);

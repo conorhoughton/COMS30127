@@ -79,7 +79,7 @@ These notes are about the cerebellum and is partly based on \cite{Albus1971a}.
 \subsection*{Anatomy of the cerebellum}
 The cerebellum has a number of striking features; it has a more
 stereotypical structure than most brain area and this structure is
-conaerved across species. It also has one of the brains largest cells,
+conaerved across species. It also has one of the brain's largest cells,
 the Purkinje cell, and its most numerous, the granule cell.
 
 \begin{figure}
@@ -110,7 +110,6 @@ contacts with it, see Fig.~\ref{fig:cerebellum}.
   cells. Each Purkinje cell has its own climbing fiber which winds up
   around it.\label{fig:cerebellum}}
 \end{figure}
-
 
 
 \begin{figure}
@@ -155,21 +154,39 @@ contacts with it, see Fig.~\ref{fig:cerebellum}.
 \path (SC) edge[-o,blue, line width=2pt](PCd);
 \end{tikzpicture}
 \end{center}
-\caption{A schematic of the cerebellar circuit. The granule cells (GC) receive input from a diverse range of other parts of the brain along the mossy fibers (MF). Each granule cell will combine input from just three or four mossy fibers and do this in lots of different combinations. The parallel fiber (PF) carries spikes from the GC to the Purkinje cell (PC). The PC also receives input from a climbing fiber (CF) coming from Inferior Olivary Nucleus (IO). In turn it sends an inhibitory signal to the Deep Cerebellar Nucleus (DCN). The basket cells (BC), the Golgi cells (GgC) and the stellate cells (SC) are all local inhibitory cells.\label{fig:connectivity}}
+\caption{A schematic of the cerebellar circuit. The granule cells (GC)
+  receive input from a diverse range of other parts of the brain along
+  the mossy fibers (MF). Each granule cell will combine input from
+  just three or four mossy fibers and do this in lots of different
+  combinations. The parallel fiber (PF) carries spikes from the GC to
+  the Purkinje cell (PC) whose large dendrite is drawn as a line. The
+  PC also receives input from a climbing fiber (CF) coming from
+  Inferior Olivary Nucleus (IO). In turn it sends an inhibitory signal
+  to the Deep Cerebellar Nucleus (DCN); the DCN has inhibitory neurons
+  which act on IO and excitatory neurons which act on the motor
+  system. The basket cells (BC), the Golgi cells (GgC) and the
+  stellate cells (SC) are all local inhibitory
+  cells.\label{fig:connectivity}}
 \end{figure}
 
-Another peculiarity is that the Purkinje cell has different responses to different inputs; in response to multiple weak inputs from the parallel fibers it fires a normal sort of spike, called in this context a \textsl{simple spike}; in response to single spike from the climbing fiber is fires a special spike, called a \textsl{complex spike}, with a leading spike, a number of small \lq{}spikelets\rq{} and a sustained after-period of depolarization; this is illustrated in Fig.~\ref{fig:spikes}.
+Another peculiarity is that the Purkinje cell has different responses
+to different inputs; in response to multiple weak inputs from the
+parallel fibers it fires a normal sort of spike, called in this
+context a \textsl{simple spike}; in response to single spike from the
+climbing fiber is fires a special spike, called a \textsl{complex
+  spike}, with a leading spike, a number of small \lq{}spikelets\rq{}
+and a sustained after-period of depolarization; this is illustrated in
+Fig.~\ref{fig:spikes}.
 
 \begin{figure}
 \begin{center}
 \includegraphics[width=8.cm]{complex_spike.png}
 \end{center}
-\caption{A complex spike. This drawing shows a simple
-spikes in black and a complex spike in red. The
-complex spike is followed by a long refractory
-period during which spiking is not possible. This is
-a sketch, not an actual recording, but a typical time
-scale would have this refractory period 50 ms long.\label{fig:spikes}} 
+\caption{A complex spike. This drawing shows a simple spikes in black
+  and a complex spike in red. The complex spike is followed by a long
+  refractory period during which spiking is not possible. This is a
+  sketch, not an actual recording, but a typical time scale would have
+  this refractory period 50 ms long.\label{fig:spikes}}
 \end{figure}
 
 \subsection*{The Marr-Albus model}
@@ -203,7 +220,8 @@ where $\eta$ is a small learning rate. The idea in the Marr-Albus
 model is that the climbing fiber carries the error signal $d-y$.
 
 Thus, in a simple example, say $\mathbf{w}=(1,1,1,1)$ initially and
-the input $\mathbf{x}=(1,0,1,0)$ has the desired output $d=-1$, well
+the input $\mathbf{x}=(1,0,1,0)$ is supposed to have the output
+$d=-1$, well
 \begin{equation}
 y=-\mathbf{w}\cdot\mathbf{x}=-2
 \end{equation}
@@ -229,7 +247,8 @@ synapse strengths.
 This can only be part of the description of this network. For example,
 synapses form the parallel fibers can only be positive, not negative;
 this can be accounted for by including inhibitory cells in the
-network. Furthermore, a linear model like that being used here can't learn complicated patterns like the XOR pattern:
+network. Furthermore, a linear model like that being used here can't
+learn complicated patterns like the XOR pattern:
 \begin{center}
 \begin{tabular}{llr}
 $x_1$&$x_2$&$d$\\
@@ -248,18 +267,21 @@ to 150 times the number of mossy fibers. Finally there are large
 inhibitory cells called Golgi cells in the network, these have long
 time constants, providing delays; this is clearly useful for motor
 control where different muscles move at different times or different
-motor consequence unfold at different times during a motion \cite{Fujita1982a,ShidaraEtAl1993a}.
+motor consequence unfold at different times during a motion
+\cite{Fujita1982a,ShidaraEtAl1993a}.
 
 This leaves lots of things mysterious; how this needs to be changed to
 account for real spiking neurons, how the error signal adjusts the
-synapse strengths and why this very special architecture is ideal for
-this sort of calculation. Another question relates to the error; our
-brain sees muscles and nerves, our observation sees objects and
-motion, how are the two reconciled: when you throw a dart you can see
-you hit the one instead of the triple 20, you can't see which finger
-muscle was activated too strongly or too weakly. However, with a low
-learning rate $d$, or even $d-y$ isn't needed exactly, in fact, just
-the sign is needed; that is something that could plausibly be deduced in cortex.
+synapse strengths, see \cite{Houghton2014a} for a suggest, and why
+this very special architecture is ideal for this sort of
+calculation. Another question relates to the error; our brain sees
+muscles and nerves, our observation sees objects and motion, how are
+the two reconciled: when you throw a dart you can see you hit the one
+instead of the triple 20, you can't see which finger muscle was
+activated too strongly or too weakly. However, with a low learning
+rate $d$, or even $d-y$ isn't needed exactly, in fact, just the sign
+is needed; that is something that could plausibly be deduced in
+cortex.
 
 
 \begin{thebibliography}{10}
@@ -292,6 +314,10 @@ Fujita M. (1982) Adaptive filter model of the cerebellum.
 \bibitem{ShidaraEtAl1993a}
 Shidara M, Kawano K, Gomi H and Kawato M (1993) Inverse-dynamics model eye movement control by Purkinje cells in the cerebellum.
 \newblock Nature, 365: 50--2.
+
+\bibitem{Houghton2014a} Houghton C (2014) Supervised Learning with Complex Spikes and Spike-Timing-Dependent Plasticity. 
+\newblock PLoS ONE 9(6): e99635. 
+
 \end{thebibliography}
 
 \end{document}

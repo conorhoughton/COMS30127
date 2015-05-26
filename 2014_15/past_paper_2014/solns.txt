@@ -1,0 +1,57 @@
+
+1)
+
+a) peristimulus time histogram
+b) cross-correlogram 
+c) d'
+d) auto-correlogram
+
+
+
+2) Aphasia
+
+3) H(W)-H(W|S)  - not covered in 2015
+
+4) The sodium channels is transient, the allows positive ions to flow in, the potassium channel is persistient, it allows positive ions to flow out.
+
+5) sparse-small-small-error-sparse
+
+6) The last answer, a neuron has only one type of synapse carrying the signal on. 
+
+7) FTFTTF reading downwards
+
+8) N
+
+9) 0.25
+
+10) D
+
+11) 1.5
+
+12) TTFT reading downwards
+
+13) granule / cere / arallel / climbing
+
+14) -68
+
+15) soma / dendrites / axon / sodium 
+
+16) animal is presented with an unexpected reward
+
+17) creation of independent codes
+
+18) hippocampus (dentate gyrus to be exact, though that's not asked for here)
+
+19) 
+
+Information about specific episodes is remembered in hippocampus
+Generalities are extracted in neocortex
+Independent representations are generated in hippocampus
+Smaller learning rates are used in neocortex
+
+20) 
+
+increasing the membrane constant will decrease the firing rate
+increasing the threshold will decrease the firing rate
+increasing the reset value will increase the firing rate
+increasing the injected current will increase the firing rate

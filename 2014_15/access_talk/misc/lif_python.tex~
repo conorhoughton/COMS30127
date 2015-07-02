@@ -1,0 +1,95 @@
+\documentclass[11pt,a4paper]{scrartcl}
+\typearea{12}
+\usepackage{graphicx}
+\usepackage{pstricks}
+\usepackage{listings}
+\lstset{language=python}
+\pagestyle{headings}
+\markright{Leaky integrate and fire neuron}
+\begin{document}
+\subsection*{The leaky integrate and fire model}
+
+The leaky integrate and fire model is a simple model of the neuron; it
+has been used in neuroscience to study large networks of neurons and
+to investigate how neuronal networks might learn through changes in
+the strengths of synapses. Here we will look at a single neuron. 
+
+Say $V$ is the voltage inside the neuron, the equation for how the
+voltage changes is given by
+\begin{equation}
+\tau_m\frac{dV}{dt}=E_L-V+R_mI
+\end{equation}
+So
+\begin{itemize}
+\item $dV/dt$ the rate of change of the voltage.
+\item $I$ the current coming in to the cell changing the voltage,
+  $R_m$ basically measures how much the charge changes the voltage.
+\item $E_L-V$ the charge also leaks out and it leaks out more for
+  bigger $V$. $E_L=-70$ mV, the reason this isn't zero is complicated
+  and related to entropy.
+\item $\tau_m$ is a time constant, usually about 10 ms. It determines
+  how fast $V$ responds.
+\end{itemize}
+
+That's part of the behavior of the neuron; there is also spiking, that
+isn't modelled by the integrate and fire model. Instead there is a
+rule that when $V\ge V_T=-55$ mV there's a spike and the voltage is
+set back to zero.
+
+\subsection*{Simulating an integrate and fire neuron}
+
+The idea here is to solve the integrate and fire equation on a
+computer, the usual way to do that is to divide time into little
+slices, say $\delta t$ wide and pretend $dV/dt$ is $\delta V/\delta t$,
+the change in $V$ divided by the change in $t$. This gives the so
+called Euler method:
+\begin{equation}
+V\rightarrow V+\delta V
+\end{equation}
+where 
+\begin{equation}
+\delta V= \frac{(E_L-V+R_mI)\delta t}{\tau_m}
+\end{equation}
+
+\newpage
+
+\subsection*{A Python version}
+
+On the Raspberry Pi you can open a text editor by typing
+\texttt{nano}. This is a very simple text editor but it has the
+advantage that all the commands are listed at the bottom. $\wedge X$, that
+is control-X, exits and will ask if you want to save your program as
+you do; there is no other way to save your program. If you want to
+edit your existing program rather than start a new one you write
+\texttt{nano foo.py} assuming your program is called \texttt{foo.py}. 
+
+Here is a Python program to do an integrate and fire neuron
+\begin{lstlisting}[numbers=right]
+e_l = -70
+tau_m = 10
+v_t = -55
+
+r_i = 10
+
+delta_t = 0.1
+
+t=0
+
+big_t=2000
+
+v=e_l
+
+while t<=big_t:
+	v+=(e_l-v+r_i)*delta_t/tau_m
+	if v>=v_t:
+		print "|",
+		v=e_l	
+	else:
+		print "_",
+
+	t+=delta_t
+\end{lstlisting}
+The numbers on the right aren't part of the program, it is just handy
+to have them. Can you work out what the different parts of the program do? To run it, save it, say as \texttt{lif.py} and then type \texttt{python lif.py}. Try changing the input current.
+
+\end{document}

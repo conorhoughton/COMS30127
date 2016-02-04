@@ -40,11 +40,11 @@ apply in this case will also be applied to synapses, for example.
 \end{picture}
 \end{center}
 
-Consider a bucket, with straight sides which is filled to a height $h$
+Consider a bucket with straight sides which is filled to a height $h$
 with water. Imagine the water leaks out of a hole in the bottom. The
 rate the water leaks out depends on $h$; the larger $h$ is the larger
 the pressure at the bottom is and hence the faster the water pours
-out. In otherwords
+out. In other words
 \begin{equation}
 l(t)\propto h(t)
 \end{equation}
@@ -71,7 +71,7 @@ or
 \frac{dh}{dt}=\frac{1}{C}(i-Gh)
 \end{equation}
 
-Lets solve this equation for constant $i$ before going on to look at
+Let's solve this equation for constant $i$ before going on to look at
 neurons. Probably the best to do this is by using an integrating
 factor, let $\tau=C/G$ and $\tilde{\i}=i/G$
 \begin{equation}
@@ -79,7 +79,7 @@ factor, let $\tau=C/G$ and $\tilde{\i}=i/G$
 \end{equation}
 then we multiply across by $\exp{t/\tau}$ and divide by $\tau$
 \begin{equation}
-e^{t/\tau}\frac{dh}{dt}+\frac{1}{\tau}e^{t/\tau}h=\frac{\tilde{\i}e^{t/tau}}{\tau}
+e^{t/\tau}\frac{dh}{dt}+\frac{1}{\tau}e^{t/\tau}h=\frac{\tilde{\i}e^{t/\tau}}{\tau}
 \end{equation}
 Now we can rewrite the left hand side using the product rule
 \begin{equation}
@@ -106,7 +106,7 @@ equilibriates with $\tilde{\i}$.
 
 These dynamics make good intuitive sense; the more water there is in
 the bucket, the higher the pressure will be at the leak and the
-quicker the water will pour out. If there is just the right about of
+quicker the water will pour out. If there is just the right amount of
 water the rate the water pours out the leak will precisely match the
 rate it pours in, this is the equilibrium. If there is more water than
 required for equilibrium it will pour out faster than the flow coming
@@ -119,7 +119,7 @@ Fig.~\ref{bucket_v} illustrates this.
 \include{bucket_v}
 \end{center}
 \caption{Exponential relaxation. The dynamics described by the
-  \lq{}bucket equation\rq{} is very common. Here
+  \lq{}bucket equation\rq{} are very common. Here
   $h=[h(0)-\tilde{\i}]\exp(-t/\tau)+\tilde{\i}$ is plotted with
   $\tilde{\i}=1$, $\tau=1$ and three different values of
   $h(0)$. $h(t)$ relaxes towards the equilibrium value $\tilde{\i}=1$,

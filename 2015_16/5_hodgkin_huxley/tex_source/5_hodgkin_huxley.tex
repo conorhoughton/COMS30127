@@ -58,16 +58,16 @@ If $\tau_n(V)$ and $n_\infty(V)$ where constant this would be simple,
 $n(t)$ would decay to $n_\infty$ with a timescale of $\tau_n$, however
 they aren't constants, they are functions of the membrane potential. 
 
-A graph of $n_\infty(V)$ is shown in Fig.~\ref{fig:asymp_vals}. We can see that $n$ is
-small when the voltage is near the resting value but climbs towards
-one as $V$ increases. Now, $n$ isn't equal to $n_\infty$, rather it
-decays towards it with a time constant given by $\tau_n(V)$, but we
-can see that the potassium channels open as the voltage
-increases. Before looking at how these play a role in spiking we will
-look at the sodium gates. It is worth noting though the way having
-four independent gates makes the dynamics crisper: if $n$ is near
-zero, $n^4$ is very small indeed. This is illustrated in
-Fig.~\ref{fig:nfour}. 
+A graph of $n_\infty(V)$ is shown in Fig.~\ref{fig:asymp_vals}. We can
+see that $n$ is small when the voltage is near the resting value but
+climbs towards one as $V$ increases. Now, $n$ isn't equal to
+$n_\infty$, rather it decays towards it with a time constant given by
+$\tau_n(V)$, but we can see that the potassium channels open as the
+voltage increases. Before looking at how these play a role in spiking
+we will look at the sodium gates. It is worth noting though the way
+having four independent gates makes the dynamics crisper: if $n$ is
+near zero, $n^4$ is very small indeed. This is illustrated in
+Fig.~\ref{fig:nfour}.
 
 We also need to discuss reversal potentials. You would expect the flow
 of potassium to be determined by $g_KV$, but it isn't; because there
@@ -174,14 +174,20 @@ resets. An example spike is shown in Fig.~\ref{fig:HH_spike}.
 \caption{Some spikes in the HH model. \textbf{A} shows the spikes produced by a standard HH model in response to a current input. \textbf{B} shows how the gating probabilities vary during the spike.\label{fig:HH_spike}}
 \end{figure}
 
-
-
 For a more accurate model further channels, and therefore further
 currents, can be added, other sodium and potassium channels with
 different dynamics, or a calcium channel. It is also common to
 investigate models \lq{}between\rq{} the integrate and fire model and
 the Hodgkin-Huxley equation which add some of the nonlinearity to the
 integrate and fire dynamics.
+
+
+\begin{thebibliography}{99}
+\bibitem{HodgkinHuxley1952}
+Hodgkin, AL and Huxley HF (1952) 
+\newblock"Propagation of electrical signals along giant nerve fibres." 
+\newblock Proceedings of the Royal Society of London. Series B, Biological Sciences 140: 177-183.
+\end{thebibliography}
 
 
 \end{document}

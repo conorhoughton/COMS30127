@@ -1,2 +1,8 @@
 
-lecture 1 (2016-01-26): 
+lecture 1 (2016-01-26): notes on the organization of the course; start of broad introduction to neuroscience - 1_introduction.
+
+lecture 2 (2016-01-28): more discussion of neuroscience, particularly neurons - 1_introduction.
+
+lecture 3 (2016-02-02): more discussion of neuroscience, particularly different brain areas, hippocampus, and so on - 1_introduction.
+
+lecture 4 (2016-02-04): more discussion of neuroscience, particularly the cortex - 1_introduction, mention of computer languages and simulation platforms - 2_python_quick_tour, start of differential equations for neuroscience, as far as the motivation for numerical solutions - 3_bucket_equations

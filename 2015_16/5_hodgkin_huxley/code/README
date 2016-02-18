@@ -1,0 +1,9 @@
+
+some simple programs I used to make the figures in the notes. 
+
+channels.cpp - this was for graphing the asymptotic values and time
+constants against V
+
+all the rest of the c++ code + Makefile - this was for plotting the HH spike, the main is Simulation.cpp for the spike I plotted, I used Simulation2.cpp because I wanted to play around with parameters a bit.
+
+HH.py - a Brian code snippet I took from the Brian examples site just to look at how it worked. 

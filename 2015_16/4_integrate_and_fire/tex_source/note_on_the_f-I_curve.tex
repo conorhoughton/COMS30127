@@ -1,0 +1,54 @@
+\documentclass[11pt,a4paper]{scrartcl}
+\typearea{12}
+\usepackage{graphicx}
+\usepackage{pstricks}
+\usepackage{listings}
+\lstset{language=python}
+\pagestyle{headings}
+\markright{Computation Neuroscience - Lecture 4}
+\begin{document}
+
+\subsection*{Introduction}
+
+The notes contain a figure, repeated here as Fig.~\ref{f_i_curve}
+showing the f-I curve for an integrate and fire neuron. To save time
+the shape of the curve was never derived but for the curious I have
+writen it out here.
+
+In the model 
+\begin{equation}
+\tau_m\frac{dV}{dt}=E_L-V+R_mI_e
+\end{equation}
+which we can solve from our study of odes, it gives
+\begin{equation}
+V(t)=E_L+R_mI_e+[V(0)-E_L-R_mI_e]e^{-t/\tau_m}
+\end{equation}
+so if the neuron has spiked and is reset at time $t=0$ and reaches
+threshold at time $t=T$, assume $V_R=E_L$ we have
+\begin{equation}
+V_T=E_L+R_mI_e-R_mI_ee^{-T/\tau_m}
+\end{equation}
+so 
+\begin{equation}
+e^{-T/\tau_m}=\frac{E_L+R_mI_e-V_T}{R_mI_e}
+\end{equation}
+Taking the log of both sides we get
+\begin{equation}
+T=\tau_m\log\left[\frac{R_mI_e}{E_L+R_mI_e-V_T}\right]
+\end{equation}
+Finally, this is the time between spikes, so the frequency is one over this. It is only defined for $R_mI_e>V_T-E_L$, below that there is no spiking and the frequency is zero. The actual gnuplot command used to make the figure was\\
+\texttt{plot [0:22] x>15 ? 1/(.01*log(x/(x-15))) : 0}
+
+\begin{figure}
+\begin{center}
+\include{f_i_curve}
+\end{center}
+\caption{The firing rate, that is spikes per second, for the integrate
+  and fire neuron with different constant inputs with $\tau_m=10$ ms,
+  $V_T=-55$ mV and both the leak and reset given by $-70$ mV. Notice
+  how there is no firing until a threshold is reached and after that
+  the firing increases very quickly. \label{f_i_curve}}
+\end{figure}
+
+\end{document}
+

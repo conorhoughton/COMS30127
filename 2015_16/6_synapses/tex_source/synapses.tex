@@ -1,0 +1,110 @@
+% GNUPLOT: LaTeX picture with Postscript
+\begingroup
+  \makeatletter
+  \providecommand\color[2][]{%
+    \GenericError{(gnuplot) \space\space\space\@spaces}{%
+      Package color not loaded in conjunction with
+      terminal option `colourtext'%
+    }{See the gnuplot documentation for explanation.%
+    }{Either use 'blacktext' in gnuplot or load the package
+      color.sty in LaTeX.}%
+    \renewcommand\color[2][]{}%
+  }%
+  \providecommand\includegraphics[2][]{%
+    \GenericError{(gnuplot) \space\space\space\@spaces}{%
+      Package graphicx or graphics not loaded%
+    }{See the gnuplot documentation for explanation.%
+    }{The gnuplot epslatex terminal needs graphicx.sty or graphics.sty.}%
+    \renewcommand\includegraphics[2][]{}%
+  }%
+  \providecommand\rotatebox[2]{#2}%
+  \@ifundefined{ifGPcolor}{%
+    \newif\ifGPcolor
+    \GPcolorfalse
+  }{}%
+  \@ifundefined{ifGPblacktext}{%
+    \newif\ifGPblacktext
+    \GPblacktexttrue
+  }{}%
+  % define a \g@addto@macro without @ in the name:
+  \let\gplgaddtomacro\g@addto@macro
+  % define empty templates for all commands taking text:
+  \gdef\gplbacktext{}%
+  \gdef\gplfronttext{}%
+  \makeatother
+  \ifGPblacktext
+    % no textcolor at all
+    \def\colorrgb#1{}%
+    \def\colorgray#1{}%
+  \else
+    % gray or color?
+    \ifGPcolor
+      \def\colorrgb#1{\color[rgb]{#1}}%
+      \def\colorgray#1{\color[gray]{#1}}%
+      \expandafter\def\csname LTw\endcsname{\color{white}}%
+      \expandafter\def\csname LTb\endcsname{\color{black}}%
+      \expandafter\def\csname LTa\endcsname{\color{black}}%
+      \expandafter\def\csname LT0\endcsname{\color[rgb]{1,0,0}}%
+      \expandafter\def\csname LT1\endcsname{\color[rgb]{0,1,0}}%
+      \expandafter\def\csname LT2\endcsname{\color[rgb]{0,0,1}}%
+      \expandafter\def\csname LT3\endcsname{\color[rgb]{1,0,1}}%
+      \expandafter\def\csname LT4\endcsname{\color[rgb]{0,1,1}}%
+      \expandafter\def\csname LT5\endcsname{\color[rgb]{1,1,0}}%
+      \expandafter\def\csname LT6\endcsname{\color[rgb]{0,0,0}}%
+      \expandafter\def\csname LT7\endcsname{\color[rgb]{1,0.3,0}}%
+      \expandafter\def\csname LT8\endcsname{\color[rgb]{0.5,0.5,0.5}}%
+    \else
+      % gray
+      \def\colorrgb#1{\color{black}}%
+      \def\colorgray#1{\color[gray]{#1}}%
+      \expandafter\def\csname LTw\endcsname{\color{white}}%
+      \expandafter\def\csname LTb\endcsname{\color{black}}%
+      \expandafter\def\csname LTa\endcsname{\color{black}}%
+      \expandafter\def\csname LT0\endcsname{\color{black}}%
+      \expandafter\def\csname LT1\endcsname{\color{black}}%
+      \expandafter\def\csname LT2\endcsname{\color{black}}%
+      \expandafter\def\csname LT3\endcsname{\color{black}}%
+      \expandafter\def\csname LT4\endcsname{\color{black}}%
+      \expandafter\def\csname LT5\endcsname{\color{black}}%
+      \expandafter\def\csname LT6\endcsname{\color{black}}%
+      \expandafter\def\csname LT7\endcsname{\color{black}}%
+      \expandafter\def\csname LT8\endcsname{\color{black}}%
+    \fi
+  \fi
+  \setlength{\unitlength}{0.0500bp}%
+  \begin{picture}(4320.00,3724.00)(0,-200)%
+    \gplgaddtomacro\gplbacktext{%
+      \csname LTb\endcsname%
+      \put(900,3400){\makebox(0,0){\strut{}\textbf{before}}}%
+   \put(946,442){\makebox(0,0)[r]{\strut{} 0}}%
+      \put(946,905){\makebox(0,0)[r]{\strut{} 0.2}}%
+      \put(946,1368){\makebox(0,0)[r]{\strut{} 0.4}}%
+      \put(946,1831){\makebox(0,0)[r]{\strut{} 0.6}}%
+      \put(946,2294){\makebox(0,0)[r]{\strut{} 0.8}}%
+      \put(946,2757){\makebox(0,0)[r]{\strut{} 1}}%
+      \put(1081,220){\makebox(0,0){\strut{} 0}}%
+      \put(2501,220){\makebox(0,0){\strut{} 500}}%
+      \put(3920,220){\makebox(0,0){\strut{} 1000}}%
+%      \put(176,1599){\rotatebox{90}{\makebox(0,0){\strut{}$w_i / w^{max}$}}}%
+      \put(2501,-200){\makebox(0,0){\strut{}synapse index $i$}}%
+      \put(5400,3400){\makebox(0,0){\strut{}\textbf{after}}}%
+      \put(5446,442){\makebox(0,0)[r]{\strut{} 0}}%
+      \put(5446,905){\makebox(0,0)[r]{\strut{} 0.2}}%
+      \put(5446,1368){\makebox(0,0)[r]{\strut{} 0.4}}%
+      \put(5446,1831){\makebox(0,0)[r]{\strut{} 0.6}}%
+      \put(5446,2294){\makebox(0,0)[r]{\strut{} 0.8}}%
+      \put(5446,2757){\makebox(0,0)[r]{\strut{} 1}}%
+      \put(5581,220){\makebox(0,0){\strut{} 0}}%
+      \put(7001,220){\makebox(0,0){\strut{} 500}}%
+      \put(8420,220){\makebox(0,0){\strut{} 1000}}%
+      \put(7001,-200){\makebox(0,0){\strut{}synapse index $i$}}%
+%      \put(4676,1599){\rotatebox{90}{\makebox(0,0){\strut{}$w_i / w^{max}$}}}%
+    }%
+    \gplgaddtomacro\gplfronttext{%
+    }%
+    \gplbacktext
+    \put(0,0){\includegraphics{synapses_before}}%
+\put(4500,0){\includegraphics{synapses_after}}%
+    \gplfronttext
+  \end{picture}%
+\endgroup

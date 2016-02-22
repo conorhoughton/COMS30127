@@ -77,11 +77,11 @@ answer questions about Python and to help debug faulty code.
   requirement that you do this, but you might find it interesting to
   try.
 
-\item Simulate two neurons which have synaptic connections between each other, i.e. the first neuron projects to the second, and the second neuron projects to the first. Both model neurons should have the same parameters: $tau_m = 20$ ms, $E_L = -70$ mV $V_r = -80$ mV $V_t = -54$ mV $R_mI_e = 18$ mV and their synapses should also have the same parameters: $R_m \bar{G}_s = 0.15$, $P = 0.5$, $\tau_s= 10$ ms. For simplicity take the synaptic conductance to satisfy
+\item Simulate two neurons which have synaptic connections between each other, i.e. the first neuron projects to the second, and the second neuron projects to the first. Both model neurons should have the same parameters: $\tau_m = 20$ ms, $E_L = -70$ mV $V_r = -80$ mV $V_t = -54$ mV $R_mI_e = 18$ mV and their synapses should also have the same parameters: $R_m \bar{g}_s = 0.15$, $P = 0.5$, $\tau_s= 10$ ms. For simplicity take the synaptic conductance to satisfy
 \begin{equation}
-\tau_s\frac{dG_s}{dt}=-G_s
+\tau_s\frac{dg_s}{dt}=-g_s
 \end{equation}
-with a spike arriving causing $G_s$ to increase by $\bar{G}_sP$. Simulate two cases: a) assuming that the synapses are excitatory with $E_s = 0$ mV, and b) assuming that the synapses are inhibitory with $E_s = -80$ mV. For each simulation set the initial membrane potentials of the neurons $V$ to different values chosen randomly from between $V_r$ and $V_t$ and simulate 1 s of activity. For each case plot the voltages of the two neurons on the same graph (with different colours). [20\% of marks].
+with a spike arriving causing $g_s$ to increase by $\bar{g}_sP$. Simulate two cases: a) assuming that the synapses are excitatory with $E_s = 0$ mV, and b) assuming that the synapses are inhibitory with $E_s = -80$ mV. For each simulation set the initial membrane potentials of the neurons $V$ to different values chosen randomly from between $V_r$ and $V_t$ and simulate 1 s of activity. For each case plot the voltages of the two neurons on the same graph (with different colours). [20\% of marks].
 
 \item In many real neurons the firing rate falls off after the first few spikes. This can be simulated with a slow potassium current. For the neuron described in the first question add a slow potassium current. This current should have reversal potential $E_K=-80$ mV, its conductance should increase by 0.005 M$\Omega^{-1}$ every time there is a spike, otherwise it should decay towards zero with time constant $\tau=200$ ms. Plot the voltage of this neuron for one second. [10\% of marks].
 

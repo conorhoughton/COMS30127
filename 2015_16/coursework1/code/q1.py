@@ -13,7 +13,7 @@ f0=0 #not actually defined in the question!
 ts=[t0]
 fs=[f0]
 
-while ts[-1]<=t1:
+while ts[-1]<t1:
     
     f=fs[-1]+df(fs[-1],ts[-1])*dt
     

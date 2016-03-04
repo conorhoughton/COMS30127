@@ -33,11 +33,11 @@ processed and denoised before being relayed on to the visual cortex,
 at the very back of the cortex. It is processed in stages in the
 cortex with the information being passed forward, as objects are
 recognized the information fans out and is integrated with other
-signals, from memory, from other sensory modalities and other aspect
-of our cognition. The basic pathway is shown in an very old drawing in
+signals, from memory, from other sensory modalities and other aspects
+of our cognition. The basic pathway is shown in a very old drawing in
 Fig.~\ref{fig:Fabrica} and is summarized in
 Fig.~\ref{fig:pathway}. One notable aspect is that different sides of
-the brain deal with different sides of the visual field, so signal
+the brain deal with different sides of the visual field, so signals
 from the left sides of the retina of both eyes go to the right side of
 the brain and signals from the right sides so to the left side.
 
@@ -60,8 +60,8 @@ specialized cells called \textsl{photoreceptors}, these don't spike,
 but they do convert light into electrical activity. There are two
 types of photoreceptors, the rods, which are important for vision in
 low light, and the cones, which are responsible for color vision and
-important for vision in normal lighting conditions. The electrically
-activity of the photorecptors is passed forward though \textsl{bipolar
+important for vision in normal lighting conditions. The electrical
+activity of the photoreceptors is passed forward through \textsl{bipolar
   cells} to \textsl{ganglion cells}.
 
 Ganglion cells aggregate activity from a number of photoreptors, along
@@ -225,8 +225,8 @@ have edge-like receptive fields; different cells respond to particular
 orientations in particular locations in the visual field. 
 
 The edge-like receptive fields in V1 were first discovered by Hubel
-and Wiesel \cite{HubelWiesel1962a}. The used an electrode to record
-from V1 neurons in anaesthetised cat; the moved an edge-like stimulus
+and Wiesel \cite{HubelWiesel1962a}. They used an electrode to record
+from V1 neurons in anaesthetised cat; they moved an edge-like stimulus
 around until they found the position that caused the highest firing
 rate, they observed that the firing rate depended on orientation as
 well as position, see Fig.~\ref{fig:hw} and Fig.~\ref{fig:hw_rf}.
@@ -545,7 +545,7 @@ this sort of salient ecological information quickly.
 Here we will consider what properties we would expect features to
 have. To do this lets imagine that there are neurons that correspond
 to the features and their activity represents the image. Say the
-feature neurons each has a receptive field and responds linearly and
+feature=code neurons each have a receptive field and respond linearly and
 for simplicity we will leave out the background firing rate: for the
 $s$th feature neuron
 \begin{equation}
@@ -577,7 +577,7 @@ is the reconstruction where the corresponding project, for example
 \begin{equation}
 v_1-\textbf{v}\cdot\textbf{i}
 \end{equation}
-is like the linear model. However, the situation in this case is more striaght-forward, because the basis vectors are orthonormal
+is like the linear model. However, the situation in this case is more straight-forward, because the basis vectors are orthonormal
 \begin{equation}
 \textbf{i}\cdot\textbf{j}=\textbf{j}\cdot\textbf{k}=\textbf{k}\cdot\textbf{i}=0
 \end{equation}
@@ -586,7 +586,7 @@ and
 \textbf{i}\cdot\textbf{i}=\textbf{j}\cdot\textbf{j}=\textbf{k}\cdot\textbf{k}=1
 \end{equation}
 the same basis vector appears in the reconstruction and the
-projection: the coeffient $v_1$ of $\textbf{i}$ in the reconstruction
+projection: the coefficent $v_1$ of $\textbf{i}$ in the reconstruction
 is the projection of $\textbf{v}$ onto $\textbf{i}$. However, in the
 case of vision the basis elements, the $W^s_{ij}$ and $w^s_{ij}$ are
 not orthonormal and therefore are not the same, working out the
@@ -699,13 +699,13 @@ black so among neurons that code for individual dots three would be
 active, but among neurons coding for vertical or horizontal lines,
 only one would be active.
 
-Of course this is a very artificial made-up example, the it thought
-that \lq{}sparseness\rq{} is a good way to define features
+Of course this is a very artificial made-up example, nonetheless it is
+thought that \lq{}sparseness\rq{} is a good way to define features
 \cite{OlshausenField1996a,OlshausenField1997a}. Very roughly, the
 fewer neurons needed to reconstruct an image, the more of the image
 each neuron is coding for; for this to work without having a vast
 number of neurons covering every possible combination of pixels, the
-neurons must code for features, piece of image that occur
+neurons must code for features, pieces of image that occur
 regularly. The assumption, in short, is that all the images are mostly
 made of the same few building blocks.
 
@@ -714,7 +714,7 @@ The idea is as follows, let $I$ be a image and $\tilde{I}$ an approximation to t
 \tilde{I}_{ij}=\sum_{s}a_sW^s_{ij}
 \end{equation}
 Now $W^s$ could be under-complete, like above, or over-complete, as it
-may be in the visual system, or the dimensions could be chosen to match. Either way, even if the basis is not under-complete, $\tilde{I}$ is an approximation because the $a_s$ are not just chosen to give an accurate reconstruction, but to do so in a sparse way; the are chosen to minimize
+may be in the visual system, or the dimensions could be chosen to match. Either way, even if the basis is not under-complete, $\tilde{I}$ is an approximation because the $a_s$ are not just chosen to give an accurate reconstruction, but to do so in a sparse way; they are chosen to minimize
 \begin{equation}
 E=\sum_{ij}(I_{ij}-\tilde{I}_{ij})^2+\beta\sum_s f(a_s)
 \end{equation}
@@ -769,7 +769,7 @@ receptive fields measured from V1.
 As described, none of this seems very biological, the sparse filters
 were discovered using numerical optimization routines. However, there
 are biologically plausible implementations using Hebbian learning, see
-for example \cite{OReillyMunakata2000a}. There are other approach
+for example \cite{OReillyMunakata2000a}. There are other approaches
 which parallel sparseness as a way of distinguishing features, for
 example, Infomax, which examines the informativeness of putative features \cite{BellSejnowski1995a}.
 

@@ -90,6 +90,39 @@ while t<=big_t:
 	t+=delta_t
 \end{lstlisting}
 The numbers on the right aren't part of the program, it is just handy
-to have them. Can you work out what the different parts of the program do? To run it, save it, say as \texttt{lif.py} and then type \texttt{python lif.py}. Try changing the input current. Can you write another program to plot the firing rate, that is the average number of spikes a second, as a function of the input?
+to have them. Can you work out what the different parts of the program
+do? To run it, save it, say as \texttt{lif.py} and then type
+\texttt{python lif.py}. Try changing the input current. Can you write
+another program to plot the firing rate, that is the average number of
+spikes a second, as a function of the input?
+
+To examine the behaviour further we can try plotting the results. One
+easy way to store the output from a program is called pipping, this
+isn't as sophisticated as having the program open a file and store the
+data itself, but it is very straightforward and so it often more
+convenient. The idea is to send what would normally appear on the
+screen into a file. In our case we would write \texttt{python lif.py >
+  volt.dat} and whatever would have been printed on the screen will
+not go into \texttt{volt.dat}. 
+
+What do we want in \texttt{volt.dat}, well let's store the voltage, so we replace the while look with
+\begin{lstlisting}
+
+while t<=big_t:
+	v+=(e_l-v+r_i)*delta_t/tau_m
+	if v>=v_t:
+		print t,0
+		v=e_l	
+	else:
+		print t,v
+
+	t+=delta_t
+
+\end{lstlisting}
+
+To plot the output we can use \texttt{gnuplot}; type \texttt{gnuplot}
+to enter gnuplot and the commange \texttt{plot \lq{}volt.dat\rq{} us
+  1:2 w lines} plots the second column in the file against the first
+using a line.
 
 \end{document}

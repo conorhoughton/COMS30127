@@ -1,0 +1,8 @@
+
+I have included these programs in the spirit of disclosure, not
+because they are useful: they aren't. They haven't been designed to
+work in a robust way and will do silly things when, for example, a
+spike is on the division between two bins. I just wrote them to get
+diagrams for my lecture notes. Also, I put the spikes unrealistically
+close together and then editted the pgf files to correct that, so they
+are still wrong in the programs. YMMV.

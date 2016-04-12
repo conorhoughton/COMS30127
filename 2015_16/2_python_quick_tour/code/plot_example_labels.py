@@ -8,10 +8,11 @@ plt.plot(x, np.cos(x), linewidth=2,label="cosine")
 
 plt.legend()
 
-plt.savefig("example.png")
+
 plt.xlabel("x")
 plt.ylabel("y")
 plt.title("an example plot")
+plt.savefig("example.png")
 plt.show()
 
 

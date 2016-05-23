@@ -1,0 +1,17 @@
+Bi and Poo's experimental results . . .  - NO, neurons which fire at
+the same time acausally will have long term depression.
+
+In Bi and Poo's experimental result a causal spike pair . . . YES,
+this is exactly what they observe
+
+Long term potentiation occurs when . . . NO, this is essentially a
+garbled version of work on modification of STDP people have considered
+but doesn't actually make sense.
+
+In the plasticity experiment . . . YES, again this is what they
+observe, long term plasticity is confined by the exponential window,
+but depends on the sign.
+
+Hebb said that if . . . YES, this is a direct quote, it includes the causal structure even though later use of the expression "Hebbian plasticity" left it out.
+
+If a spike from Neuron A . . . NO, synapses never change from excitatory to inhibitory.

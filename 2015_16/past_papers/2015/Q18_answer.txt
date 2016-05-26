@@ -3,4 +3,4 @@ the change is
 
 0.5 * (0.2) * (0.2-1) = -0.08
 
-the connection strength was 0.1 before so no it is 0.02
+the connection strength was 0.1 before so now it is 0.02

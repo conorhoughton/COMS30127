@@ -1,0 +1,5 @@
+
+S1 already predicts the reward, so when S1 and S2 are presented
+together, no change occurs to the network and so when S2 is presented
+along no reward is anticipated. This is blocking, one of the
+distinctive properties of the RW rule.

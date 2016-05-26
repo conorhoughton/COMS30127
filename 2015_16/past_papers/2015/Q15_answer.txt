@@ -1,0 +1,2 @@
+
+So adding w_ij I_ij over i and j gives 1.5

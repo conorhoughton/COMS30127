@@ -1,0 +1,2 @@
+
+sigma is 1 in each case and mu is 11 for the first set and 12 for the second, hence d'= (12-11)/1 =1

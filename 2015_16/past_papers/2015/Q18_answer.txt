@@ -1,0 +1,6 @@
+so neuron 7 is on and neuron 10 is off, the average value is 0.2 so
+the change is
+
+0.5 * (0.2) * (0.2-1) = -0.08
+
+the connection strength was 0.1 before so no it is 0.02

@@ -1,0 +1,6 @@
+
+According to Marr's view, the cerebellum does supervised learning, the
+climbing fibre supplies the error signal, the basal ganglia and
+hippocampus do reinforcement learning, that is choices are tested
+against predicted rewards and the neocortex does unsupervised
+learning, that is, there is no error signal.

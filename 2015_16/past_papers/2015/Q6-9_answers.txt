@@ -1,0 +1,9 @@
+
+Q6 the integrate and fire model is computational cheap because it
+leaves out many nonlinearities.
+
+Q7 is a Purkinje cell.
+
+Q8 -70mV
+
+Q9 Runge-Kutta method

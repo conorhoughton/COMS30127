@@ -22,7 +22,9 @@ d) auto-correlogram
 
 8) N
 
-9) 0.25
+9) 0.25 
+
+No learning rate is given so assume equilibrium values. In phase 1 S1 and S2 are presented together, so each has weight 0.5; when S1 and S3 are presented together 0.5 of the reward is unaccounted for, so each weight grows by 0.25, give S1 originally had 0.5 it now has 0.75 whereas S3 has 0.25. This is the predicted reward if S3 is presented alone.
 
 10) D
 

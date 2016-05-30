@@ -24,7 +24,20 @@ d) auto-correlogram
 
 9) 0.25 
 
-No learning rate is given so assume equilibrium values. In phase 1 S1 and S2 are presented together, so each has weight 0.5; when S1 and S3 are presented together 0.5 of the reward is unaccounted for, so each weight grows by 0.25, give S1 originally had 0.5 it now has 0.75 whereas S3 has 0.25. This is the predicted reward if S3 is presented alone.
+No learning rate is given so assume equilibrium values. In phase 1 S1
+and S2 are presented together, so each has weight 0.5; when S1 and S3
+are presented together 0.5 of the reward is unaccounted for, so each
+weight grows by 0.25, give S1 originally had 0.5 it now has 0.75
+whereas S3 has 0.25. This is the predicted reward if S3 is presented
+alone.
+
+is after first epoch 1 = 0.5 * S1 + 0.5 * S2
+
+at the start of the second epoch 0.5 * S1 + 0 * S3 =0.5 so there is a
+short fall of 0.5, this will cause the weights of S1 and S3 to grow,
+the RW rule doesn't depend on the existing weight, so they both grow
+the same, leading to 1= 0.75 *s1 + 0.25 *S3, so if S3 is presented
+alone, the prediction is 0.25.
 
 10) D
 

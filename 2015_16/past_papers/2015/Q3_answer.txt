@@ -1,0 +1,17 @@
+
+a dh/dt = -h +b
+
+is solved by an integrating factor
+
+dh/dt+h/a=f/a
+
+d(h e^{t/a})dt=f/a e^{t/a}
+
+then integrate both side, to give
+
+h(t)= h(0) +b - be^{-t/a}
+
+which you can also see by noting the equilibrium value is b and for
+t=0 h(t)=h(0)
+
+The f is a typo which was corrected at the time of the exam.

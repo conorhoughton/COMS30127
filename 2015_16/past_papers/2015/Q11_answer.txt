@@ -1,0 +1,8 @@
+
+So the answer is D, it is easy to see there are three "1"'s 
+
+3 and 4
+8 and 9
+14 and 15
+
+so the answer must be A or D but A has no "3"s whereas 14 and 17 are three apart.

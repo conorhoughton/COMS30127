@@ -1,0 +1,584 @@
+%%
+%% This is file `tikzscale.sty',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% tikzscale.dtx  (with options: `package')
+%% ----------------------------------------------------------------
+%% tikzscale --- Absolute resizing of TikZ pictures and PGF plots without scaling text
+%% E-mail: pat_h@web.de
+%% Released under the LaTeX Project Public License v1.3c or later
+%% See http://www.latex-project.org/lppl.txt
+%% ----------------------------------------------------------------
+%% 
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{tikzscale}[2013/05/22 v0.2.6 tikzscale LaTeX package]
+\RequirePackage{graphicx}
+\RequirePackage{etoolbox}
+\RequirePackage{pgfkeys}
+\RequirePackage{xparse}
+\RequirePackage{letltxmacro}
+\RequirePackage{xstring}
+
+\def\pgfmathsetglobalmacro#1#2{%
+\pgfmathparse{#2}%
+\global\let#1\pgfmathresult%
+}
+\def\ifTikzLibraryLoaded#1#2#3{%
+\ifcsdef{tikz@library@#1@loaded}{%
+#2%
+}{%
+#3%
+}%
+}
+\def\ifExternalizationLoaded#1#2{%
+\ifTikzLibraryLoaded{external}{#1}{#2}%
+}
+\def\ifedefequal#1#2{%
+\edef\etoolbox@ifedefequal@first{#1}%
+\edef\etoolbox@ifedefequal@second{#2}%
+\ifdefequal{\etoolbox@ifedefequal@first}{\etoolbox@ifedefequal@second}%
+}
+\def\edocsvlist#1{%
+\edef\tikzscale@edocsvlist{#1}%
+\expandafter\docsvlist\expandafter{\tikzscale@edocsvlist}%
+}
+\def\eforcsvlist#1#2{%
+\edef\tikzscale@eforcsvlist{#2}%
+\expandafter\forcsvlist\expandafter{\expandafter#1\expandafter}\expandafter{\tikzscale@eforcsvlist}%
+}
+\def\forgrouplist#1#2{%
+\def\grouplistbreak{\def\breakFor{}}%
+\tikzscale@forGroupListElement{#1}#2\tikzscale@endList%
+\undef\breakFor
+}
+\NewDocumentCommand{\tikzscale@forGroupListElement}{mgu{\tikzscale@endList}}{%
+\ifundef{\breakFor}{%
+\IfValueTF{#2}{%
+#1{#2}%
+\tikzscale@forGroupListElement{#1}#3\tikzscale@endList%
+}{%
+#1{#3}%
+}%
+}{}%
+}
+\def\eforgrouplist#1#2{%
+\edef\tikzscale@grouplist{#2}%
+\expandafter\forgrouplist\expandafter{\expandafter#1\expandafter}\expandafter{\tikzscale@grouplist}%
+}
+\def\tikzscale@trim#1{%
+\ignorespaces#1\unskip
+}%
+\def\tikzscale@trimMacro#1{%
+\expandafter\IfBeginWith\expandafter{#1}{ }{%
+\expandafter\StrGobbleLeft\expandafter{#1}{1}[#1]%
+}{}%
+\expandafter\IfEndWith\expandafter{#1}{ }{%
+\expandafter\StrGobbleRight\expandafter{#1}{1}[#1]%
+}{}%
+}
+\NewDocumentCommand{\elseif}{mm}{%
+\ifboolexpr{#1}{%
+#2%
+\elseif@absorb
+}{%
+\elseif@optional
+}%
+}
+\NewDocumentCommand{\elseif@optional}{gg}{%
+\IfValueTF{#1}{%
+\IfValueTF{#2}{%
+\ifboolexpr{#1}{%
+#2%
+\elseif@absorb
+}{%
+\elseif@optional
+}%
+}{%
+#1%
+}%
+}{}%
+}
+\NewDocumentCommand{\elseif@absorb}{g}{%
+\IfValueTF{#1}{%
+\elseif@absorb
+}{}%
+}
+\ExplSyntaxOn
+\NewDocumentCommand{\IfNoValueOrSplitEmptyTF}{mmm}{
+\ifboolexpr{test {\IfNoValueTF{#1}} or test {\tl_if_eq:nnTF{#1}{{}}}}{
+#2
+}{
+#3
+}
+}
+\ExplSyntaxOff
+\def\tikzscale@ifExternalizationActive#1#2{%
+\ifExternalizationLoaded{%
+\ifdefequal{\tikz}{\tikzexternal@tikz@replacement}{%
+#1%
+}{%
+\ifdefequal{\tikz}{\tikzexternal@origtikz}{%
+}{%
+\PackageWarning{tikzscale}{Status of externalization is unknown, thus I assume it is deactivated.}%
+}%
+#2%
+}%
+}{%
+#2%
+}%
+}%
+\def\tikzscale@debug#1{}%
+\AtEndPreamble{%
+\def\tikzscale@tikzFileExtensions{.tikz,.TIKZ,.TikZ,.pgf,.PGF}%
+\DeclareGraphicsExtensions{\tikzscale@tikzFileExtensions,\Gin@extensions}%
+\LetLtxMacro{\tikzscale@oldincludegraphics}{\includegraphics}%
+\tikzscale@useEnhancedIncludegraphics
+\tikzscale@patchTikzpictureIncludegraphics
+\tikzscale@patchEndtikzpictureIncludegraphics
+}
+\AtEndPreamble{%
+\ifExternalizationLoaded{%
+\pgfkeys{/pgf/images/external info}%
+}{}%
+\@ifpackageloaded{tikz}{%
+\newlength{\tikzscale@accuracy}%
+\setlength{\tikzscale@accuracy}{\hfuzz}%
+\def\maxTestIterations{10}%
+}{}%
+\ifExternalizationLoaded{%
+\apptocmd{\tikzexternaldisable}{%
+\tikzscale@useEnhancedIncludegraphics
+\tikzscale@patchTikzpictureIncludegraphics
+}{}{\PackageError{tikzscale}{Patching tikzexternaldisable failed}}%
+\apptocmd{\tikzexternalenable}{%
+\tikzscale@useEnhancedIncludegraphics
+\tikzscale@patchTikzpictureIncludegraphics
+}{}{\PackageError{tikzscale}{Patching tikzexternalenable failed}}%
+\LetLtxMacro{\tikzscale@externalend@storeshifts}{\pgf@externalend@storeshifts}%
+\def\pgf@externalend@storeshifts#1{%
+\tikzscale@externalend@storeshifts{#1}%
+\ifpgfexternal@info
+\tikzscale@writeToDpth{#1}{\tikzscale@oldAxisRatio}{\requestedAxisRatio}%
+\fi
+}%
+}{}%
+}
+\def\tikzscale@writeToDpth#1#2#3{%
+\ifdef{#3}{%
+\immediate\write#1{\noexpand\pgfexternal@restore{\noexpand\def\noexpand#2{#3}}}%
+}{}%
+}
+\NewDocumentCommand{\tikzscale@includegraphics}{O{}m}{%
+\begingroup
+\LetLtxMacro{\includegraphics}{\tikzscale@oldincludegraphics}%
+\tikzscale@FixEndLine
+\tikzscale@findExactFileName{tikzscale@fileName}{#2}%
+\tikzscale@isTikzFile{tikzscale@testTikzFile}{\tikzscale@fileName}%
+\ifcsdef{tikzscale@testTikzFile}{%
+\tikzscale@includetikz[#1]{\tikzscale@fileName}%
+}{%
+\tikzscale@restoreEndLineChar
+\tikzscale@oldincludegraphics[#1]{\tikzscale@fileName}%
+}%
+\endgroup
+}%
+\def\tikzscale@useEnhancedIncludegraphics{%
+\LetLtxMacro{\includegraphics}{\tikzscale@includegraphics}%
+}
+\def\tikzscale@FixEndLine{%
+\edef\tikzscale@restoreEndLineChar{\endlinechar=\the\endlinechar\relax}%
+\endlinechar=-1%
+\tikzscale@addRestoreEndLineCharToTikzpicture
+\apptocmd{\endtikzpicture}{%
+\endlinechar=-1%
+}{}{\PackageError{tikzscale}{Patching endtikzpicture failed}}%
+}%
+\def\tikzscale@addRestoreEndLineCharToTikzpicture{%
+\pretocmd{\tikzpicture}{%
+\tikzscale@restoreEndLineChar
+}{}{\PackageError{tikzscale}{Patching tikzpicture failed}}%
+}
+\def\tikzscale@patchTikzpictureIncludegraphics{%
+\pretocmd{\tikzpicture}{%
+\LetLtxMacro{\includegraphics}{\tikzscale@oldincludegraphics}%
+}{}{\PackageError{tikzscale}{Patching tikzpicture failed}}%
+}
+\def\tikzscale@patchEndtikzpictureIncludegraphics{%
+\apptocmd{\endtikzpicture}{%
+\LetLtxMacro{\includegraphics}{\tikzscale@includegraphics}%
+}{}{\PackageError{tikzscale}{Patching endtikzpicture failed}}%
+}
+\NewDocumentCommand{\tikzscale@findExactFileName}{mm}{%
+\csundef{#1}%
+\def\tikzscale@checkDirectory##1{%
+\def\tikzscale@checkExtension####1{%
+\IfFileExists{##1#2####1}{%
+\csedef{#1}{##1#2####1}%
+\listbreak
+}{}%
+}%
+\eforcsvlist{\tikzscale@checkExtension}{{},\Gin@extensions}%
+\ifcsdef{#1}{%
+\grouplistbreak
+}{}%
+}%
+\tikzscale@setGraphicsPath
+\eforgrouplist{\tikzscale@checkDirectory}{\tikzscale@graphicspath}%
+\ifcsundef{#1}{%
+\csdef{#1}{#2}%
+}{}%
+}
+\NewDocumentCommand{\tikzscale@setGraphicsPath}{}{%
+\ifdef{\Ginput@path}{%
+\tikzscale@trimMacro{\Ginput@path}%
+}{}%
+\ifdef{\currfiledir}{%
+\ifdef{\Ginput@path}{%
+\def\tikzscale@graphicspath{{\currfiledir}\Ginput@path{}}%
+}{%
+\def\tikzscale@graphicspath{{\currfiledir}{}}%
+}%
+}{%
+\ifdef{\Ginput@path}{%
+\def\tikzscale@graphicspath{\Ginput@path{}}%
+}{%
+\def\tikzscale@graphicspath{{}}%
+}%
+}%
+}%
+\NewDocumentCommand{\tikzscale@isTikzFile}{mm}{%
+\def\do##1{%
+\IfEndWith{#2}{##1}{%
+\csdef{#1}{}%
+\listbreak
+}{}%
+}%
+\csundef{#1}%
+\edocsvlist{\tikzscale@tikzFileExtensions}%
+}
+\pgfkeys{
+/tikzscale/.is family, /tikzscale,
+width/.code = {\pgfmathsetmacro{\requestedWidth}{#1}},
+width/.value required,
+height/.code = {\pgfmathsetmacro{\requestedHeight}{#1}},
+height/.value required,
+axisratio/.code = {\pgfmathsetmacro{\requestedAxisRatio}{#1}},
+axisratio/.value required
+}
+\newcommand{\tikzscale@includetikz}[2][]{%
+\pgfkeys{/tikzscale, #1}%
+\tikzscale@ifExternalizationActive{%
+\tikzifexternalizingnext{%
+\tikzscale@debug{Externalizing the file #2}%
+\tikzscale@includetikzUnexternalized{#2}%
+}{%
+\tikzscale@includetikzWithExternalization{#2}%
+}%
+}{%
+\tikzscale@includetikzUnexternalized{#2}%
+}%
+}
+\def\tikzscale@includetikzUnexternalized#1{%
+\elseif{test {\ifundef{\requestedWidth}} and test {\ifundef{\requestedHeight}} and test {\ifundef{\requestedAxisRatio}}}{%
+\tikzscale@debug{no option given}%
+\tikzscale@trim{\input{#1}}%
+}{test {\ifdef{\requestedWidth}} and test {\ifdef{\requestedHeight}}}{%
+\tikzscale@debug{width and height given}%
+\tikzscale@resizePlotTo{#1}%
+}{test {\ifdef{\requestedAxisRatio}}}{%
+\tikzscale@debug{axis ratio given}%
+\tikzscale@includeAxisRatio{#1}%
+}{test {\ifundef{\requestedAxisRatio}}}{%
+\tikzscale@debug{width or height given}%
+\ifdef{\pgfplotsset}{%
+\def\requestedAxisRatio{1}%
+\tikzscale@includeAxisRatio{#1}%
+}{%
+\tikzscale@debug{no pgfplots loaded}%
+\tikzscale@includeNormalTikzpicture{#1}%
+}%
+}{%
+\tikzscale@invalidKeyError{#1}%
+}%
+}
+
+\NewDocumentCommand{\tikzscale@includetikzWithExternalization}{m}{%
+\tikzexternalgetnextfilename{\tikzscale@externalizationName}%
+\pgfexternalreaddpth{\tikzscale@externalizationName}%
+\IfFileExists{\tikzscale@externalizationName.dpth}{%
+\tikzscale@checkRequestedSizeChanges
+}{}%
+\tikzscale@trim{\input{#1}}%
+}
+\NewDocumentCommand{\tikzscale@checkRequestedSizeChanges}{}{%
+\ifdef{\requestedWidth}{%
+\ifdef{\pgfexternalwidth}{%
+\tikzscale@ifSizeDifference{\requestedWidth - \pgfexternalwidth}{%
+\tikzset{external/remake next}%
+\tikzscale@debug{Regenerate \tikzscale@externalizationName \MessageBreak because of width difference \MessageBreak (requestedWidth=\requestedWidth, pgfexternalwidth=\pgfexternalwidth)}%
+}{}%
+}{%
+\tikzset{external/remake next}%
+\tikzscale@debug{Regenerate \tikzscale@externalizationName \MessageBreak because of no external width}%
+}%
+}{}%
+\ifdef{\requestedHeight}{%
+\ifdef{\pgfexternalheight}{%
+\tikzscale@ifSizeDifference{\requestedHeight - \pgfexternalheight}{%
+\tikzset{external/remake next}%
+\tikzscale@debug{Regenerate \tikzscale@externalizationName \MessageBreak because of height difference \MessageBreak (requestedHeight=\requestedHeight, pgfexternalheight=\pgfexternalheight)}%
+}{}%
+}{%
+\tikzset{external/remake next}%
+\tikzscale@debug{Regenerate \tikzscale@externalizationName \MessageBreak because of no external height}%
+}%
+}{}%
+\ifdef{\requestedAxisRatio}{%
+\ifdef{\tikzscale@oldAxisRatio}{%
+\tikzscale@ifSizeDifference{\requestedAxisRatio - \tikzscale@oldAxisRatio}{%
+\tikzset{external/remake next}%
+\tikzscale@debug{Regenerate \tikzscale@externalizationName \MessageBreak because of axis ratio difference \MessageBreak (requestedAxisRatio=\requestedAxisRatio, oldAxisRatio=\tikzscale@oldAxisRatio)}%
+}{}%
+\undef{\tikzscale@oldAxisRatio}%
+}{%
+\tikzset{external/remake next}%
+\tikzscale@debug{Regenerate \tikzscale@externalizationName \MessageBreak because of no external axis ratio}%
+}%
+}{}%
+}
+\NewDocumentCommand{\tikzscale@preparePlot}{}{%
+\pgfplotsset{every axis/.append style={width=\tikzscale@width,height=\tikzscale@height,every axis/.style={}}}%
+}
+\NewDocumentCommand{\tikzscale@prepareTikzpicture}{}{%
+\tikzset{every picture/.style={scale=\tikzscale@scale,every picture/.style={}}}%
+}
+\NewDocumentCommand{\tikzscale@includeNormalTikzpicture}{m}{%
+\tikzscale@prepareTikzpicture
+\elseif{test {\ifdef{\requestedWidth}} and test {\ifundef{\requestedHeight}}}{%
+\def\requestedSize{\requestedWidth}%
+\tikzscale@scaleTikzpictureTo{\wd}{\tikzscale@trim{\input{#1}}}{#1}%
+}{test {\ifundef{\requestedWidth}} and test {\ifdef{\requestedHeight}}}{%
+\def\requestedSize{\requestedHeight}%
+\tikzscale@scaleTikzpictureTo{\ht}{\tikzscale@trim{\input{#1}}}{#1}%
+}{%
+\tikzscale@invalidKeyError{#1}%
+}%
+}
+\NewDocumentCommand{\tikzscale@invalidKeyError}{m}{%
+\PackageError{tikzscale}{Invalid key for TikZ graphic}{Change key #1 into a valid key.}%
+}
+\NewDocumentCommand{\tikzscale@includeAxisRatio}{m}{%
+\pgfplotsset{every axis/.append style={scale only axis,every axis/.style={}}}%
+\elseif{test {\ifdef{\requestedWidth}} and test {\ifundef{\requestedHeight}}}{%
+\let\requestedSize\requestedWidth
+\def\tikzscale@width{\requestedWidth}%
+\pgfmathsetmacro{\tikzscale@height}{\requestedWidth / \requestedAxisRatio}%
+\tikzscale@resizePlotWithAxesRatioTo{\wd}{\tikzscale@width}{\tikzscale@trim{\input{#1}}}{#1}%
+}{test {\ifundef{\requestedWidth}} and test {\ifdef{\requestedHeight}}}{%
+\let\requestedSize\requestedHeight
+\def\tikzscale@height{\requestedHeight}%
+\pgfmathsetmacro{\tikzscale@width}{\requestedHeight * \requestedAxisRatio}%
+\tikzscale@resizePlotWithAxesRatioTo{\ht}{\tikzscale@height}{\tikzscale@trim{\input{#1}}}{#1}%
+}{%
+\tikzscale@invalidKeyError{#1}%
+}%
+}
+\NewDocumentCommand{\tikzscale@scaleTikzpictureTo}{mmm}{%
+\tikzscale@debug{At beginning scale, requestedWidth=\requestedWidth}%
+\tikzscale@conditionalDisableExternalization
+\def\tikzscale@scale{1}%
+\tikzscale@measureSize{\measuredFirst}{#1}{#2}%
+\pgfmathsetmacro{\tikzscale@scale}{\requestedSize/\measuredFirst}%
+\tikzscale@measureSize{\measuredSecond}{#1}{#2}%
+\tikzscale@ifSizeDifference{\measuredSecond - \requestedSize}{%
+\tikzscale@ifSizeDifference{\measuredFirst - \measuredSecond}{%
+}{%
+\PackageError{tikzscale}{Requested to scale unscalable graphic}{Do not set width or height for graphic in\MessageBreak #3}%
+}%
+\pgfmathsetmacro{\fixedSize}{(\tikzscale@scale*\measuredFirst - \measuredSecond) / (\tikzscale@scale - 1)}%
+\pgfmathsetmacro{\tikzscale@scale}{(\requestedSize - \fixedSize) / (\measuredFirst - \fixedSize)}%
+\foreach \l in {1,...,\maxTestIterations}{%
+\tikzscale@measureSize{\measuredIntermediate}{#1}{#2}%
+\tikzscale@ifSizeDifference{\measuredIntermediate-\requestedSize}{%
+\pgfmathsetmacro{\errorRatio}{\measuredIntermediate/\requestedSize}%
+\tikzscale@debug{errorRatio=\errorRatio\MessageBreak for #3}%
+\pgfmathsetglobalmacro{\tikzscale@scale}{\tikzscale@scale/\errorRatio}%
+}{%
+\breakforeach%
+}%
+}%
+ % Do a last measurement to be able to warn if the size does not fit good enough. This measurement has to be done before possibly reactivating the externalization, as measurements with activated externalization can lead to wrong measurement results (possibly due to calling \cmd{\shipout} inside of the measurement). The assumption is, that the real graphic size does not change if the externalization gets activated, which all tests seem to confirm.
+\tikzscale@measureSize{\measuredFinal}{#1}{#2}%
+\tikzscale@warnIfSizeDifference{\measuredFinal}{\requestedSize}{#3}%
+\tikzscale@testGraphicFileForRetry{#1}{#2}{#3}{\measuredFinal}%
+}{%
+\tikzscale@testGraphicFileForRetry{#1}{#2}{#3}{\measuredSecond}%
+}%
+}
+\def\tikzscale@testGraphicFileForRetry#1#2#3#4{%
+\tikzscale@conditionalEnableExternalization{#3}%
+\tikzscale@ifExternalizationActive{%
+\tikzexternalgetnextfilename{\tikzscale@externalizationName}%
+}{}%
+#2%
+\tikzscale@ifExternalizationActive{%
+\pgfexternalreaddpth{\tikzscale@externalizationName}%
+\tikzscale@ifIsWidth{#1}{%
+\edef\pgfexternalsize{\pgfexternalwidth}%
+}{%
+\edef\pgfexternalsize{\pgfexternalheight}%
+}%
+\ifundef{\originalRequestedSize}{%
+\let\originalRequestedSize\requestedSize
+}{}%
+\tikzscale@debug{originalRequestedSize=\originalRequestedSize, requestedSize=\requestedSize, pgfexternalsize=\pgfexternalsize}%
+\tikzscale@ifSizeDifference{\originalRequestedSize-\pgfexternalsize}{%
+\pgfmathsetmacro{\requestedSize}{\requestedSize + #4 - \pgfexternalsize}%
+\tikzscale@decreaseFigureCounter
+\tikzscale@scaleTikzpictureTo{#1}{#2}{#3}%
+}{}%
+}{}%
+}
+\def\tikzscale@decreaseFigureCounter{%
+\begingroup
+\edef\macroName{c@tikzext@no@\pgfkeysvalueof{/tikz/external/figure name}}%
+\c@pgf@counta=\csuse{\macroName}\relax
+\advance\c@pgf@counta -1\relax
+\expandafter\xdef\csname\macroName\endcsname{\the\c@pgf@counta}%
+\endgroup
+}%
+\NewDocumentCommand{\tikzscale@resizePlotTo}{m}{%
+\def\fileName{#1}%
+\def\content{\tikzscale@trim{\input{#1}}}%
+\tikzscale@preparePlot
+\def\tikzscale@width{\requestedWidth}%
+\def\tikzscale@height{\requestedHeight}%
+\tikzscale@conditionalDisableExternalization
+\foreach \l in {1,...,\maxTestIterations}{%
+\sbox{\tikzscale@measuredSize}{\content}%
+\pgfmathsetmacro{\widthDifference}{\wd\tikzscale@measuredSize - \requestedWidth}%
+\pgfmathsetmacro{\heightDifference}{\ht\tikzscale@measuredSize - \requestedHeight}%
+\ifboolexpr{test {\tikzscale@ifSizeDifference{\widthDifference}} or test {\tikzscale@ifSizeDifference{\heightDifference}}}{%
+\pgfmathsetglobalmacro{\tikzscale@width}{\tikzscale@width - \widthDifference}%
+\pgfmathsetglobalmacro{\tikzscale@height}{\tikzscale@height - \heightDifference}%
+}{%
+\breakforeach
+}%
+}%
+\sbox{\tikzscale@measuredSize}{\content}%
+\tikzscale@warnIfSizeDifference{\requestedWidth}{\wd\tikzscale@measuredSize}{\fileName's width}%
+\tikzscale@warnIfSizeDifference{\requestedHeight}{\ht\tikzscale@measuredSize}{\fileName's height}%
+\tikzscale@conditionalEnableExternalization{\fileName}%
+\content%
+}
+
+\NewDocumentCommand{\tikzscale@resizePlotWithAxesRatioTo}{mmmm}{%
+\def\dimension{#1}%
+\def\variable{#2}%
+\def\content{#3}%
+\def\fileName{#4}%
+\gdef\tikzscale@oldSizeDifference{0pt}%
+\tikzscale@preparePlot
+\tikzscale@conditionalDisableExternalization
+\foreach \l in {1,...,\maxTestIterations}{%
+\tikzscale@measureSize{\measuredSize}{\dimension}{\content}%
+\pgfmathsetmacro{\sizeDifference}{\measuredSize - \requestedSize}%
+\tikzscale@ifSizeDifference{\sizeDifference}{%
+\tikzscale@ifIsWidth{\dimension}{%
+\pgfmathsetglobalmacro{\tikzscale@width}{\tikzscale@width - \sizeDifference}%
+\pgfmathsetglobalmacro{\tikzscale@height}{\tikzscale@width / \requestedAxisRatio}%
+}{%
+\pgfmathsetglobalmacro{\tikzscale@height}{\tikzscale@height - \sizeDifference}%
+\pgfmathsetglobalmacro{\tikzscale@width}{\tikzscale@height * \requestedAxisRatio}%
+}%
+\tikzscale@ifSizeDifference{\sizeDifference-\tikzscale@oldSizeDifference}{%
+}{%
+\tikzscale@conditionalEnableExternalization{\fileName}%
+\tikzscale@includeNormalTikzpicture{#4}%
+\gdef\tikzscale@alreadyIncluded{true}%
+\breakforeach
+}%
+\pgfmathsetglobalmacro{\tikzscale@oldSizeDifference}{\sizeDifference}%
+}{%
+\breakforeach
+}%
+}%
+\ifdef{\tikzscale@alreadyIncluded}{%
+\global\undef\tikzscale@alreadyIncluded%
+}{%
+ % Do a last measurement to be able to warn if the size does not fit good enough. This measurement has to be done before possibly reactivating the externalization, as measurements with activated externalization can lead to wrong measurement results (possibly due to calling \cmd{\shipout} inside of the measurement). The assumption is, that the real graphic size does not change if the externalization gets activated, which all tests seem to confirm.
+\tikzscale@measureSize{\measuredFinal}{\dimension}{\content}%
+\tikzscale@warnIfSizeDifference{\measuredFinal}{\requestedSize}{\fileName}%
+\tikzscale@conditionalEnableExternalization{\fileName}%
+\content%
+}%
+}
+\def\tikzscale@ifIsWidth#1{%
+\ifedefequal{#1}{\wd}%
+}
+\newsavebox{\tikzscale@measuredSize}
+\def\tikzscale@measureSize#1#2#3{%
+\sbox{\tikzscale@measuredSize}{#3}%
+\pgfmathsetmacro{#1}{#2\tikzscale@measuredSize}%
+}
+\def\tikzscale@ifSizeDifference#1#2#3{%
+\pgfmathparse{abs(#1)}%
+\ifdimgreater{\pgfmathresult pt}{\tikzscale@accuracy}{%
+#2%
+}{%
+#3%
+}%
+}%
+
+\def\tikzscale@warnIfSizeDifference#1#2#3{%
+\tikzscale@ifSizeDifference{#1-#2}{%
+\PackageWarning{tikzscale}{Scaling of #3 was only\MessageBreak accurate to \pgfmathresult pt}%
+}{}%
+}
+\NewDocumentCommand{\tikzscale@conditionalDisableExternalization}{}{%
+\tikzscale@ifExternalizationActive{%
+\tikzexternaldisable
+\def\tikzscale@externalizationWasDisabled{}%
+}{}%
+\ifExternalizationLoaded{%
+\tikzscale@addRestoreEndLineCharToTikzpicture
+}{}%
+\ifdef{\pause}{%
+\LetLtxMacro{\tikzscale@oldpause}{\pause}%
+\RenewDocumentCommand{\pause}{o}{}%
+}{}%
+}
+\NewDocumentCommand{\tikzscale@conditionalEnableExternalization}{m}{%
+\ifdef{\tikzscale@externalizationWasDisabled}{%
+\tikzexternalenable
+\undef\tikzscale@externalizationWasDisabled
+}{}%
+\ifExternalizationLoaded{%
+\tikzscale@addRestoreEndLineCharToTikzpicture
+}{}%
+\ifdef{\pause}{%
+\LetLtxMacro{\pause}{\tikzscale@oldpause}%
+}{}%
+}
+%% 
+%% Copyright (C) 2012 by Patrick Häcker <pat_h@web.de>
+%% 
+%% This work may be distributed and/or modified under the
+%% conditions of the LaTeX Project Public License (LPPL), either
+%% version 1.3c of this license or (at your option) any later
+%% version.  The latest version of this license is in the file:
+%% 
+%% http://www.latex-project.org/lppl.txt
+%% 
+%% This work is "maintained" (as per LPPL maintenance status) by
+%% Patrick Häcker.
+%% 
+%% This work consists of the file  tikzscale.dtx
+%% and the derived files           tikzscale.ins,
+%%                                 tikzscale.pdf and
+%%                                 tikzscale.sty.
+%% 
+%%
+%% End of file `tikzscale.sty'.

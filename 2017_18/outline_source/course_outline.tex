@@ -70,6 +70,15 @@
 
 \node[center,text height=0.35cm](nt){neurons types};
 
+\node[center,text height=0.35cm,right = 2cm of nt](sc){some maths};
+\node[center,text height=0.35cm,above = 2cm of sc](tb){the brain};
+
+
+\path (tb) edge[->,line width=2pt](sc);
+\path (sc) edge[->,line width=2pt](nt);
+
+
+
 \node[neuron,text height=0.35cm,above = 2cm of nt](on){MP neurons};
 \node[applic,text height=0.35cm,above = 2cm of on](hpc){hippocampus};
 
@@ -84,7 +93,7 @@
 
 
 \node[neuron,text height=0.35cm,left = 2cm of nt](ln){LIF neurons};
-\node[applic,text height=0.35cm,left = 2cm of ln](pla){plasticity};
+\node[applic,text height=0.35cm,left = 2cm of ln](pla){features};
 
 \path (nt) edge[->,line width=2pt,draw=gray,style=dashed](ln);
 \path (ln) edge[<->,line width=2pt](pla);

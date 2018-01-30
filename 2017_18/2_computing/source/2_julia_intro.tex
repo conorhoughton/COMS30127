@@ -6,7 +6,7 @@
 \pagestyle{headings}
 \newcommand{\lnn}[1]{\textbf{line #1}\,}
 \newcommand{\Lnn}[1]{\textbf{Line #1}\,}
-\markright{Julia introduction}
+\markright{Computational Neuroscience - 2 julia introduction}
 \lstdefinelanguage{Julia}%
   {morekeywords={abstract,break,case,catch,const,continue,do,else,elseif,%
       end,export,false,for,function,immutable,import,importall,if,in,%
@@ -29,7 +29,7 @@
 }
 
 \begin{document}
-\section*{Julia Introduction\footnote{\texttt{https://github.com/conorhoughton/teaching\_misc/tree/master/python\_workshop/}}}
+\section*{Julia Introductionxo}
 \subsection*{Introduction}
 Julia is a new programming language that runs much faster than Python;
 it is possible to write fast code in MATLAB where everything is
@@ -66,7 +66,7 @@ https://juliabox.com/
 \subsection*{A simple example}
 
 Here is a programme to add powers of two (\texttt{add.jl}):
-\begin{lstlisting}[numbers=left]
+\begin{lstlisting}[numbers=right]
 highest_power=10
 
 value=1.0::Float64
@@ -86,7 +86,7 @@ is \lnn{4} was \texttt{value=1::Float64} it would return an error
 since \texttt{1} isn't a \texttt{Float64}. You can find a full list of
 types in the wikibook, it has lots of different int and float types,
 along with rational numbers using \texttt{//} to seperate numerator and divisor (\texttt{rational.jl}):
-\begin{lstlisting}[numbers=left]
+\begin{lstlisting}[numbers=right]
 a=2//3
 b=1//2
 println(a-b)
@@ -96,7 +96,7 @@ println(a-b)
 Arrays are what Python calls lists, python is the odd one out here,
 array is a more common name. Julia has the same slicing functionality
 as Python, although as mentioned above indexing is different (\texttt{slice.jl})
-\begin{lstlisting}[numbers=left]
+\begin{lstlisting}[numbers=right]
 a=[1,2,3,4,5]
 println(a[1:3])
 
@@ -110,7 +110,7 @@ a for loop. The last element in an array is indexed \texttt{end} so in
 the programme above \texttt{a[end]} is \texttt{5}.
 
 Arrays can store mixed items, but the array can be typed, so \texttt{a} in (\texttt{typed\_list.jl}
-\begin{lstlisting}[numbers=left]
+\begin{lstlisting}[numbers=right]
 a=Int64[1,2,3,4,5]
 push!(a,6)
 println(a)
@@ -126,7 +126,7 @@ overview. There is also a tuple type which is immutable.
 
 \subsection*{Functions}
 Here is a programme with some functions (\texttt{functions.jl})
-\begin{lstlisting}[numbers=left]
+\begin{lstlisting}[numbers=right]
 function add_to_int(a::Integer,b::Integer)
 	 println("int version")
 	 a+b
@@ -160,7 +160,7 @@ Julia doesn't have classes, this comes as a surprise at first, but it
 does have composite data types that work like structs, combining this
 with multiple dispach captures important parts of the functionality of
 classes, in a way that supports fast code (\texttt{struct\_example.jl}
-\begin{lstlisting}[numbers=left]
+\begin{lstlisting}[numbers=right]
 mutable struct Cow
 	name::String
 	age::Int64
@@ -190,6 +190,62 @@ You can see that although the structs have no methods, the function
 types. The default constructor defines the variables in the order they
 appear, it is possible to define other constructors, but that won't be
 considered here.
+
+You can write constructors for these structs as ordinary functions; you can also use the key word \texttt{new} to write internal constructors, these serve, typically, to impose constraints on the input, see \texttt{constructor.jl}
+\begin{lstlisting}[numbers=right]
+struct Joke
+
+    question::String
+    answer::String
+
+    function Joke(question::String,answer::String)
+        if question[end]!="?"
+            question=string(question,"?")
+        end
+        new(question,answer)
+    end
+
+end
+
+function make_joke()
+    Joke("what weapon does a fat jedi use","a heavy sabre")
+end
+
+joke=make_joke()
+
+println(joke.question)
+println(joke.answer)
+\end{lstlisting}
+
+\subsection*{Making functions}
+
+Functions are objects just like any other, so they can be returned
+like other objects (\texttt{make\_function\_1.jl}):
+\begin{lstlisting}[numbers=right]
+function make_adder(a::Int64)
+    function adder(b::Int64)
+        a+b
+    end
+end
+
+three_adder=make_adder(3)
+two_adder=make_adder(2)
+
+println(two_adder(5)," ",three_adder(5))
+\end{lstlisting}
+or even (\texttt{make\_function\_2.jl})::
+\begin{lstlisting}[numbers=right]
+
+function make_adder(a::Int64)
+    b::Int64->a+b
+end
+
+three_adder=make_adder(3)
+two_adder=make_adder(2)
+
+println(two_adder(5)," ",three_adder(5))
+\end{lstlisting}
+
 
 \end{document}
 

@@ -1,0 +1,195 @@
+\documentclass[11pt,a4paper]{scrartcl}
+\typearea{12}
+\usepackage{graphicx}
+\usepackage{pstricks}
+\usepackage{listings}
+\pagestyle{headings}
+\newcommand{\lnn}[1]{\textbf{line #1}\,}
+\newcommand{\Lnn}[1]{\textbf{Line #1}\,}
+\markright{Julia introduction}
+\lstdefinelanguage{Julia}%
+  {morekeywords={abstract,break,case,catch,const,continue,do,else,elseif,%
+      end,export,false,for,function,immutable,import,importall,if,in,%
+      macro,module,otherwise,quote,return,switch,true,try,type,typealias,%
+      using,while},%
+   sensitive=true,%
+%   alsoother={$},%
+   morecomment=[l]\#,%
+   morecomment=[n]{\#=}{=\#},%
+   morestring=[s]{"}{"},%
+   morestring=[m]{'}{'},%
+}[keywords,comments,strings]%
+\lstset{%
+    language         = Julia,
+    basicstyle       = \ttfamily,
+    keywordstyle     = \bfseries\color{blue},
+    stringstyle      = \color{magenta},
+    commentstyle     = \color{ForestGreen},
+    showstringspaces = false,
+}
+
+\begin{document}
+\section*{Julia Introduction\footnote{\texttt{https://github.com/conorhoughton/teaching\_misc/tree/master/python\_workshop/}}}
+\subsection*{Introduction}
+Julia is a new programming language that runs much faster than Python;
+it is possible to write fast code in MATLAB where everything is
+written as linear algebra or using carefully optimized numpy or fancy
+just-in-time compilation in Python; the idea of Julia is that it runs
+at C-like speeds for natural, modern-looking code. It does this by
+allowing, while not requiring, type declaration and by not having
+classes, instead it has \textsl{types}, a bit like \textsl{structs} in
+C, and multiple dispatch. 
+
+It has other features to make it useful for scientific computing,
+little things like being able to \texttt{2v} when you mean
+\texttt{2*v}, along with big things, like a sophisticated
+multi-dimensional array datatype that can be used for efficient matrix
+operations. Presumably to help persuade people to finally abandon
+MATLAB it has a MATLAB-like syntax, blocks are denoated using a
+\texttt{end} keyword, the first element of an array \texttt{a} is
+\texttt{a[1]} and \texttt{1:10} means one to ten, not one to nine.
+
+If you are used to Python Julia can seem frustrating to debug, mostly
+because the typing can be hard to get used to, but debugging Julia as
+a Python programmer really reminds you how often you cast variables
+without even noticing; this is part of why Julia is much faster.
+
+This only outlines the simplest parts of the language, the wikibook
+\begin{quote}
+https://en.wikibooks.org/wiki/Introducing\_Julia/
+\end{quote}
+is a good place to look for a longer introduction. There is online Julia at
+\begin{quote}
+https://juliabox.com/
+\end{quote}
+
+\subsection*{A simple example}
+
+Here is a programme to add powers of two (\texttt{add.jl}):
+\begin{lstlisting}[numbers=left]
+highest_power=10
+
+value=1.0::Float64
+current=0.5::Float64
+
+for i in 1:highest_power
+   value+=current
+   current*=0.5
+end
+
+println(value)
+\end{lstlisting}
+\Lnn{1} defined \texttt{highest\_power}; this is dynamically typed, as
+in Python, but \texttt{value} and \texttt{current} are given a type,
+\texttt{Float64}; as an indication of how seriously it takes typing,
+is \lnn{4} was \texttt{value=1::Float64} it would return an error
+since \texttt{1} isn't a \texttt{Float64}. You can find a full list of
+types in the wikibook, it has lots of different int and float types,
+along with rational numbers using \texttt{//} to seperate numerator and divisor (\texttt{rational.jl}):
+\begin{lstlisting}[numbers=left]
+a=2//3
+b=1//2
+println(a-b)
+\end{lstlisting}
+
+\subsection*{Arrays}
+Arrays are what Python calls lists, python is the odd one out here,
+array is a more common name. Julia has the same slicing functionality
+as Python, although as mentioned above indexing is different (\texttt{slice.jl})
+\begin{lstlisting}[numbers=left]
+a=[1,2,3,4,5]
+println(a[1:3])
+
+for i in a
+   println(i)
+end
+
+\end{lstlisting}
+prints \texttt{[1,2,3]} from \lnn{2}, \lnn{4} to \lnn{6} demonstrates
+a for loop. The last element in an array is indexed \texttt{end} so in
+the programme above \texttt{a[end]} is \texttt{5}.
+
+Arrays can store mixed items, but the array can be typed, so \texttt{a} in (\texttt{typed\_list.jl}
+\begin{lstlisting}[numbers=left]
+a=Int64[1,2,3,4,5]
+push!(a,6)
+println(a)
+\end{lstlisting}
+can only store items of type \texttt{Int64}. \texttt{push!} pushes an
+item onto the list, like \texttt{append} in Python, again, this is the
+more common notation. The \texttt{!} is part of an convention where
+all commands that change an array have a \texttt{!}.
+
+As mentioned above, Julia arrays can be multidimensional and have
+matrix like operations, but this won't be explored in this brief
+overview. There is also a tuple type which is immutable.
+
+\subsection*{Functions}
+Here is a programme with some functions (\texttt{functions.jl})
+\begin{lstlisting}[numbers=left]
+function add_to_int(a::Integer,b::Integer)
+	 println("int version")
+	 a+b
+end
+
+function add_to_int(a::Real,b::Real)
+	 println("float version")
+	 convert(Int64,a+b)
+end
+
+function add_to_int(a,b)
+	 println("what are these things")
+	 0
+end
+
+println(add_to_int(12,6))
+println(add_to_int(12.0,6.0))
+\end{lstlisting}
+Obviously this is a very artificial example, but it shows some of the
+features of functions, first, their return value is the most recently
+evaluated expression and second, and more importantly, they support
+multiple dispach; the function is chosen to match the type of the
+arguments, here there is one function for \texttt{Integers}, this is a
+supertype which includes, for example, \texttt{Int64}, there is one
+for \texttt{Real}, the supertype that includes various floats, and one
+with no type; the correct function is used for each. If there is no
+correct fuction there will be an error.
+
+\subsection*{Composite Types}
+Julia doesn't have classes, this comes as a surprise at first, but it
+does have composite data types that work like structs, combining this
+with multiple dispach captures important parts of the functionality of
+classes, in a way that supports fast code (\texttt{struct\_example.jl}
+\begin{lstlisting}[numbers=left]
+mutable struct Cow
+	name::String
+	age::Int64
+end
+
+mutable struct Poem
+	name::String
+end	
+
+function move(cow::Cow)
+	 print(cow.name," walks forward") 
+         println("showing the weight of her ",cow.age," years")
+end
+
+function move(poem::Poem)
+	 println(poem.name, " moves us to tears with its beauty")
+end
+
+poem = Poem("The Red Wheelbarrow")
+cow = Cow("Hellcow",42)
+
+move(cow)
+move(poem)
+\end{lstlisting}
+You can see that although the structs have no methods, the function
+\texttt{update} can have different meaning for the two different data
+types. The default constructor defines the variables in the order they
+appear, it is possible to define other constructors, but that won't be
+considered here.
+
+\end{document}
+

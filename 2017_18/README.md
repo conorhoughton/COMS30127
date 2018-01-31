@@ -6,3 +6,7 @@ given in course_outline.pdf. The course will emphasis different
 neuronal models and how they relate to different ideas about how the
 brain performs its function.
 
+A good book on Computational Neuroscience is
+
+http://www.gatsby.ucl.ac.uk/~dayan/book/
+

@@ -458,7 +458,7 @@ prints \texttt{[1,2,3]} from \lnn{2}, \lnn{4} to \lnn{6} demonstrates
 a for loop. The last element in an array is indexed \texttt{end} so in
 the programme above \texttt{a[end]} is \texttt{5}.
 
-Arrays can store mixed items, but the array can be typed, so \texttt{a} in (\texttt{typed\_list.jl}
+Arrays can store mixed items, but the array can be typed, so \texttt{a} in (\texttt{typed\_list.jl})
 \begin{lstlisting}[numbers=right]
 a=Int64[1,2,3,4,5]
 push!(a,6)
@@ -503,6 +503,35 @@ supertype which includes, for example, \texttt{Int64}, there is one
 for \texttt{Real}, the supertype that includes various floats, and one
 with no type; the correct function is used for each. If there is no
 correct fuction there will be an error.
+
+There is also a terse \lq{}mathematical functions\rq{} style function
+syntax that is useful, well, for functions that do the sort of things
+mathematical functions do (\texttt{math\_fxn.jl})
+\begin{lstlisting}[numbers=right]
+
+f(x,y)=2x+y
+
+println(f(1,3))
+
+\end{lstlisting}
+You can also return more than one value (\texttt{multiple\_return.jl})
+\begin{lstlisting}[numbers=right]
+function powers(x)
+	 x,x^2,x^3
+end
+
+multiples(x::Float64) = x,2x,3x
+
+a,b,c=powers(2)
+
+println(a,' ',b,' ',c)
+
+a,b,c=multiples(2)
+
+println(a,' ',b,' ',c)
+
+\end{lstlisting}
+
 
 \subsubsection*{Composite Types}
 Julia doesn't have classes, this comes as a surprise at first, but it

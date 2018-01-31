@@ -234,8 +234,9 @@ print list(enumerate(hello))
 
 One thing about Python that is hard to get used to if you are used to
 C or C++ is that what I keep calling variables are more correctly
-labels, they name memory locations rather than pieces of data. This
-often catches me out, to see the difference look at (\texttt{labels.py})
+thought of as labels, they name memory locations rather than pieces of
+data. This often catches me out, to see the difference look at
+(\texttt{labels.py})
 \begin{lstlisting}[numbers=right]
 a = [0,1,2]
 b = a
@@ -397,7 +398,7 @@ MATLAB it has a MATLAB-like syntax, blocks are denoated using a
 \texttt{end} keyword, the first element of an array \texttt{a} is
 \texttt{a[1]} and \texttt{1:10} means one to ten, not one to nine.
 
-If you are used to Python Julia can seem frustrating to debug, mostly
+If you are used to Python, Julia can seem frustrating to debug, mostly
 because the typing can be hard to get used to, but debugging Julia as
 a Python programmer really reminds you how often you cast variables
 without even noticing; this is part of why Julia is much faster.
@@ -430,7 +431,7 @@ println(value)
 \Lnn{1} defined \texttt{highest\_power}; this is dynamically typed, as
 in Python, but \texttt{value} and \texttt{current} are given a type,
 \texttt{Float64}; as an indication of how seriously it takes typing,
-is \lnn{4} was \texttt{value=1::Float64} it would return an error
+is \lnn{3} was \texttt{value=1::Float64} it would return an error
 since \texttt{1} isn't a \texttt{Float64}. You can find a full list of
 types in the wikibook, it has lots of different int and float types,
 along with rational numbers using \texttt{//} to seperate numerator and divisor (\texttt{rational.jl}):
@@ -534,7 +535,7 @@ move(cow)
 move(poem)
 \end{lstlisting}
 You can see that although the structs have no methods, the function
-\texttt{update} can have different meaning for the two different data
+\texttt{move} can have different meaning for the two different data
 types. The default constructor defines the variables in the order they
 appear, it is possible to define other constructors, but that won't be
 considered here.

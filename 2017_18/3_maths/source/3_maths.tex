@@ -1,0 +1,148 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\begin{document}
+\section*{A first order differential equation}
+Many of the differential equations we come across in neuroscience are inhomogeneous first order differential equations
+\begin{equation}
+\tau\frac{df}{dt}=g(t)-f(t)
+\end{equation}
+where $f(t)$ is some function of $t$ we are interested in and $g(t)$ is some outside \textsl{driving function} and $\tau$ is a constant. These differential equations can be solved, or, at least the solution can be written as an integral. The solution uses an \textsl{integrating factor}: that is, 
+and multiply across by
+\begin{equation}
+\lambda=e^{-t/\tau}
+\end{equation}
+to give
+\begin{equation}
+\tau e^{t/\tau}\frac{df}{dt}+e^{t/\tau}f=e^{t/\tau}g(t)
+\end{equation}
+The trick, now, is that the two terms on the right hand side can be rewritten in product form
+\begin{equation}
+\tau \frac{d}{dt}\left(e^{t/\tau}f\right)=e^{t/\tau}g(t)
+\end{equation}
+Now, we integrate both sides
+\begin{equation}
+\tau e^{t/\tau}f(t)=\int_0^t e^{t'/\tau} g(t')dt'+A
+\end{equation}
+where $A$ is some integration constant. Setting $t=0$ shows that $A=\tau f(0)$ and, hence, dividing across by the stuff in front of $f(t)$
+\begin{equation}
+f(t)=e^{-t/\tau}\left[\frac{1}{\tau}\int_0^t e^{t'/\tau} g(t')dt'+f(0)\right]
+\end{equation}
+Hence, $f(t)$ is written as an integral, if we can do the integral we have solved the equation.
+
+The easiest case is obviously $g(t)=\bar{g}$ a constant:
+\begin{equation}
+f(t)= \bar{g} \left[\frac{1}{\tau}e^{-t/\tau}\int_0^t e^{t'/\tau}dt'+f(0)\right]=\bar{g}\left(1-e^{-t/\tau}\right) + f(0)e^{-t/\tau}
+\end{equation}
+or
+\begin{equation}
+f(t)=\bar{g}+[f(0)-\bar{g}]e^{-t/\tau}
+\end{equation}
+It is easy to understand this solution: 
+\begin{equation}
+\tau\frac{df}{dt}=\bar{g}-f(t)
+\end{equation}
+has $df/dt=0$ only if $f(t)=\bar{g}$ furthermore if $f(t)>\bar{g}$ then $df/dt<0$ and $f(t)$ decreases towards $\bar{g}$; if $f(t)>\bar{g}$  $df/dt>0$ then $f(t)$ increases. We can see in the solution that $f(t)$ decays exponentially towards $\bar{g}$ and it does so with a time scale that depends on $\tau$.
+
+What happens if $g(t)$ isn't constant; well some of the same logic applies, the sign of $df/dt$ means that the solution is trying to get to $g(t)$ but the difference is now that $g(t)$ might change before it gets there. Actually looking at 
+\begin{equation}
+f(t)=e^{-t/\tau}\left[\frac{1}{\tau}\int_0^t e^{t'/\tau} g(t')dt'+f(0)\right]
+\end{equation}
+lets consider the function
+\begin{equation}
+T(t)=\frac{1}{\tau}e^{-t/\tau}\int_0^t e^{t'/\tau} g(t')dt'
+\end{equation}
+and do a change of variable $t'=t-s$ so 
+\begin{equation}
+T(t)=\frac{1}{\tau}\int_0^t e^{-s/\tau} g(t-s)ds
+\end{equation}
+then the role of the integral is to smooth out $g(t)$ a bit by averaging it over its past with a exponential window. Imagine that $g(t)$ varies slowly compared to the time scale $\tau$, so by the time $g(t-s)$ changes much compared to $g(t)$ then $\exp(-s/\tau)$ is more-or-less zero, then
+\begin{equation}
+T(t)\approx\frac{1}{\tau}g(t)\int_0^t e^{-s/\tau}ds=g(t)\left(1-e^{-t/\tau}\right)
+\end{equation}
+and substituting back in we get
+\begin{equation}
+f(t)\approx g(t)+[f(0)-g(t)]e^{-t/\tau}
+\end{equation}
+
+\section*{Two first order differential equation}
+
+Differential equations can be coupled; here is an example of a nearly homogeneous pair of coupled equations
+\begin{eqnarray}
+\tau_f \frac{df}{dt}&=&\bar{f}-f-w\\
+\tau_w \frac{dw}{dt}&=&\bar{w}-w
+\end{eqnarray}
+There are lots of ways to solve this equation; one approach is to rewrite it as a matrix equation and find the eigenvectors, another is to convert it into a second  order equation and solve that; the first way is more general but the second is quicker. Let's start by making the equation homogeneous and going from there, so
+let
+\begin{eqnarray}
+f'&=&f-\bar{f}\\
+w'&=&w-\bar{w}
+\end{eqnarray}
+giving
+\begin{eqnarray}
+\tau_f \frac{df'}{dt}&=&-f'-w'\\
+\tau_w \frac{dw'}{dt}&=&-w'
+\end{eqnarray}
+Now, differenciate the first equation to get
+\begin{equation}
+\tau_f \frac{d^2f'}{dt^2}=-\frac{df}{dt}-\frac{dw'}{dt}
+\end{equation}
+This means
+\begin{eqnarray}
+w'&=&-f'-\tau_f \frac{df'}{dt}\\
+\frac{dw'}{dt}&=&-\tau_f \frac{d^2f'}{dt^2}-\frac{df}{dt}
+\end{eqnarray}
+so substituting all this into the equation for $w'$ gives
+\begin{equation}
+\tau_w\tau_f \frac{d^2f'}{dt^2}+\tau_w\frac{df}{dt}=\tau_f\frac{df'}{dt}-f'
+\end{equation}
+or
+\begin{equation}
+\tau_w\tau_f \frac{d^2f'}{dt^2}+(\tau_w+\tau_f)\frac{df'}{dt}+f'=0
+\end{equation}
+
+This second order equation is solved by ansatz, that is by guessing; we guess
+\begin{equation}
+f(t)=e^{rt}
+\end{equation}
+and substitute back in
+\begin{equation}
+\tau_w\tau_f r^2+(\tau_w+\tau_f)r+1=0
+\end{equation}
+which has two solutions $r=-1/\tau_f$ and $r=-1/\tau_w$.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}

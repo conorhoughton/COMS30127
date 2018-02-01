@@ -379,7 +379,7 @@ It both saves the plot as \texttt{example.png} and shows it on the screen.
 
 
 \subsection*{Julia}
-
+\lstset{language=python}
 Julia is a new programming language that runs much faster than Python;
 it is possible to write fast code in MATLAB where everything is
 written as linear algebra or using carefully optimized numpy or fancy
@@ -622,6 +622,25 @@ three_adder=make_adder(3)
 two_adder=make_adder(2)
 
 println(two_adder(5)," ",three_adder(5))
+\end{lstlisting}
+
+\subsubsection*{Plotting}
+
+Julia doesn't have it's own plotting package but it has several
+packages that wrap other plotting packages, it even has one for
+gnuplot. One easy example is the package \texttt{PyPloy} which gives
+access to \texttt{matplotlib} in Python. The package first needs to be
+installed, to do this open Julia on the command line and in the REPL
+type \texttt{Pkg.add(\lq{}PyPlot\rq{})}; this needs to only be done
+once, then, you can do things like this (\texttt{matplotlib\_example.jl})
+\begin{lstlisting}[numbers=right]
+import PyPlot; 
+const plt = PyPlot
+
+x = linspace(0,2*pi,1000); y = sin.(3 * x + 4 * cos.(2 * x));
+plt.plot(x, y, color="red", linewidth=2.0, linestyle="--")
+plt.title("A sinusoidally modulated sinusoid")
+plt.show()
 \end{lstlisting}
 
 

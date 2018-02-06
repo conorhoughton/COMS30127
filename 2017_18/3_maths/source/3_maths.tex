@@ -108,9 +108,25 @@ and substitute back in
 \begin{equation}
 \tau_w\tau_f r^2+(\tau_w+\tau_f)r+1=0
 \end{equation}
-which has two solutions $r=-1/\tau_f$ and $r=-1/\tau_w$.
+which has two solutions $r=-1/\tau_f$ and $r=-1/\tau_w$ so
+\begin{equation}
+f(t)=Ae^{-t/\tau_f}+Be^{-t/\tau_w}
+\end{equation}
+and substituting back into 
+\begin{equation}
+\tau_f \frac{df'}{dt}=-f'-w'
+\end{equation}
+give an equation for $w'$.
 
+Another approach to this pair of equations is to write them as a
+matrix equation:
+\begin{equation}
+\frac{d}{dt}\left(\begin{array}{c}f'\\w'\end{array}\right)
+=\left(\begin{array}{cc}-1/\tau_f&-1/\tau_f\\0&-1/\tau_w\end{array}\right)
+\left(\begin{array}{c}f'\\w'\end{array}\right)
+\end{equation}
 
+\end{document}
 
 
 

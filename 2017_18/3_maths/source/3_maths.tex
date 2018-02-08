@@ -209,7 +209,7 @@ understanding the phase dynamics; recall how in case above with just
 one differential equation we could see that the equation had a stable
 equilibrium, well we can do the same thing here. First consider the equation
 \begin{equation}
-\tau_w \frac{dw}{dt}&=&-w
+\tau_w \frac{dw}{dt}=-w
 \end{equation}
 If $w=0$ this means that $dw/dt=0$; this is called a nullcline and, in
 $f-w$ space it is a line not a point. The system isn't in equilibrium
@@ -222,6 +222,20 @@ that is if we are to the right of the nullcline, then $df/dt<0$ and we
 move to the left, and the converse for $f<-w$. Hence, we always move
 towards the nullclines; furthermore, the two lines cross at $f=w=0$
 and this is a stable equilibrium point.
+
+
+\begin{figure}[tb]
+\begin{center}
+\include{two_d}
+\end{center}
+\caption{This shows some of the trajectories in $f-w$ space; the
+  horizontal axis is $f$, the vertical is $w$. The nullclines are the
+  two curves in bold. All the trajectories approach the equilibrium
+  point, as they cross the $f=-w$ nullcline their tangent is vertical
+  because on this line $df/dt=0$; $\tau_f=2$ and $\tau_w=1$; the programme is
+  \texttt{two\_d.py}. \label{two_d}}
+\end{figure}
+
 
 \end{document}
 

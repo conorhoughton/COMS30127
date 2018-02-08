@@ -72,7 +72,13 @@ It is easy to understand this solution:
 \end{equation}
 has $df/dt=0$ only if $f(t)=\bar{g}$ furthermore if $f(t)>\bar{g}$
 then $df/dt<0$ and $f(t)$ decreases towards $\bar{g}$; if
-$f(t)>\bar{g}$ $df/dt>0$ then $f(t)$ increases. We can see in the
+$f(t)>\bar{g}$ $df/dt>0$ then $f(t)$ increases. Since $df/dt$ is zero
+for $f(t)=\bar{g}$ we say this is the equilibrium; since the sign of
+$df/dt$ means that $f(t)$ always approaches $\bar{g}$ we say this
+solution is stable.
+
+
+We can see in the
 solution that $f(t)$ decays exponentially towards $\bar{g}$ and it
 does so with a time scale that depends on $\tau$. An example is shown in Fig.~\ref{exp_decay}.
 
@@ -98,18 +104,20 @@ and do a change of variable $t'=t-s$ so
 T(t)=\frac{1}{\tau}\int_0^t e^{-s/\tau} g(t-s)ds
 \end{equation}
 then the role of the integral is to filter or smooth out $g(t)$ by
-averaging it over its past with a exponential window. This is illustrated in Fig.~\ref{filtering}.
+averaging it over its past with a exponential window. This is
+illustrated in Fig.~\ref{filtering}.
 
 \begin{figure}[tb]
 \begin{center}
 \include{filtering}
 \end{center}
-\caption{This shows how the response $f(t)$ filters the input $g(t)$; the differntial equation has $\tau=3$ and an input $g(t)$ which varies as shown above; the coded used to calculate $f(t)$ is \texttt{filtered\_input.py}. \label{filtering}}
+\caption{This shows how the response $f(t)$ filters the input $g(t)$;
+  the differntial equation has $\tau=3$ and an input $g(t)$ which
+  varies as shown above; the coded used to calculate $f(t)$ is
+  \texttt{filtered\_input.py}. \label{filtering}}
 \end{figure}
 
-
-
- Imagine that $g(t)$ varies slowly compared to the time scale $\tau$, so by the time $g(t-s)$ changes much compared to $g(t)$ then $\exp(-s/\tau)$ is more-or-less zero, then
+Imagine that $g(t)$ varies slowly compared to the time scale $\tau$, so by the time $g(t-s)$ changes much compared to $g(t)$ then $\exp(-s/\tau)$ is more-or-less zero, then
 \begin{equation}
 T(t)\approx\frac{1}{\tau}g(t)\int_0^t e^{-s/\tau}ds=g(t)\left(1-e^{-t/\tau}\right)
 \end{equation}
@@ -188,13 +196,32 @@ and substituting back into
 \end{equation}
 give an equation for $w'$.
 
-Another approach to this pair of equations is to write them as a
-matrix equation:
+Another approach to this pair of equations which we won't explore here
+is to write them as a matrix equation:
 \begin{equation}
 \frac{d}{dt}\left(\begin{array}{c}f'\\w'\end{array}\right)
 =\left(\begin{array}{cc}-1/\tau_f&-1/\tau_f\\0&-1/\tau_w\end{array}\right)
 \left(\begin{array}{c}f'\\w'\end{array}\right)
 \end{equation}
+
+As important as seeing how to solve these differential equation is
+understanding the phase dynamics; recall how in case above with just
+one differential equation we could see that the equation had a stable
+equilibrium, well we can do the same thing here. First consider the equation
+\begin{equation}
+\tau_w \frac{dw}{dt}&=&-w
+\end{equation}
+If $w=0$ this means that $dw/dt=0$; this is called a nullcline and, in
+$f-w$ space it is a line not a point. The system isn't in equilibrium
+along the nullcline because $df/dt$ isn't zero but it is stable in the
+sense that if we are above $w=0$ then $dw/dt<0$ and if it is below
+$dw/dt>0$ and so, as before, the system will approach the
+nullcline. In fact there is also a $df/dt$ nullcline given by $f=-w$;
+this is a diagonal line in $f-w$ space; it is also stable, if $f>-w$,
+that is if we are to the right of the nullcline, then $df/dt<0$ and we
+move to the left, and the converse for $f<-w$. Hence, we always move
+towards the nullclines; furthermore, the two lines cross at $f=w=0$
+and this is a stable equilibrium point.
 
 \end{document}
 

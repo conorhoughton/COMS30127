@@ -6,6 +6,7 @@
 \lfoot{\texttt{github.com/conorhoughton/COMS30127}}
 \lhead{Computation Neuroscience - 3\_maths (b) - Conor}
 \rhead{\thepage}
+\cfoot{}
 \begin{document}
 \section*{Some mathematics}
 \subsection*{A first order differential equation}
@@ -15,18 +16,18 @@ inhomogeneous first order differential equations
 \tau\frac{df}{dt}=g(t)-f(t)
 \end{equation}
 where $f(t)$ is some function of $t$ we are interested, $g(t)$ is some
-outside \textsl{driving function} and $\tau$ is a constant. In one
+outside \textsl{driving function} and $\tau$ is a con|stant. One
 example we will examine is the integrate and fire equation:
 \begin{equation}
 \tau_m\frac{dV}{dt}=E_l-V(t)+g_lI(t)
 \end{equation}
 where $V(t)$ is the voltage inside a neuron, and the driving function
 is made up of two parts $E_l$, the so called reversal potential and
-$g_lI(t)$ which represents current coming in to the cell, for example,
+$g_lI(t)$ which represents current coming into the cell, for example,
 through an electrode if the cell being modelled is being experimented
 on, or because of signals from other neurons. Another example is the
 gating equation which represents the opening and closing of
-ino-channels, little gates in the membrane of the cells and a third
+ion-channels, little gates in the membrane of the cells and a third
 example is the equation for synaptic conductance. In each of these
 examples the underlying equation is the same, or nearly the same, and
 so we will look at it now in the abstract without considering the
@@ -40,7 +41,7 @@ non-linear $f$ terms, no $f^2$ or anything like that. First order
 linear differential equations can be solved, or, at least the solution
 can be written as an integral. The solution uses an
 \textsl{integrating factor}: the trick of simplifying the equation by
-multiply across by
+multipling across by
 \begin{equation}
 \lambda=e^{-t/\tau}
 \end{equation}
@@ -119,7 +120,7 @@ illustrated in Fig.~\ref{filtering}.
 \end{center}
 \caption{This shows how the response $f(t)$ filters the input $g(t)$;
   the differntial equation has $\tau=3$ and an input $g(t)$ which
-  varies as shown above; the coded used to calculate $f(t)$ is
+  varies as shown above; the code used to calculate $f(t)$ is
   \texttt{filtered\_input.py}. \label{filtering}}
 \end{figure}
 
@@ -159,7 +160,7 @@ Actually having the prime on $f$ and $w$ gets annoying so we'll drop the prime f
 \tau_w \frac{dw}{dt}&=&-w
 \end{eqnarray}
 
-Now, differenciate the first equation to get
+Now, differentiate the first equation to get
 \begin{equation}
 \tau_f \frac{d^2f}{dt^2}=-\frac{df}{dt}-\frac{dw}{dt}
 \end{equation}

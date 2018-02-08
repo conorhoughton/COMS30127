@@ -1,8 +1,14 @@
 \documentclass{article}
 \usepackage[utf8]{inputenc}
 \usepackage{graphicx}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\lfoot{\texttt{github.com/conorhoughton/COMS30127}}
+\lhead{Computation Neuroscience - 3\_math - Conor}
+\rhead{\thepage}
 \begin{document}
-\section*{A first order differential equation}
+\section*{Some mathematics}
+\subsection*{A first order differential equation}
 Many of the differential equations we come across in neuroscience are
 inhomogeneous first order differential equations
 \begin{equation}
@@ -126,7 +132,7 @@ and substituting back in we get
 f(t)\approx g(t)+[f(0)-g(t)]e^{-t/\tau}
 \end{equation}
 
-\section*{Two first order differential equation}
+\subsection*{Two first order differential equation}
 
 Differential equations can be coupled; here is an example of a nearly homogeneous pair of coupled equations
 \begin{eqnarray}

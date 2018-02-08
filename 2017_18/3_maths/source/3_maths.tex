@@ -221,7 +221,18 @@ this is a diagonal line in $f-w$ space; it is also stable, if $f>-w$,
 that is if we are to the right of the nullcline, then $df/dt<0$ and we
 move to the left, and the converse for $f<-w$. Hence, we always move
 towards the nullclines; furthermore, the two lines cross at $f=w=0$
-and this is a stable equilibrium point.
+and this is a stable equilibrium point. 
+
+The trajectories for an example system are shown in Fig.~\ref{two_d};
+this is a plot in $f-w$ space so it doesn't tell us how quickly the
+system will move along the trajectories, only their shape. To see the
+exact shape of the trajectories we need to solve the differential
+equations, but to guess roughly what they do we can use the nullclines
+and the logic above that describes what sign the derivatives have in
+the different areas as the $f-w$ space is divided up by the
+nullclines. Later we will use this sort of analysis to understand the
+behaviour of systems where the nullclines aren't straight because the
+differential equations are not linear.
 
 
 \begin{figure}[tb]
@@ -232,44 +243,14 @@ and this is a stable equilibrium point.
   horizontal axis is $f$, the vertical is $w$. The nullclines are the
   two curves in bold. All the trajectories approach the equilibrium
   point, as they cross the $f=-w$ nullcline their tangent is vertical
-  because on this line $df/dt=0$; $\tau_f=2$ and $\tau_w=1$; the programme is
-  \texttt{two\_d.py}. \label{two_d}}
+  because on this line $df/dt=0$; $\tau_f=2$ and $\tau_w=1$. The
+  arrows are included for illustrative purposes, the direction of the
+  trajectories could also be decided using the two rules described in
+  the text based on the signs of the derivatives. The programme used
+  to plot the trajectories \texttt{two\_d.py}. \label{two_d}}
 \end{figure}
 
 
 \end{document}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 \end{document}

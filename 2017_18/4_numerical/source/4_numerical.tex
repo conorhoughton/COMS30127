@@ -12,7 +12,7 @@
 
 \section*{Numerical integration of differntial equations} 
 
-This lecture is about the Taylor series and about the numerical
+This chapter is about the Taylor series and about the numerical
 solution of differential equations; two methods are considered, the
 Euler method and the Runge Kutta method. These are the most
 straight-forward way to solve differential equations on a computer,
@@ -27,8 +27,8 @@ As an introduction it is often useful to use a series description of
 functions, it can help with numerical calculations of the values and
 it can be useful in studying properties of the function. Here, it will
 be used to work out how to efficiently calculate the solutions to
-differential equations accurately. The Taylor series is one commonly
-applicable approach to representing a function as a series.
+differential equations. The Taylor series is one commonly applicable
+approach to representing a function as a series.
 
 Imagine you have a function $f(t)$ that can be represented as a series
 \begin{equation}
@@ -96,9 +96,9 @@ for all $n$ so
 \begin{equation}
 f(t)=\sum_{n=0}^{\infty}\frac{1}{n!}t^n
 \end{equation}
-which is what we got before.
 
-Next lets consider
+
+Next let's consider
 \begin{equation}
 f(t)=\sin{t}
 \end{equation}
@@ -128,21 +128,30 @@ f(t_0+\epsilon)=\sum_{n=0}^\infty\frac{1}{n!}\left.\frac{d^nf}{dt^n}\right|_{t=t
 
 Consider the differential equation
 \begin{equation}
-\frac{df}{dt}=G(f)
+\frac{df}{dt}=G(t,f)
 \end{equation}
 This class of differential equations would include the equation we looked before:
 \begin{equation}
 \frac{df}{dt}=-\frac{1}{\tau}f
 \end{equation}
-with $G(f)=-f/\tau$. Of course, the right hand side might also depend
-on $t$, but we'll worry about that later. Imagine we want to find
-numerical values for $f(t)$ where we know $f(0)=f_0$, some value, and
+with $G(f)=-f/\tau$ or
+\begin{equation}
+\frac{df}{dt}=\frac{1}{\tau}[g(t)-f]
+\end{equation}
+with $G(t,f)=(g-f)/\tau$. If fact, for most of this discussion we will
+restrict ourselves to the case where $G$ doesn't depend on $t$ except
+through $f$, this case is a small bit simpler, we'll put the
+possibility of other $t$ dependences back in at the end.
+
+Now imagine we want to find numerical values for $f(t)$ where we know
+$f(0)=f_0$, some value, and
 \begin{equation}
 \frac{df}{dt}=G(f)
 \end{equation}
 Imagine further that we can't solve the equation analytically, so we
 resort to solving it approximately on the computer. This might be
-necessary because the equation is too hard to solve, or, in the case of the equation
+necessary because the equation is too hard to solve, or, in the case
+of the equation
 \begin{equation}
 \tau\frac{df}{dt}=g(t)-f(t)
 \end{equation}
@@ -151,8 +160,8 @@ it might be that we don't know $g(t)$ analytically.
 The normal approach would be to discretize time and to work out the
 solution approximately for each time step in turn, depending on the
 previous time step. In other words, say we choose $\delta t$, a small
-value, as the time step then we would work out $y(\delta t)$, then use
-that to work out $y(2\delta t)$ and so on.
+value, as the time step then we would work out $f(\delta t)$, then use
+that to work out $f(2\delta t)$ and so on.
 
 Let us use the notation $f_n=f(n\delta t)$ and consider how we might
 get a computer to work out $f_{n+1}$ approximately if $f_n$ is already
@@ -207,7 +216,7 @@ k_2=G(f_n+\delta t f_1/2)=G(f_n)+\left.\frac{dG}{df}\right|_{f=f_n}\delta t\frac
 \end{equation}
 Substituting back for $k_1$ this gives
 \begin{equation}
-k_2=G(f_n)+\frac{1}{2}\left.\frac{dG}{dg}\right|_{g=g_n}\left.\frac{dg}{dt}\right|_{t=t_n}\delta t+\ldots
+k_2=G(f_n)+\frac{1}{2}\left.\frac{dG}{df}\right|_{g=g_n}\left.\frac{df}{dt}\right|_{t=t_n}\delta t+\ldots
 \end{equation}
 Using the chain rule
 \begin{equation}
@@ -250,9 +259,9 @@ includes a dependence on $t$ so, writing $t_n=n\delta t$
 Now
 \begin{eqnarray}
 k_1&=&G(t_n,f_n)\cr
-k_2&=&G\left(t_n+\frac{1}{2}\delta,f_n+\frac{1}{2}\delta tk_1\right)\cr 
-k_3&=&G\left(t_n+\frac{1}{2}\delta,f_n+\frac{1}{2}\delta tk_2\right)\cr 
-k_4&=&G\left(t_n+\delta,y_n+\delta tk_2\right) 
+k_2&=&G\left(t_n+\frac{1}{2}\delta t,f_n+\frac{1}{2}\delta tk_1\right)\cr 
+k_3&=&G\left(t_n+\frac{1}{2}\delta t,f_n+\frac{1}{2}\delta tk_2\right)\cr 
+k_4&=&G\left(t_n+\delta t,y_n+\delta tk_2\right) 
 \end{eqnarray}
 and 
 \begin{equation}

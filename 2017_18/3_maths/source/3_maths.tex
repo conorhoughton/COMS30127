@@ -1,25 +1,53 @@
 \documentclass{article}
 \usepackage[utf8]{inputenc}
+\usepackage{graphicx}
 \begin{document}
 \section*{A first order differential equation}
-Many of the differential equations we come across in neuroscience are inhomogeneous first order differential equations
+Many of the differential equations we come across in neuroscience are
+inhomogeneous first order differential equations
 \begin{equation}
 \tau\frac{df}{dt}=g(t)-f(t)
 \end{equation}
-where $f(t)$ is some function of $t$ we are interested in and $g(t)$ is some outside \textsl{driving function} and $\tau$ is a constant. These differential equations can be solved, or, at least the solution can be written as an integral. The solution uses an \textsl{integrating factor}: that is, 
-and multiply across by
+where $f(t)$ is some function of $t$ we are interested, $g(t)$ is some
+outside \textsl{driving function} and $\tau$ is a constant. In one
+example we will examine is the integrate and fire equation:
+\begin{equation}
+\tau_m\frac{dV}{dt}=E_l-V(t)+g_lI(t)
+\end{equation}
+where $V(t)$ is the voltage inside a neuron, and the driving function
+is made up of two parts $E_l$, the so called reversal potential and
+$g_lI(t)$ which represents current coming in to the cell, for example,
+through an electrode if the cell being modelled is being experimented
+on, or because of signals from other neurons. Another example is the
+gating equation which represents the opening and closing of
+ino-channels, little gates in the membrane of the cells and a third
+example is the equation for synaptic conductance. In each of these
+examples the underlying equation is the same, or nearly the same, and
+so we will look at it now in the abstract without considering the
+application.
+
+
+These are called first order linear differential equations, first
+order because the highest derivative is $df/dt$, there is no
+$d^2f/dt^2$ term for example, and linear because there are no
+non-linear $f$ terms, no $f^2$ or anything like that. First order
+linear differential equations can be solved, or, at least the solution
+can be written as an integral. The solution uses an
+\textsl{integrating factor}: the trick of simplifying the equation by
+multiply across by
 \begin{equation}
 \lambda=e^{-t/\tau}
 \end{equation}
-to give
+This gives
 \begin{equation}
 \tau e^{t/\tau}\frac{df}{dt}+e^{t/\tau}f=e^{t/\tau}g(t)
 \end{equation}
-The trick, now, is that the two terms on the right hand side can be rewritten in product form
+The clever bit, now, is that the two terms on the right hand side can
+be rewritten in product form
 \begin{equation}
 \tau \frac{d}{dt}\left(e^{t/\tau}f\right)=e^{t/\tau}g(t)
 \end{equation}
-Now, we integrate both sides
+We integrate both sides
 \begin{equation}
 \tau e^{t/\tau}f(t)=\int_0^t e^{t'/\tau} g(t')dt'+A
 \end{equation}
@@ -27,7 +55,8 @@ where $A$ is some integration constant. Setting $t=0$ shows that $A=\tau f(0)$ a
 \begin{equation}
 f(t)=e^{-t/\tau}\left[\frac{1}{\tau}\int_0^t e^{t'/\tau} g(t')dt'+f(0)\right]
 \end{equation}
-Hence, $f(t)$ is written as an integral, if we can do the integral we have solved the equation.
+Hence, $f(t)$ is written as an integral, if we can do the integral we
+have solved the equation.
 
 The easiest case is obviously $g(t)=\bar{g}$ a constant:
 \begin{equation}
@@ -41,7 +70,20 @@ It is easy to understand this solution:
 \begin{equation}
 \tau\frac{df}{dt}=\bar{g}-f(t)
 \end{equation}
-has $df/dt=0$ only if $f(t)=\bar{g}$ furthermore if $f(t)>\bar{g}$ then $df/dt<0$ and $f(t)$ decreases towards $\bar{g}$; if $f(t)>\bar{g}$  $df/dt>0$ then $f(t)$ increases. We can see in the solution that $f(t)$ decays exponentially towards $\bar{g}$ and it does so with a time scale that depends on $\tau$.
+has $df/dt=0$ only if $f(t)=\bar{g}$ furthermore if $f(t)>\bar{g}$
+then $df/dt<0$ and $f(t)$ decreases towards $\bar{g}$; if
+$f(t)>\bar{g}$ $df/dt>0$ then $f(t)$ increases. We can see in the
+solution that $f(t)$ decays exponentially towards $\bar{g}$ and it
+does so with a time scale that depends on $\tau$. An example is shown in Fig.~\ref{exp_decay}.
+
+\begin{figure}[tb]
+\begin{center}
+\include{exp_decay}
+\end{center}
+\caption{Two examples of $f(t)$ decaying towards $\bar{g}$. Here
+  $\bar{g}=1$ and $\tau=10$; in the top curve $f(0)=2.5$ whereas in
+  the other $f(0)=0.5$. \label{exp_decay}}
+\end{figure}
 
 What happens if $g(t)$ isn't constant; well some of the same logic applies, the sign of $df/dt$ means that the solution is trying to get to $g(t)$ but the difference is now that $g(t)$ might change before it gets there. Actually looking at 
 \begin{equation}
@@ -55,7 +97,19 @@ and do a change of variable $t'=t-s$ so
 \begin{equation}
 T(t)=\frac{1}{\tau}\int_0^t e^{-s/\tau} g(t-s)ds
 \end{equation}
-then the role of the integral is to smooth out $g(t)$ a bit by averaging it over its past with a exponential window. Imagine that $g(t)$ varies slowly compared to the time scale $\tau$, so by the time $g(t-s)$ changes much compared to $g(t)$ then $\exp(-s/\tau)$ is more-or-less zero, then
+then the role of the integral is to filter or smooth out $g(t)$ by
+averaging it over its past with a exponential window. This is illustrated in Fig.~\ref{filtering}.
+
+\begin{figure}[tb]
+\begin{center}
+\include{filtering}
+\end{center}
+\caption{This shows how the response $f(t)$ filters the input $g(t)$; the differntial equation has $\tau=3$ and an input $g(t)$ which varies as shown above; the coded used to calculate $f(t)$ is \texttt{filtered\_input.py}. \label{filtering}}
+\end{figure}
+
+
+
+ Imagine that $g(t)$ varies slowly compared to the time scale $\tau$, so by the time $g(t-s)$ changes much compared to $g(t)$ then $\exp(-s/\tau)$ is more-or-less zero, then
 \begin{equation}
 T(t)\approx\frac{1}{\tau}g(t)\int_0^t e^{-s/\tau}ds=g(t)\left(1-e^{-t/\tau}\right)
 \end{equation}
@@ -71,10 +125,13 @@ Differential equations can be coupled; here is an example of a nearly homogeneou
 \tau_f \frac{df}{dt}&=&\bar{f}-f-w\\
 \tau_w \frac{dw}{dt}&=&\bar{w}-w
 \end{eqnarray}
-There are lots of ways to solve this equation; one approach is to rewrite it as a matrix equation and find the eigenvectors, another is to convert it into a second  order equation and solve that; the first way is more general but the second is quicker. Let's start by making the equation homogeneous and going from there, so
-let
+There are lots of ways to solve this equation; one approach is to
+rewrite it as a matrix equation and find the eigenvectors, another is
+to convert it into a second order equation and solve that; the first
+way is more general but the second is quicker. Let's start by making
+the equation homogeneous and going from there, so let
 \begin{eqnarray}
-f'&=&f-\bar{f}\\
+f'&=&f-\bar{f}-\bar{w}\\
 w'&=&w-\bar{w}
 \end{eqnarray}
 giving
@@ -82,22 +139,35 @@ giving
 \tau_f \frac{df'}{dt}&=&-f'-w'\\
 \tau_w \frac{dw'}{dt}&=&-w'
 \end{eqnarray}
+Actually having the prime on $f$ and $w$ gets annoying so we'll drop the prime for convenience.
+\begin{eqnarray}
+\tau_f \frac{df}{dt}&=&-f-w\\
+\tau_w \frac{dw}{dt}&=&-w
+\end{eqnarray}
+
 Now, differenciate the first equation to get
 \begin{equation}
-\tau_f \frac{d^2f'}{dt^2}=-\frac{df}{dt}-\frac{dw'}{dt}
+\tau_f \frac{d^2f}{dt^2}=-\frac{df}{dt}-\frac{dw}{dt}
 \end{equation}
-This means
-\begin{eqnarray}
-w'&=&-f'-\tau_f \frac{df'}{dt}\\
-\frac{dw'}{dt}&=&-\tau_f \frac{d^2f'}{dt^2}-\frac{df}{dt}
-\end{eqnarray}
-so substituting all this into the equation for $w'$ gives
+Since 
 \begin{equation}
-\tau_w\tau_f \frac{d^2f'}{dt^2}+\tau_w\frac{df}{dt}=\tau_f\frac{df'}{dt}-f'
+\frac{dw}{dt}=-\frac{1}{\tau_w}w
 \end{equation}
-or
+we can substitute back in for $w$:
 \begin{equation}
-\tau_w\tau_f \frac{d^2f'}{dt^2}+(\tau_w+\tau_f)\frac{df'}{dt}+f'=0
+\tau_f \frac{d^2f}{dt^2}=-\frac{df}{dt}+\frac{1}{\tau_w}w
+\end{equation}
+From the original $df/dt$ equation we have
+\begin{equation}
+w=-f-\tau_f \frac{df}{dt}
+\end{equation}
+and using this to get rid of the $w$ we have
+\begin{equation}
+\tau_f \frac{d^2f}{dt^2}=-\frac{df}{dt}-\frac{1}{\tau_w}f-\frac{\tau_f}{\tau_w}\frac{df}{dt}
+\end{equation}
+Finally, multiplying across by $\tau_w$ and fiddling around a bit we have
+\begin{equation}
+\tau_w\tau_f \frac{d^2f}{dt^2}+(\tau_w+\tau_f)\frac{df}{dt}+f=0
 \end{equation}
 
 This second order equation is solved by ansatz, that is by guessing; we guess

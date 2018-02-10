@@ -33,6 +33,7 @@ t_final=3.75
 f_rk=0.5
 f_euler=0.5
 
+#note how functions are just objects
 this_g=example_g
 
 while t<=t_final:

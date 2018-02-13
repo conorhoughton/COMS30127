@@ -17,7 +17,7 @@ solution of differential equations; two methods are considered, the
 Euler method and the Runge Kutta method. These are the most
 straight-forward way to solve differential equations on a computer,
 there are other methods that are commonly used in neuroscience, like
-backwards Runge Kutte and adaptive timestep methods, but these are
+backwards Runge Kutta and adaptive timestep methods, but these are
 easy enough to understand in the future once you know about Euler and
 Runge Kutta.
 
@@ -141,7 +141,7 @@ with $G(f)=-f/\tau$ or
 with $G(t,f)=(g-f)/\tau$. In fact, for most of this discussion we will
 restrict ourselves to the case where $G$ doesn't depend on $t$ except
 through $f$, this case is a small bit simpler, we'll put the
-possibility of other $t$ dependences back in at the end.
+possibility of other $t$ dependencies back in at the end.
 
 Now imagine we want to find numerical values for $f(t)$ where we know
 $f(0)=f_0$, some value, and
@@ -192,7 +192,7 @@ This approximation is known as the \textsl{Euler method}. A simple example is pl
 \subsection*{The Runge-Kutta method}
 
 The Runge-Kutta method uses the Taylor expansion in a clever way to
-find a better approximation than the Euler mdthod. It is a bit
+find a better approximation than the Euler method. It is a bit
 convoluted, so there is a lot of notation, but it does give a very
 useful numerical algorithm.
 
@@ -235,7 +235,7 @@ and from the formula for $k_1$ and $k_2$ we see that this can be written as
 y_{n+1}=y_n+k_2\delta t
 \end{equation}
 This means that the calculation of $y_{n+1}$ takes into account
-more of the Taylor expansion that the Euler method, it includes the
+more of the Taylor expansion than the Euler method, it includes the
 $\delta t^2$ part and so the errors will come in at $\delta t^3$.
 This is the \textsl{second order Runge Kutta method}, it is called
 second order because it includes the first and second order terms in

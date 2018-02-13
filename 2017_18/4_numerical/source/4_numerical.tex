@@ -24,7 +24,7 @@ Runge Kutta.
 \subsection*{The Taylor series}
 
 As an introduction it is often useful to use a series description of
-functions, it can help with numerical calculations of the values and
+functions. This can help with numerical calculations of the values and
 it can be useful in studying properties of the function. Here, it will
 be used to work out how to efficiently calculate the solutions to
 differential equations. The Taylor series is one commonly applicable
@@ -138,7 +138,7 @@ with $G(f)=-f/\tau$ or
 \begin{equation}
 \frac{df}{dt}=\frac{1}{\tau}[g(t)-f]
 \end{equation}
-with $G(t,f)=(g-f)/\tau$. If fact, for most of this discussion we will
+with $G(t,f)=(g-f)/\tau$. In fact, for most of this discussion we will
 restrict ourselves to the case where $G$ doesn't depend on $t$ except
 through $f$, this case is a small bit simpler, we'll put the
 possibility of other $t$ dependences back in at the end.
@@ -234,11 +234,11 @@ and from the formula for $k_1$ and $k_2$ we see that this can be written as
 \begin{equation}
 y_{n+1}=y_n+k_2\delta t
 \end{equation}
-This means that the calculation of $y_{n+1}$ takes into account of
+This means that the calculation of $y_{n+1}$ takes into account
 more of the Taylor expansion that the Euler method, it includes the
 $\delta t^2$ part and so the errors will come in at $\delta t^3$.
 This is the \textsl{second order Runge Kutta method}, it is called
-second order because it include the first and second order terms in
+second order because it includes the first and second order terms in
 the Taylor expansion, the Euler method is like a first order Runge
 Kutta method.
 

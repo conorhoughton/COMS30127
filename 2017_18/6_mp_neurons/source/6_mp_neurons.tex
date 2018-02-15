@@ -1,0 +1,152 @@
+\documentclass[12pt]{article}
+\usepackage{amsfonts, epsfig}
+
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\lfoot{\texttt{github.com/conorhoughton/COMS30127}}
+\lhead{Computation Neuroscience - 6\_mp\_neurons (d) - Conor}
+\rhead{\thepage}
+\cfoot{}
+\begin{document}
+
+\section*{McCulloch-Pitts neurons} 
+
+The McCulloch Pitts neuron model, or Threshold Logic Unit, was
+introducted in 1943 by Warren McCulloch and Walter Pitts as a
+computational model of a neuronal network. There thinking was that
+neurons are connected to each other with connections of variable
+strength; in the soma the inputs from other neurons are added up and
+they determine the activity of the neuron in a non-linear way; they
+also knew that neurons tend to ignore input up to some threshold value
+before responding strongly.
+
+Artificial neurons, of the sort used in artificial intelligance, are
+described by a single dynamical variable, $x_i$ say for a neuron
+labelled $i$; the value of $x_i$ is determined by the weighted input
+from the other neurons:
+\begin{equation}
+x_i=\phi\left(\sum_j w_{ij} x_j-\theta_i\right)
+\end{equation}
+$\phi$ is an activation function, $\theta$ is a threshold and the
+$w_{ij}$ are the connection strengths weighting the inputs from the
+other neurons. The McCulloch Pitts neuron was the first example of an
+artificial neuron and had a step function for $\phi$:
+\begin{equation}
+x_i=\left\{\begin{array}{ll}1&\sum_j w_{ij} x_j>\theta_i\\0&\mbox{otherwise}\end{array}\right.
+\end{equation}
+Thus, the neuron has two states, it is in the on state, $x_i=1$ if the
+weighted input exceeds a threshold $\theta_i$ and an off state,
+$x_i=-1$ if it doesn't; the picture you might have of how this
+corresponds to the brain is that \lq{}on\rq{} corresponds to rapid
+spiking and \lq{}off\rq{} to spiking at a much lower rate. The
+$w_{ij}$, the connection strengths, are like the synapse strengths, a
+positive $w_{ij}$ is an excitatory synapse and negative, an
+inhibitory; a given neurons have have both negative and positive
+out-going synapses, that is there is no restriction that says $w_{ij}$
+always has the same sign for a given $j$, this is different from real
+neurons where all the outgoing synapses from a given neuron are either
+excitatory or inhibitory.
+
+While it should be clear that this network has some of the properties,
+very abstracted, of a neuronal network, it might not be so clear what
+can be done with the neurons. In fact, there are two major
+applications of McCulloch-Pitts neurons: the perceptron and the
+Hopfield network. Of course, the more general artificial neuron is the
+node in a neural network, but here we look specifically at the
+McCulloch-Pitts neurons.
+
+\subsubsection*{Perceptrons}
+
+The perceptron is a machine that does supervised learning, that is, it
+makes guesses, is told whether or not its guess is correct, and then
+makes another guess. They were first discovered in 1957 by Frank
+Rosenblatt and introduced to the world with great fanfare, it was
+claimed that they would solve problems from object recognition to
+consciousness: if you consider the perceptron as the forebearer of the
+deep learning network, then perhaps we don't know if these claims will
+be fulfilled, but we do know that the original perceptron proved quite
+limited in artificial intelligence. It does, however, appear to
+describe some neuronal processes, if we ignore the implementation
+details.
+
+Anyway, a percepton is made of two layers of neurons, an input layer
+and an output layer of McCulloch-Pitts neurons. For simplicity lets
+assume the output layer
+has a single neuron. Now, if the input is given by
+$(x_1,x_2,\ldots,x_n)$ the output, $y$, is
+\begin{equation}
+y=\phi(r)
+\end{equation}
+where
+\begin{equation}
+r=\sum_j w_j x_j-\theta
+\end{equation}
+and $\phi$ here is the simple Heaviside like activitation function
+described above. Now for a given input, if the actual value of the
+output should be $d$ the error is $d-y$. The perceptron learning rule
+is to change the $w_j$ weight by an amount proportional to the error
+and how much $x_j$ was \lq{}to blame\rq{} for the error:
+\begin{equation}
+\delta w_j=\eta (d-y) x_j
+\end{equation}
+and
+\begin{equation}
+\delta \theta =  \eta (d-y)
+\end{equation}
+where $\eta$ is some small learning rate and
+\begin{equation}
+w_j\rightarrow w_j+\delta w_j
+\end{equation}
+
+You can see how this might work, if $x_j$ was positive and $y$ was too
+big, this would make $w_j$ smaller so in future $y$ would be smaller
+when it had the same input. SOMETHING HERE ON ERROR MINIMIZATION.
+
+\subsection*{Hopfield network}
+
+In contrast to a perceptron a Hopfield network is a recurrently
+connected network; it is intended to perform pattern completion and
+was proposed by John Hopfield in 1982, though other people had had the
+idea before in different contexts. The idea behind a Hopfield network
+is that you evolve the network according to the McCulloch-Pitts
+relation, so, in the synchronous update version, from one iteration to
+the next
+\begin{equation}
+\hat{x}_i=\phi\left(\sum_j w_{ij} x_j\right)
+\end{equation}
+and then $x_i\rightarrow \hat{x}$; that is all the nodes update using
+the old values. In the most common version of a Hopfield network, the $w_{ij}$ are symmetric, that is
+\begin{equation}
+w_{ij}=w_{ji}
+\end{equation}
+The threshold values $\theta_i$ have been set to zero, this is
+something you can do in a Hopfield network. In the asynchronous
+scheme, the you update the nodes one-by-one, for example, after
+choosing a random node.
+
+Now, there is an \lq{}energy\rq{} associated with a Hopfield network:
+\begin{equation}
+E=-\frac{1}{2}\sum_{ij} w_{ij}x_ix_j
+\end{equation}
+and you can show than if you update a node you will reduce the energy;
+roughly speaking if you update a node $x_i$ then it is more likely to
+have the same sign as a connected node $x_j$ if the connection between
+them is large and positive and an opposite sign if the connect is
+large and negative. It can be shown that update the nodes will evolve
+the system to a local minimum.
+
+Now the question is how to create the local minima? Two versions:
+\begin{equation}
+w_{ij}=\frac{1}{N}\sum{\mbox{patterns}} x_ix_j
+\end{equation}
+or 
+\begin{equation}
+\delta w_{ij}=\eta (x_i-a)(x_j-a)
+\end{equation}
+
+
+
+
+\end{document}
+

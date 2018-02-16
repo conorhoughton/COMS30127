@@ -55,7 +55,7 @@ three=[1,-1,1,1,-1,1,1,1,1,-1,-1]
 one=[-1,-1,1,-1,-1,1,-1,1,-1,-1,-1]
 
 seven_segment(three)
-seven_segment(eight)
+seven_segment(six)
 seven_segment(one)
 
 

@@ -10,7 +10,7 @@
 \cfoot{}
 \begin{document}
 
-\section*{Coursework 1 - DRAFT}
+\section*{Coursework 1}
 
 This coursework relates to the Hopfield network. In the \texttt{auto}
 folder you will find programmes \texttt{seven\_segment.jl} and
@@ -25,17 +25,30 @@ The goal of this coursework is to extend one or other of these
 programmes to include a Hopfield network to store these three
 patterns using the formula for $w_{ij}$ when $i\not=j$
 \begin{equation}
-w_{ij}=\frac{1}{N}\sum_i x_i^a x_j^a
+w_{ij}=\frac{1}{N}\sum_a x_i^a x_j^a
 \end{equation}
-where $a$ labels patterns and $N$ is the number of
+where $a$ labels patterns, $x_i^a$ is the activiation of the $i$th
+node in the $a$th pattern and $N$ is the number of
 patterns. $w_{ii}=0$.
 
 In the code there are also two test patterns, your programme should
 update these synchronously until convergence and print out the
 patterns at each iteration. 
 
+
 This coursework is intended to check you understand Hopfield networks,
-you are not being asked to do anything over elaborate beyond that.
+you are not being asked to do anything over elaborate beyond that. In
+summary you should:
+\begin{itemize}
+\item Create a weight matrix of $w_{ij}$s.
+\item Fix the weight values to store the three patterns.
+\item Write a function to evolve the network according to the
+  McCulloch-Pitts formula; this should be done synchronously so all the nodes are updated at each timestep.
+\item For each of the two test patterns, evolve the patterns until they stop changing, printing the pattern at each step.
+\end{itemize}
+
+
+
 
 \subsection*{COMSM20127}
 
@@ -48,7 +61,11 @@ patterns and any patterns formed as the patterns are updated.
 
 \subsection*{Submission instructions}
 
-Upload your course on safe; if your programme does what it is supposed
-to do you will get full marks.
+Upload your programme on safe; if your programme does what it is
+supposed to do you will get full marks. The reason there are two
+programmes, \texttt{seven\_segments.py} and
+\texttt{seven\_segments.jl} is to give you a choice of languages, it
+is only expected you will submit one piece of code in one of the two
+languages.
 
 \end{document}

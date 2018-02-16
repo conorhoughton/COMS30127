@@ -43,7 +43,7 @@ can be written as an integral. The solution uses an
 \textsl{integrating factor}: the trick of simplifying the equation by
 multipling across by
 \begin{equation}
-\lambda=e^{-t/\tau}
+\lambda=e^{t/\tau}
 \end{equation}
 This gives
 \begin{equation}
@@ -67,7 +67,7 @@ have solved the equation.
 
 The easiest case is obviously $g(t)=\bar{g}$ a constant:
 \begin{equation}
-f(t)= \bar{g} \left[\frac{1}{\tau}e^{-t/\tau}\int_0^t e^{t'/\tau}dt'+f(0)\right]=\bar{g}\left(1-e^{-t/\tau}\right) + f(0)e^{-t/\tau}
+f(t)= \bar{g} \left[\frac{1}{\tau}e^{-t/\tau}\int_0^t e^{t'/\tau}dt'\right]+f(0)e^{-t/\tau}=\bar{g}\left(1-e^{-t/\tau}\right) + f(0)e^{-t/\tau}
 \end{equation}
 or
 \begin{equation}

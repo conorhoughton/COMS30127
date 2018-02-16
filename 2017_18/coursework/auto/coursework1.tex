@@ -1,0 +1,54 @@
+\documentclass[12pt]{article}
+\usepackage{amsfonts, epsfig}
+
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\lfoot{\texttt{github.com/conorhoughton/COMS30127}}
+\lhead{Computation Neuroscience - Coursework 1 - auto-associative networks}
+\rhead{\thepage}
+\cfoot{}
+\begin{document}
+
+\section*{Coursework 1 - DRAFT}
+
+This coursework relates to the Hopfield network. In the \texttt{auto}
+folder you will find programmes \texttt{seven\_segment.jl} and
+\texttt{seven\_segment.py}. These contain a function for converting an
+11-component vector of ones and -1's into an old-fashioned
+seven-segment digit\footnote{\texttt{https://en.wikipedia.org/wiki/Seven-segment\_display}} and a number: the first seven digits correspond to
+the seven-segment display and the remaining four code for the number
+in a sort of binary where the zeros have been replaced with -1. It
+also contains three patterns: one, three and eight.
+
+The goal of this coursework is to extend one or other of these
+programmes to include a Hopfield network to store these three
+patterns using the formula for $w_{ij}$ when $i\not=j$
+\begin{equation}
+w_{ij}=\frac{1}{N}\sum_i x_i^a x_j^a
+\end{equation}
+where $a$ labels patterns and $N$ is the number of
+patterns. $w_{ii}=0$.
+
+In the code there are also two test patterns, your programme should
+update these synchronously until convergence and print out the
+patterns at each iteration. 
+
+This coursework is intended to check you understand Hopfield networks,
+you are not being asked to do anything over elaborate beyond that.
+
+\subsection*{COMSM20127}
+
+Add to the above a function to calculate the energy of a configuration
+\begin{equation}
+E=-\frac{1}{2}\sum_{ij} x_i w_{ij} x_j
+\end{equation}
+and print out the energy of the three learned patterns, of the test
+patterns and any patterns formed as the patterns are updated.
+
+\subsection*{Submission instructions}
+
+Upload your course on safe; if your programme does what it is supposed
+to do you will get full marks.
+
+\end{document}

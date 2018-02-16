@@ -14,12 +14,13 @@
 
 The McCulloch Pitts neuron model, or Threshold Logic Unit, was
 introducted in 1943 by Warren McCulloch and Walter Pitts as a
-computational model of a neuronal network. There thinking was that
-neurons are connected to each other with connections of variable
+computational model of a neuronal network. Their thinking was that
+neurons are joined to each other with connections of variable
 strength; in the soma the inputs from other neurons are added up and
 they determine the activity of the neuron in a non-linear way; they
 also knew that neurons tend to ignore input up to some threshold value
-before responding strongly.
+before responding strongly. These properties they tried to include in
+their model neurons.
 
 Artificial neurons, of the sort used in artificial intelligance, are
 described by a single dynamical variable, $x_i$ say for a neuron
@@ -50,11 +51,17 @@ excitatory or inhibitory.
 
 While it should be clear that this network has some of the properties,
 very abstracted, of a neuronal network, it might not be so clear what
-can be done with the neurons. In fact, there are two major
-applications of McCulloch-Pitts neurons: the perceptron and the
-Hopfield network. Of course, the more general artificial neuron is the
-node in a neural network, but here we look specifically at the
-McCulloch-Pitts neurons.
+can be done with the neurons. When they were working, at the dawn of
+the age of electronic computers, McCulloch and Pitts believed that
+their neurons might form the natural unit in computer circuits, in
+other words, they thought they might perform the role actually played
+by logical circuits. In fact, it is still not clear if the artificial
+neuron is or isn't the natural unit of computation in silicon since
+they are a component in, for example, deep learning networks. In fact,
+there are two major applications of McCulloch-Pitts neurons: the
+perceptron and the Hopfield network; these two applications add a rule
+for changing the connect strength to the original McCulloch-Pitts
+neuron.
 
 \subsubsection*{Perceptrons}
 
@@ -74,7 +81,7 @@ Anyway, a percepton is made of two layers of neurons, an input layer
 and an output layer of McCulloch-Pitts neurons. For simplicity lets
 assume the output layer
 has a single neuron. Now, if the input is given by
-$(x_1,x_2,\ldots,x_n)$ the output, $y$, is
+$\textbf{x}=(x_1,x_2,\ldots,x_n)$ the output, $y$, is
 \begin{equation}
 y=\phi(r)
 \end{equation}
@@ -95,13 +102,23 @@ and
 \delta \theta =  \eta (d-y)
 \end{equation}
 where $\eta$ is some small learning rate and
-\begin{equation}
-w_j\rightarrow w_j+\delta w_j
+\begin{eqnarray}
+w_j&\rightarrow& w_j+\delta w_j\cr
+\theta&\rightarrow& \theta+\delta\theta
 \end{equation}
-
 You can see how this might work, if $x_j$ was positive and $y$ was too
 big, this would make $w_j$ smaller so in future $y$ would be smaller
-when it had the same input. SOMETHING HERE ON ERROR MINIMIZATION.
+when it had the same input. 
+
+In fact, the perceptron can only solve problems with a linear
+classifier: if we think of the $x_i$'s as parameterizing an
+$n$-dimensional space then $\sum_iw_ix_i=\theta$ is a hyperplane in
+that space, so a pattern $\textbf{x}$ is classified one way or the
+other according to which side of that hyperplane it lies. Thus, the
+perceptron works only if there is a hyperplane dividing the data into
+two, with one class of data on one side and one on the other. In fact,
+if the data is linearly seperable the perceptron is guaranteed to
+converge to a solution. However, it is not the optimial solution an 
 
 \subsection*{Hopfield network}
 

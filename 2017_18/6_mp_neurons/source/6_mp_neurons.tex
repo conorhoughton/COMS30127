@@ -105,7 +105,7 @@ where $\eta$ is some small learning rate and
 \begin{eqnarray}
 w_j&\rightarrow& w_j+\delta w_j\cr
 \theta&\rightarrow& \theta+\delta\theta
-\end{equation}
+\end{eqnarray}
 You can see how this might work, if $x_j$ was positive and $y$ was too
 big, this would make $w_j$ smaller so in future $y$ would be smaller
 when it had the same input. 
@@ -118,7 +118,44 @@ other according to which side of that hyperplane it lies. Thus, the
 perceptron works only if there is a hyperplane dividing the data into
 two, with one class of data on one side and one on the other. In fact,
 if the data is linearly seperable the perceptron is guaranteed to
-converge to a solution. However, it is not the optimial solution an 
+converge to a solution which manages this seperation. Now, there will
+not be a unique hyper-plane seperating the two classes and the
+perceptron won't, typically, find what you might regard as the
+\lq{}best\rq{} hyperplane, where by best you might mean the line that
+is, in some sense, as far from the individual data points as possible;
+finding that best hyperplane is the idea behind the support vector
+machine.
+
+The perceptron learning rule can be motivated by thinking about error
+minimization. Consider an error function
+\begin{equation}
+E=\langle(d^a-y^a)^2\rangle_a
+\end{equation}
+If $a$ labels lots of input, $\textbf{x}^a$, desired output $d^a$
+pairs, with $y^a$ the actual output; the angle brackets are an average
+over these pairs. Now consider the gradient of $E$ with $w_{i}$:
+\begin{equation}
+\frac{\partial E}{\partial w_{i}}=2\left\langle (d^a-y_a) \frac{\partial y^a}{\partial w_{i}}\right\rangle
+\end{equation}
+Now if we ignore for the moment the fact that the activiation function for the McCulloch-Pitt neuron isn't differentiable and write
+\begin{equation}
+y^=\phi(r)
+\end{equation}
+with 
+\begin{equation}
+r=\sum_{i}w_i x_i-\theta
+\end{equation}
+we have
+\begin{equation}
+\frac{dy^a}{dw_i}=\frac{d\phi}{dr}\frac{\partial r}{\partial w_i}
+\end{equation}
+we get
+\begin{equation}
+\frac{\partial E}{\partial w_{i}}=2\left\langle (d^a-y^a)x^a_i (\mbox{stuff involving the differential of }\phi)\right\rangle
+\end{equation}
+
+
+
 
 \subsection*{Hopfield network}
 

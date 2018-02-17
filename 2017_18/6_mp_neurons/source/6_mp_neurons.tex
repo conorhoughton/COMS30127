@@ -395,9 +395,9 @@ of supervised learning.
 
 \subsection*{Hopfield network}
 
-In contrast to a perceptron a Hopfield network is a recurrently
+In contrast to a perceptron, a Hopfield network is a recurrently
 connected network; it is intended to perform pattern completion and
-was proposed by John Hopfield in 1982, though other people had had the
+was proposed by John Hopfield in 1982 \cite{Hopfield1982}, though other people had had the
 idea before in different contexts. The idea behind a Hopfield network
 is that you evolve the network according to the McCulloch-Pitts
 relation, so, in the synchronous update version, from one iteration to
@@ -428,13 +428,14 @@ the system to a local minimum.
 
 Now the question is how to create the local minima? Two versions:
 \begin{equation}
-w_{ij}=\frac{1}{N}\sum{\mbox{patterns}} x_ix_j
+w_{ij}=\frac{1}{N}\sum_a x^a_ix^a_j
 \end{equation}
 or 
 \begin{equation}
-\delta w_{ij}=\eta (x_i-a)(x_j-a)
+\delta w_{ij}=\eta (x_i-\alpha)(x_j-\alpha)
 \end{equation}
-
+where $N$ is the number of patterns to be stored, and $a$ indexes the
+patterns.
 
 
 \begin{thebibliography}{10}
@@ -454,11 +455,15 @@ Albus, JS. (1971) A theory of cerebellar function.
 
 \bibitem{GaoEtAl1996a}
 Gao J-H, Parsons LM, Bower JM, Xiong J, Li J and Fox PT (1996) Cerebellum implicated in sensory acquisition and discrimination rather than motor control.
-
 \newblock Science 272: 545--7. 
+
 \bibitem{Marr1969a}
 Marr, D (1969) A theory of cerebellar cortex.
 \newblock Journal of Physiology 202: 437--70.
+
+\bibitem{Hopfield1982}
+Hopfield, JJ. (1982) Neural networks and physical systems with emergent collective computational abilities.
+\newblock Proceedings of the National Academy of Sciences of the USA, 79:2554--2558.
 
 
 \end{thebibliography}

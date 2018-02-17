@@ -1,0 +1,8 @@
+
+seven_segments.py is python2.7
+
+seven_segments_p3.py is python3 or python 2.7
+
+they differ only in the cast of the map to a list which is needed in python3 but not 2.7. 
+
+You are welcome to use either python.

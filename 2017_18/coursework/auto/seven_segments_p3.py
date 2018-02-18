@@ -61,7 +61,7 @@ seven_segment(one)
 
 print("test1")
 
-test=[1,-1,1,1,-1,1,1,-1,-1,-1,-1]
+test=[1,-1,1,1,-1,1,1,1,1,-1,-1]
 
 seven_segment(test)
 

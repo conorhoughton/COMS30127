@@ -217,13 +217,18 @@ other according to which side of that hyperplane it lies. Thus, the
 perceptron works only if there is a hyperplane dividing the data into
 two, with one class of data on one side and one on the other. In fact,
 if the data is linearly separable the perceptron is guaranteed to
-converge to a solution which manages this separation. Now, there will
-not be a unique hyper-plane separating the two classes and the
-perceptron won't, typically, find what you might regard as the
-\lq{}best\rq{} hyperplane, where by best you might mean the line that
-is, in some sense, as far from the individual data points as possible;
-finding that best hyperplane is the idea behind the support vector
-machine.
+converge to a solution which manages this separation. Now, as
+illustrated in Fig.~\ref{random_points}, there will not be a unique
+hyper-plane separating the two classes and the perceptron won't,
+typically, find what you might regard as the \lq{}best\rq{}
+hyperplane, where by best you might mean the line that is, in some
+sense, as far from the individual data points as possible; finding
+that best hyperplane is the idea behind the support vector machine.
+
+\begin{figure}
+\include{random_points}
+\caption{All of these lines seperate the points into two classes\label{random_points}}
+\end{figure}
 
 The perceptron learning rule can be motivated by thinking about error
 minimization. Consider an error function

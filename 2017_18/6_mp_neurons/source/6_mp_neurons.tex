@@ -213,21 +213,31 @@ In fact, the perceptron can only solve problems with a linear
 classifier: if we think of the $x_i$'s as parametrizing an
 $n$-dimensional space then $\sum_iw_ix_i=\theta$ is a hyperplane in
 that space, so a pattern $\textbf{x}$ is classified one way or the
-other according to which side of that hyperplane it lies. Thus, the
+other according to which side of that hyperplane it lies, see for example Fig.~\ref{fig:linear_classifier}. Thus, the
 perceptron works only if there is a hyperplane dividing the data into
 two, with one class of data on one side and one on the other. In fact,
 if the data is linearly separable the perceptron is guaranteed to
 converge to a solution which manages this separation. Now, as
-illustrated in Fig.~\ref{random_points}, there will not be a unique
+illustrated in Fig.~\ref{fig:random_points}, there will not be a unique
 hyper-plane separating the two classes and the perceptron won't,
 typically, find what you might regard as the \lq{}best\rq{}
 hyperplane, where by best you might mean the line that is, in some
 sense, as far from the individual data points as possible; finding
 that best hyperplane is the idea behind the support vector machine.
 
+
+\begin{figure}
+\include{linear_classifier}
+\caption{Here the shaded region corresponds to $1.1x_1+x_2>0.25$, so
+  if $w_1=1.1$ and $w_2=1$ with $\theta=0.25$ then the corresponding
+  perceptron neuron will be one for all the circle points and -1 for
+  all the square points.\label{fig:linear_classifier}}
+\end{figure}
+
+
 \begin{figure}
 \include{random_points}
-\caption{All of these lines seperate the points into two classes\label{random_points}}
+\caption{All of these lines seperate the points into two classes\label{fig:random_points}}
 \end{figure}
 
 The perceptron learning rule can be motivated by thinking about error

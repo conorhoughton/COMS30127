@@ -515,15 +515,18 @@ One way to think about this is to note that there is an
 \begin{equation}
 E=-\frac{1}{2}\sum_{ij} w_{ij}x_ix_j
 \end{equation}
-and you can show than if you update a node you will reduce the energy;
-roughly speaking if you update a node $x_i$ then it is more likely to
+and you can show than if you update a node you will reduce the energy.
+Roughly speaking if you update a node $x_i$ then it is more likely to
 have the same sign as a connected node $x_j$ if the connection between
-them is large and positive and an opposite sign if the connect is
-large and negative. This means that updating the neurons will tend to
-reduce the energy. In fact, this can be proved and that the system
-will evolve to a local minimum.
+them is large and positive since this means $w_{ij}x_j$ will have a
+big effect on the activation of $x_i$ and visa versa; $x_i$ and $x_j$
+are more likely to have an opposite sign if the connection is large
+and negative. This means that updating the neurons will tend to reduce
+the energy. In fact, this can be proved and that the system will
+evolve to a local minimum.
 
-Now the question is how to create the local minima? Two versions:
+Now the question is how to create the local minima? Here are two
+similar rules to achieve this:
 \begin{equation}
 w_{ij}=\frac{1}{N}\sum_a x^a_ix^a_j
 \end{equation}
@@ -567,12 +570,12 @@ such that A's efficiency, as one of the cells firing B, is increased.
 \end{quote}
 In other words, if one neurons tends to cause another to fire, the
 synapse from the first to the second will get stronger. In artificial
-neural networks the nodes, modelling neurons, often lack spiking
-dynamics and so have a continuous state or rate variable; since
-\textsl{Hebbian plasticity} often plays a role in artificial neural
-networks it is often applied to a rule that strengthens synapses
-between neurons that are active at the same time, that is, the
-explicit causal structure is ignored in favor of
+neurons or rate-based neurons, lack spiking dynamics and instead have
+a continuous state or rate variable; since \textsl{Hebbian plasticity}
+often plays a role in artificial neural networks it is often applied
+to a rule that strengthens synapses between neurons that are active at
+the same time, that is, the explicit causal structure is ignored in
+favor of
 \begin{quote}
 Neurons that fire together wire together.
 \end{quote}
@@ -691,10 +694,10 @@ the connections between these nodes will be strong, so if the network has nodes 
 \node[off,text width=0.35cm,right of = 7](8){8};
 \end{tikzpicture}
 \end{center}
-the value $r_{2}=w_{12}+w_{52}$ will be larger than threshold and the
-subsequent dynamics will switch neuron 2 on. However, in this network,
-if a different initial set of neurons are activated, the activity will
-die away because the $r_i$ will all be sub-threshold.
+the value $r_{2}=w_{12}+w_{52}$ will be larger than the threshold and
+the subsequent dynamics will switch neuron 2 on. However, in this
+network, if a different initial set of neurons are activated, the
+activity will die away because the $r_i$ will all be sub-threshold.
 
 When many patterns are stored it is likely that there will be
 interference between them. This is illustrated in

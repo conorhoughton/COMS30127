@@ -456,9 +456,10 @@ the old values. In the most common version of a Hopfield network, the $w_{ij}$ a
 w_{ij}=w_{ji}
 \end{equation}
 The threshold values $\theta_i$ have been set to zero, this is
-something you can do in a Hopfield network. In the asynchronous
-scheme, the you update the nodes one-by-one, for example, after
-choosing a random node.
+something you can do in a Hopfield network if you want because the
+learning rule doesn't change to threshold. In the asynchronous scheme,
+the you update the nodes one-by-one, for example, after choosing a
+random node.
 
 
 The idea is that this is a model for \textsl{auto-associative}
@@ -585,8 +586,8 @@ $\eta$ is a learning rate. Another version is
 \begin{equation}
 \delta w_{ij}=\eta (x_i-\alpha)(x_j-\alpha)
 \end{equation}
-where $\alpha$ is a threshold, this allows negative changes, when
-$x_i>\alpha$ and $x_j<\alpha$, or visa versa.
+where having $\alpha$ allows negative changes, when $x_i>\alpha$ and
+$x_j<\alpha$, or visa versa.
 
 This plasticity rule clearly matches the on-line Hopfield learning
 rule; in fact, in the Hopfield network $\alpha$ has to be set equal to
@@ -707,7 +708,7 @@ number of patterns that can be stored is $N^2/N=N$ \cite{Amit1992a}.
 
 The capacity is also larger if there is sparseness; one way to think
 of this is to observe the weight decrease between an active and
-inactive connection is $dDelta w_{ij}=-\eta \alpha (1-\alpha)$ so the smaller
+inactive connection is $\delta w_{ij}=-\eta \alpha (1-\alpha)$ so the smaller
 $a$ is the smaller the amount these links are decreased. Links are
 decreased if, in the pattern, one neuron is active and one inactive,
 they are strengthened if both neurons are active, the increase is

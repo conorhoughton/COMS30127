@@ -142,7 +142,7 @@ corresponds to the brain is that \lq{}on\rq{} corresponds to rapid
 spiking and \lq{}off\rq{} to spiking at a much lower rate. The
 $w_{ij}$, the connection strengths, are like the synapse strengths, a
 positive $w_{ij}$ is an excitatory synapse and negative, an
-inhibitory; a given neurons have have both negative and positive
+inhibitory; a given neurons have both negative and positive
 out-going synapses, that is there is no restriction that says $w_{ij}$
 always has the same sign for a given $j$, this is different from real
 neurons where all the outgoing synapses from a given neuron are either
@@ -169,15 +169,15 @@ makes guesses, is told whether or not its guess is correct, and then
 makes another guess. They were first discovered in 1957 by Frank
 Rosenblatt \cite{Rosenblatt1958} and introduced to the world with great fanfare, it was
 claimed that they would solve problems from object recognition to
-consciousness: if you consider the perceptron as the forebearer of the
+consciousness: if you consider the perceptron as the forbearer of the
 deep learning network, then perhaps we don't know if these claims will
 be fulfilled, but we do know that the original perceptron proved quite
 limited in artificial intelligence. It does, however, appear to
 describe some neuronal processes, if we ignore the implementation
 details.
 
-Anyway, a percepton is made of two layers of neurons, an input layer
-and an output layer of McCulloch-Pitts neurons. For simplicity lets
+Anyway, a perceptron is made of two layers of neurons, an input layer
+and an output layer of McCulloch-Pitts neurons. For simplicity let's
 assume the output layer
 has a single neuron. Now, if the input is given by
 $\textbf{x}=(x_1,x_2,\ldots,x_n)$ the output, $y$, is
@@ -188,7 +188,7 @@ where
 \begin{equation}
 r=\sum_j w_j x_j-\theta
 \end{equation}
-and $\phi$ here is the simple Heaviside like activation function
+and $\phi$ here is the simple Heaviside-like activation function
 described above. Now for a given input, if the actual value of the
 output should be $d$ the error is $d-y$. The perceptron learning rule
 is to change the $w_j$ weight by an amount proportional to the error
@@ -237,7 +237,7 @@ that best hyperplane is the idea behind the support vector machine.
 
 \begin{figure}
 \include{random_points}
-\caption{All of these lines seperate the points into two classes\label{fig:random_points}}
+\caption{All of these lines separate the points into two classes\label{fig:random_points}}
 \end{figure}
 
 The perceptron learning rule can be motivated by thinking about error
@@ -251,7 +251,7 @@ over these pairs. Now consider the gradient of $E$ with $w_{i}$:
 \begin{equation}
 \frac{\partial E}{\partial w_{i}}=2\left\langle (d^a-y_a) \frac{\partial y^a}{\partial w_{i}}\right\rangle
 \end{equation}
-Now if we ignore for the moment the fact that the activiation function for the McCulloch-Pitt neuron isn't differentiable and write
+Now if we ignore for the moment the fact that the activation function for the McCulloch-Pitt neuron isn't differentiable and write
 \begin{equation}
 y^=\phi(r)
 \end{equation}
@@ -301,7 +301,7 @@ algorithm can be recognized in neuronal dynamics.
 
 The cerebellum has a number of striking features; it has a more
 stereotypical structure than most brain area and this structure is
-conaerved across species. It also has one of the brain's largest cells,
+conserved across species. It also has one of the brain's largest cells,
 the Purkinje cell, and its most numerous, the granule cell.
 
 \begin{figure}
@@ -326,7 +326,7 @@ contacts with it, see Fig.~\ref{fig:cerebellum}.
 \begin{center}
 \includegraphics[width=11cm]{cerebellum.png}
 \end{center}
-\caption{A cartoon of the cerebellar circuitary. A vertical axon rises
+\caption{A cartoon of the cerebellar circuitry. A vertical axon rises
   from each granule cells, splits once and then extends horizontally
   in two directions making connections with multiple Purkinje
   cells. Each Purkinje cell has its own climbing fiber which winds up
@@ -403,7 +403,7 @@ Fig.~\ref{fig:spikes}.
 \begin{center}
 \includegraphics[width=8.cm]{complex_spike.png}
 \end{center}
-\caption{A complex spike. This drawing shows a simple spikes in black
+\caption{A complex spike. This drawing shows simple spikes in black
   and a complex spike in red. The complex spike is followed by a long
   refractory period during which spiking is not possible. This is a
   sketch, not an actual recording, but a typical time scale would have
@@ -419,7 +419,7 @@ one that exhibits a certain self-consciousness or vigilance is
 required for movement. According to most ideas about cerebellar
 function it is required for the calculation of fine motor signals
 \cite{Albus1971a}, or for predicting the sensory or proprioceptive
-consequences of motor actions \cite{GaoEtAl1996a}; it is believe it
+consequences of motor actions \cite{GaoEtAl1996a}; it is believed it
 encodes forward and backwards models of movement so that it predicts
 the consequences of motor commands, or calculates the motor command
 that will a particular movement.
@@ -519,7 +519,7 @@ and you can show than if you update a node you will reduce the energy.
 Roughly speaking if you update a node $x_i$ then it is more likely to
 have the same sign as a connected node $x_j$ if the connection between
 them is large and positive since this means $w_{ij}x_j$ will have a
-big effect on the activation of $x_i$ and visa versa; $x_i$ and $x_j$
+big effect on the activation of $x_i$ and vice versa; $x_i$ and $x_j$
 are more likely to have an opposite sign if the connection is large
 and negative. This means that updating the neurons will tend to reduce
 the energy. In fact, this can be proved and that the system will
@@ -544,13 +544,13 @@ We will discuss synapses in much more detail later on; synapses are
 the connections from one neuron to another; an \textsl{excitatory
   synapse} means that if the pre-synaptic neuron spikes, it makes the
 post-synaptic neuron more likely to spike, an \textsl{inhibitory
-  synapse} is the opposate, if the pre-synaptic neuron spikes, it
+  synapse} is the opposite, if the pre-synaptic neuron spikes, it
 makes the post-synaptic neuron less likely to spike. Crucially,
 synapses can change their strength, both in the short term and in the
 long term.
 
 Synaptic plasticity usually refers to the long-term changes in synapse
-strength, an long term increase in synaptic strength is called
+strength, a long term increase in synaptic strength is called
 \textsl{long term potentiation} of LTP, a decrease is called
 \textsl{long term depression} or LTD. It is believed that synapses
 respond to their pre- and post-synaptic activity, so that the changes
@@ -590,7 +590,7 @@ $\eta$ is a learning rate. Another version is
 \delta w_{ij}=\eta (x_i-\alpha)(x_j-\alpha)
 \end{equation}
 where having $\alpha$ allows negative changes, when $x_i>\alpha$ and
-$x_j<\alpha$, or visa versa.
+$x_j<\alpha$, or vice versa.
 
 This plasticity rule clearly matches the on-line Hopfield learning
 rule; in fact, in the Hopfield network $\alpha$ has to be set equal to
@@ -727,7 +727,7 @@ where $k$ is constant which has been found to be about $k\approx
 \begin{equation}
 P=c\frac{k}{\alpha}N
 \end{equation}
-if there is missing connections, where $c$ stands for the fraction of pairs that are connected.
+if there are missing connections, where $c$ stands for the fraction of pairs that are connected.
 
 The actual sparseness of the brain needs to balance this advantage,
 the increased capacity, along with a metabolic advantage and more

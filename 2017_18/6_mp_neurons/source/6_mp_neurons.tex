@@ -709,6 +709,52 @@ hand-waving argument goes like this: the number of connections is
 roughly $N^2$ and the amount of information in a pattern is $N$ so the
 number of patterns that can be stored is $N^2/N=N$ \cite{Amit1992a}.
 
+
+\begin{figure}
+\begin{center}
+\begin{tikzpicture}
+\node[on,text width=0.35cm](0){0};
+\node[off,text width=0.35cm,right of = 0](1){1};
+\node[on,text width=0.35cm,right of = 1](2){2};
+\node[off,text width=0.35cm,right of = 2](3){3};
+\node[off,text width=0.35cm,right of = 3](4){4};
+\node[on,text width=0.35cm,right of = 4](5){5};
+\node[off,text width=0.35cm,right of = 5](6){6};
+\node[off,text width=0.35cm,right of = 6](7){7};
+\node[off,text width=0.35cm,right of = 7](8){8};
+\path (5) edge[bend left,color=red] (0);
+\path (5) edge[bend right,color=yellow] (1);
+\path (5) edge[bend left,color=red] (2);
+\path (5) edge[bend right,color=yellow] (3);
+\path (5) edge[bend left,color=yellow] (4);
+\path (5) edge[bend right,color=yellow] (6);
+\path (5) edge[bend left,color=yellow] (7);
+\path (5) edge[bend right,color=yellow] (8);
+\end{tikzpicture}
+\begin{tikzpicture}
+\node[off,text width=0.35cm](0){0};
+\node[on,text width=0.35cm,right of = 0](1){1};
+\node[off,text width=0.35cm,right of = 1](2){2};
+\node[off,text width=0.35cm,right of = 2](3){3};
+\node[off,text width=0.35cm,right of = 3](4){4};
+\node[on,text width=0.35cm,right of = 4](5){5};
+\node[on,text width=0.35cm,right of = 5](6){6};
+\node[off,text width=0.35cm,right of = 6](7){7};
+\node[off,text width=0.35cm,right of = 7](8){8};
+\path (5) edge[bend left,color=yellow] (0);
+\path (5) edge[bend right,color=red] (1);
+\path (5) edge[bend left,color=yellow] (2);
+\path (5) edge[bend right,color=yellow] (3);
+\path (5) edge[bend left,color=yellow] (4);
+\path (5) edge[bend right,color=red] (6);
+\path (5) edge[bend left,color=yellow] (7);
+\path (5) edge[bend right,color=yellow] (8);
+\end{tikzpicture}
+\end{center}
+\caption{Interference in an associate network. Neuron 5 is involved in two patterns and, as a consequence, some of its connections are strengthen for one pattern and weakened for the other, if these strengthening and weakening effects are similar in size it makes it unlikely that either pattern will be accurately retrieved.\label{fig:interfere}}
+\end{figure}
+
+
 The capacity is also larger if there is sparseness; one way to think
 of this is to observe the weight decrease between an active and
 inactive connection is $\delta w_{ij}=-\eta \alpha (1-\alpha)$ so the smaller

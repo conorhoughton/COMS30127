@@ -69,9 +69,9 @@ test=Int64[1,-1,1,1,-1,1,1,-1,-1,-1,-1]
 
 seven_segment(test)
 
-println("test2")
-
 #here the network should run printing at each step
+
+println("test2")
 
 test=Int64[1,1,1,1,1,1,1,-1,-1,-1,-1]
 

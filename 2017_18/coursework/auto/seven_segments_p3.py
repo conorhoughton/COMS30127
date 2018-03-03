@@ -65,9 +65,9 @@ test=[1,-1,1,1,-1,1,1,-1,-1,-1,-1]
 
 seven_segment(test)
 
-print("test2")
-
 #here the network should run printing at each step
+
+print("test2")
 
 test=[1,1,1,1,1,1,1,-1,-1,-1,-1]
 

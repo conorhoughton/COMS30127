@@ -1,0 +1,10 @@
+
+In both languages the function returns a spike trains for the interval
+[0,big_t] with overall firing rate rate and refractory period
+tau_ref. The rate exp_rate calculated in the function is the rate the
+Poisson process must have to give the correct overall firing rate
+given the refractory period. 	  
+
+I often find it useful to define SI units at the start even if they
+are just "1.0" this makes it easier to keep track of units and stops my 
+making embarassing mistakes divinding by 1000 in my head.  

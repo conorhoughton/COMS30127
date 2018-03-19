@@ -1,0 +1,53 @@
+\documentclass[12pt]{article}
+\usepackage{amsfonts, epsfig}
+
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\lfoot{\texttt{github.com/conorhoughton/COMS30127}}
+\lhead{Computation Neuroscience - Coursework 2 - spike trains}
+\rhead{\thepage}
+\cfoot{}
+\begin{document}
+
+\section*{Coursework 2}
+
+This coursework relates to the properties of spike train. These
+questions areadapted from the exercises given in Part 1.1 of
+\texttt{http://www.gatsby.ucl.ac.uk/~dayan/book/exercises.html}; these
+are exercises for the book Dayan and Abbott, a recommended text book
+for this course.
+
+
+\subsection*{Question 1}
+
+In the \texttt{spike\_trains} folder you will find programmes
+\texttt{poisson.jl} and \texttt{poisson.py}. These contain a function
+which will generate spike trains simulated using a Poisson process
+with a refractory period. Calculate the Fano factor and coefficient of
+variation for 1000 seconds of spike train with a firing rate of 35 Hz,
+both with no refractory period and with a refractory period of 5 ms.
+
+\subsection*{Question 2}
+
+In the \texttt{spike\_trains} folder you will find the data file
+\texttt{rho.dat}. This is contains data collected and provided by Rob
+de Ruyter van Steveninck from a fly H1 neuron responding to an
+approximate white-noise visual motion stimulus. Data were collected
+for 20 minutes at a sampling rate of 500 Hz. In the file, rho is a
+vector that gives the sequence of spiking events or nonevents at the
+sampled time, that is, every 2 ms. Calculate the Fano factor and coefficient of variation for this spike train.
+
+\subsection*{Question 3} 
+
+In the \texttt{spike\_trains} folder you will find the data file
+\texttt{stim.dat}. This give the motion stimulus that evoked the spike
+train in \texttt{rho.dat}. Calculate the spike triggered average.
+
+\subsection*{COMSM20127}
+
+Calculate the stimulus triggered by pairs of spikes.
+
+\subsection*{Submission instructions}
+
+\end{document}

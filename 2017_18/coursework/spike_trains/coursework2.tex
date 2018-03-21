@@ -13,20 +13,70 @@
 \section*{Coursework 2}
 
 This coursework relates to the properties of spike train. These
-questions areadapted from the exercises given in Part 1.1 of
-\texttt{http://www.gatsby.ucl.ac.uk/~dayan/book/exercises.html}; these
-are exercises for the book Dayan and Abbott, a recommended text book
-for this course.
+questions are adapted from the exercises given in Part 1.1 of\\
+\\
+\texttt{http://www.gatsby.ucl.ac.uk/$\sim$dayan/book/exercises.html}\\ 
+\\
+in their original form they are exercises for the book Dayan and Abbott,
+a recommended text book for this course.
 
+The first question relates to Poisson processes, a Poisson process
+is a memoryless random process producing a time series of events; in
+the application to spike trains an event corresponds to a spike. By
+memoryless it is meant that the chance of an event depends only on a
+rate function $r(t)$ and not on the history of past events. The idea
+is that the probability of an event in a small interval $\delta t$ wide is $r(t)\delta t$.
+
+Imagine a person fishing in the sea, the chance of catching a fish
+might depend on the time of day but it doesn't depend on how many
+fishes the person has already caught, however, if they are fishing in
+a small pond the chance of catching a fish would diminish as they
+catch fish, so fishing in the sea is a Poisson process, but fishing in
+a pond is not. In the two questions here the Poisson process is
+inhomogenous, that is, the rate is constant. Of course, if their is a
+refractory period, that is a time during which the neuron cannot
+spike, the spike train is not a Poisson process, but in this question
+a Poisson process is used to generate the spike train.
+
+It can be proved, with a nice argument you are used to look up, that
+the distribution of inter-event intervals $t$, here inter-spike intervals,
+is given by
+\begin{equation}
+p(t)=\frac{1}{r}e^{-rt}
+\end{equation}
+The code supplied in \texttt{poisson.py} and \texttt{poisson.jl}
+generates intervals according to this distribution. A distinctive
+feature of a Poisson process is that its Fano factor and coefficient
+of variation. The aim here is to calculate these quantities for
+simulated and real spike trains.
+
+The Fano factor is defined as
+\begin{equation}
+F=\frac{\sigma^2}{\mu}
+\end{equation}
+where $\sigma^2$ is a variance and $\mu$ is an average.  In the
+case of spike trains it is usually applied to the spike count; so to
+calculate it you divide the spike train into intervals and work out
+the spike count for each interval. The Fano factor is calculated using
+the average and variance for these counts. The coefficient of variation is 
+\begin{equation}
+C_v=\frac{\sigma}{\mu}
+\end{equation}
+where $\sigma$ is a standard deviation and $\mu$ is an average. In the
+case of spike trains this is usually applied to the inter-spike
+interval, that is the time difference between successive spikes.
 
 \subsection*{Question 1}
 
-In the \texttt{spike\_trains} folder you will find programmes
+In the \texttt{spike\_trains} folder you will find
 \texttt{poisson.jl} and \texttt{poisson.py}. These contain a function
 which will generate spike trains simulated using a Poisson process
-with a refractory period. Calculate the Fano factor and coefficient of
-variation for 1000 seconds of spike train with a firing rate of 35 Hz,
-both with no refractory period and with a refractory period of 5 ms.
+with a refractory period. Calculate the Fano factor of the spike count
+and coefficient of variation of the inter-spike interval for 1000
+seconds of spike train with a firing rate of 35 Hz, both with no
+refractory period and with a refractory period of 5 ms. In the case of
+the Fano factor the count should be performed over windows of width 10
+ms, 50 ms and 100 ms.
 
 \subsection*{Question 2}
 
@@ -35,23 +85,39 @@ In the \texttt{spike\_trains} folder you will find the data file
 de Ruyter van Steveninck from a fly H1 neuron responding to an
 approximate white-noise visual motion stimulus. Data were collected
 for 20 minutes at a sampling rate of 500 Hz. In the file, rho is a
-vector that gives the sequence of spiking events or nonevents at the
+vector that gives the sequence of spiking events or non-events at the
 sampled time, that is, every 2 ms. Simple programmes, \texttt{load.jl}
 and \texttt{load.py}, are supplied to load this data file and the data
 file described in the next question.
 
-Calculate the Fano factor and coefficient of variation for this spike train.
+Calculate the Fano factor and coefficient of variation for this spike
+train as for the simulated spike trains above.
 
 \subsection*{Question 3} 
 
 In the \texttt{spike\_trains} folder you will find the data file
 \texttt{stim.dat}. This give the motion stimulus that evoked the spike
-train in \texttt{rho.dat}. Calculate the spike triggered average.
+train in \texttt{rho.dat}. Calculate and plot the spike triggered
+average over a 100 ms window. You can plot using Python or Julia or
+you can export the data and plot using another package such as
+gnuplot. Do not upload a screen shot of the plot, the plot should be
+exported into whatever format you upload.
 
-\subsection*{COMSM20127}
+\subsection*{COMSM2127}
 
-Calculate the stimulus triggered by pairs of spikes.
+Calculate the stimulus triggered by pairs of spikes, that is for
+intervals of 2 ms, 10 ms, 20 ms and 50 ms calculate the average
+stimulus before a pair of spikes seperated by that interval; do this
+for both the case where the spikes are not neccesarily adjacent and
+the case where they are.
 
 \subsection*{Submission instructions}
+
+Please submit your code along with a short document giving the answers
+to Q1 and Q2 and the plot from Q3 and for COMSM2127 students the extra
+plot for that section. Include enough text to make it clear what you
+are presenting, for example \lq{}the Fano factor for the Poisson train
+with zero refractory period is $F=$\ldots\rq{}. Submit the document as
+a pdf, not a doc, and do not zip or tar your submission.
 
 \end{document}

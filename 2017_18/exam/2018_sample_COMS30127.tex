@@ -1,0 +1,219 @@
+\documentclass[a4paper,12pt]{article}
+
+
+\newif\ifsoln
+\solnfalse
+%\solntrue
+
+
+%MSM: unit specific Latex commands 
+\usepackage{amsmath,amsfonts,amssymb}   
+
+\let\imp=\Rightarrow
+\let\iff=\Leftrightarrow
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{tikz-qtree}
+\lstset{language=C}
+
+
+\tikzset{every tree node/.style={minimum width=2em,draw,circle},
+         blank/.style={draw=none},
+         edge from parent/.style=
+         {draw,->, edge from parent path={(\tikzparentnode) -- (\tikzchildnode)}},
+         level distance=1.5cm}
+
+\begin{document}
+
+\section*{COMS30127 / COMSM2127 sample paper - DRAFT}
+
+\subsection*{Rubrik}
+This paper contains \emph{two} parts. \\
+The first section contains \emph {15} short questions.\\ 
+Each question is worth \emph{two marks} and all should be attempted.\\
+The second section contains \emph {three} long questions.\\
+Each long question is worth \emph{20 marks}.\\
+The best \emph{two} long question answers will be used for assessment. \\
+The maximum for this paper is \emph{70 marks}.\\
+This is a two hour exam. 
+
+\subsection*{Section A: short questions - answer all questions}
+
+\begin{enumerate} 
+
+%1
+\item Neurophysiologists typically distinguish between two cell types in primary visual cortex: simple cells and complex cells. What is the key characteristic that distinguishes these two cell types?
+
+\ifsoln Solution: Complex cell responses are spatially invariant to
+the stimulus location, simple cell responses are not.  \fi
+
+%2
+\item Hebb's rule is often paraphrased as \lq{}neurons that fire together wire together\rq{}; why is this no longer considered accurate?
+
+\ifsoln Solution:  It ignores the temporal structure; spike timing effects are now considered important.\fi
+
+%3
+\item Visual neurons receptive fields can often be modelled as a 2D sine wave multiplied by a 2D Gaussian. What is the common name for this compound function? 
+
+\ifsoln Solution:  Gabor function/filter. \fi
+
+%4
+\item  Neurons cannot fire at arbitrarily high rates because after a spike there is typically a short period of time, usually several milliseconds, where they are resistant to spiking again. What is this time period called? 
+
+\ifsoln Solution:  The refractory period.\fi
+
+%5
+\item Which channel is typically responsible for spike rate adaptation?
+
+\ifsoln Solution:  Slow potassium. \fi
+
+%6
+\item The two principal forms of aphasia are expressive aphasia and
+  fluent aphasia, one is distinguished by the inability to find words,
+  the other by the inability to understand language. These are
+  associated with lesions in which brain areas.
+
+\ifsoln Solution:  Broca's area and Wernicke's area.\fi
+
+%7
+
+\item In the Hodgkin-Huxley model of the squid giant axon, which ion
+  is responsible for the initial rise in the voltage during a spike?
+
+\ifsoln Solution:  Sodium.\fi
+
+%8
+
+\item What is the typical scale of voltage differences in the brain: microvolts, millivolts or volts?
+
+\ifsoln Solution:  millivolts.\fi
+
+%9 
+
+\item For a spike train with spike times $\{t_1,t_2,\ldots,t_n\}$ evoked by stimulus $s(t)$ define the spike triggered average.
+
+\ifsoln Solution:  $$S(\tau)=\frac{1}{n}\sum_i s(t_i-\tau)$$. \fi
+
+%10
+
+\item What is $d'$ used for in describing a neuronal response?
+
+\ifsoln Solution:  It measures the difference between two sets of multi-trial responses.\fi
+
+%11
+
+\item Which part of the hippocampus is thought to act as a Hopfield network?
+
+\ifsoln Solution:  CA3 \fi
+
+%12
+
+\item Sketch the hippocampus and labelling CA3, CA1 and dentate gyrus.
+
+\ifsoln Solution:  Should show two interlocking horseshoe shapes, the smaller is the dentate gyrus, the larger contains CA3 and CA1, CA3 is at the end that interlocks with the dentate gyrus. \fi
+
+%13
+
+\item Solve the equation
+$$3\frac{dv}{dt}=-v$$
+with $v(0)=1$.
+
+\ifsoln
+Solved by ansatz or integrating factor this give $v=\exp{(-t/3)}$.
+\fi
+
+%14 
+
+\item What is meant by a central pattern generator?  
+
+\ifsoln Solution:  It is an intrinsically spiking network of neuron which creates
+a rhythmic activity.\fi
+
+%15 
+\item Define the energy of a pattern in the Hopfield network and
+  briefly describe how this is related to pattern storage and
+  completion.
+
+\ifsoln Solution: 
+The energy is given by 
+$$E=-\frac{1}{2}\sum_{ij}x_iw_{ij}x_j$$
+and stored patterns correspond to local minima.
+\fi
+
+\end{enumerate}
+
+\subsection*{Section B: long questions - answer two questions}
+
+\begin{enumerate}
+
+
+\item This question is about numerical methods. 
+\begin{enumerate}
+\item Explain how the Euler method for integrating the differential equation 
+$$\frac{dv}{dt}=F(v)$$
+is derived from the Taylor expansion. [7 marks]
+\item Although the error in the Euler method is $O(\delta t^2)$ and
+  therefore small, there is a problem with it accumalating: if the
+  error is always positive, for example, it grows as $t$
+  increases. Explain why this might be less of a problem when
+  integrating the leaky integrate-and-fire neuron? [5 marks]
+\item In the second order Runge-Kutta algorithm we define
+\begin{eqnarray*}
+k_1&=&F(v)\delta t\cr
+k_2&=&F(v+k_1/2)\delta t
+\end{eqnarray*}
+and approximate
+$$
+v(t+\delta_t)=v(t)+k_2
+$$
+Show using the Taylor expansion that this is accurate to $O(\delta t^3)$. [8 marks]
+\end{enumerate}
+
+\ifsoln Solution:  a) and c) see notes; b) because of the reset. \fi
+
+ 
+\item This question is about synaptic plasticity.
+\begin{enumerate}
+\item Let each synapse's weight $w_i$ be plastic, and change according
+  to a Hebbian rule: $w(t+1) = w(t) + 0.1 \times x_i y$. Is this
+  plasticity rule stable or unstable? Explain your answer. [4 marks]
+ 
+\item Now consider a case where there are just two input neurons with
+  firing rates $x_1 = 2$ and $x_2 = 4$, and respective synaptic
+  weights initially both equal to one, $w_1 = w_2 = 0.5$. Compute the
+  synaptic weights after one update. [4 marks]
+ 
+\item Let's assume that we always want the sum of the weights to remain $w_1 + w_2 = 1$. This can be achieved by renormalising the synaptic strengths after each update, either by subtracting some fixed amount from each weight, or by dividing both weights by some fixed amount. Compute the normalised synaptic weights after one weight update for each case. Which method (additive scaling or multiplicative scaling) leads to a greater difference between synaptic strengths? [4 marks]
+ 
+\item Now consider a new plasticity rule (similar to the ``BCM'' rule), where $\frac{dw_i}{dt} = x_i(y-\theta)$ where $\theta$ is a threshold that determines whether the synapse increases or decreases in strength. The threshold itself changes on a slow timescale, according to $\frac{d \theta}{dt} = y^2 - \theta$. What is the steady state value of the threshold in terms of $y$? [4 marks]
+
+\item Now consider there are just two input neurons with firing rates $x_1 = 3$ and $x_2 = 5$. If the synaptic weights change according to the BCM-like plasticity rule from the previous question, what is the eventual steady-state value of $w_1$ as a function of the steady-state value of $w_2$? [4 marks]
+\end{enumerate}
+
+\ifsoln Solution:  To follow soon.\fi
+
+\item This question is about the Hodgkin-Huxley equation.
+
+\begin{enumerate}
+
+\item Sketch a spike; label the up swing and down swing and indicate
+  what aspect of the current dynamics are responsible for each. [4 marks]
+
+\item Write down the Hodgkin-Huxley equation; include the sodium and potassium channels. [4 marks]
+
+\item Which axon is this an equation for? [2 marks]
+
+\item Write down the equation for $n$, $m$ and $h$ both in terms of
+  the transition probabilities and in terms of the time constant and
+  asymptotic values. [5 marks]
+
+\item Sketch the asymptotic values for $n$, $m$ and $h$ indicating
+  what role these play in the spike. [5 marks]
+
+\end{enumerate}
+
+\ifsoln Solution:  To follow soon. \fi
+
+\end{enumerate}
+
+\end{document}

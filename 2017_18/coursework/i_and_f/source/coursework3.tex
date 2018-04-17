@@ -1,0 +1,90 @@
+\documentclass[12pt]{article}
+\usepackage{amsfonts, epsfig}
+
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\lfoot{\texttt{github.com/conorhoughton/COMS30127}}
+\lhead{Computation Neuroscience - Coursework 3 - integrate and fire}
+\rhead{\thepage}
+\cfoot{}
+\begin{document}
+
+\section*{Coursework 3}
+
+Write a brief report, no longer than two pages, probably shorter,
+including the figures and the comments specified above; submissions
+exceeding the page limit will be rejected, I will take a dim view of
+super-narrow margins or tiny fonts. Submit it in the pdf format
+together with the Python or Julia code by the deadline. Remember,
+provided it is in good time, I am happy to answer questions about
+Python and to help debug faulty code. Submit the report as pdf; make
+sure to set the size of the graphs in your plotting programme, not by
+shrinking the graph to fit in the report, this makes the figure
+legends and axis numbers tiny and is super annoying. You don't have to
+plot in Python or Julia, it is fine to output a data file and plot
+using gnuplot or whatever.
+
+\subsection*{Question 1}
+
+Simulate an integrate and fire model with the following
+  parameters for 1 s: $\tau_m = 10 $ms, $E_L = V_r = -70$ mV, $V_t =
+  -40$ mV, $R_m= 10$ M$\Omega$, $I_e = 3.1 $ nA. Use Euler's method
+  with timestep $\delta t = 1$ ms. Here $E_L$ is the leak potential,
+  $V_r$ is the reset voltage, $V_t$ is the threshold, $R_m$ is the
+  membrane resistance, that is one over the conductance, and $\tau_m$
+  is the membrane time constant. Plot the voltage as a function of
+  time. For simplicity assume that the neuron does not have a
+  refractory period after producing a spike. You do not need to plot
+  spikes - once membrane potential exceeds threshold, simply set the
+  membrane potential to $V_r$.
+
+\subsection*{Question 2}
+
+Simulate two neurons which have synaptic connections between
+  each other, that is the first neuron projects to the second, and the
+  second neuron projects to the first. Both model neurons should have
+  the same parameters: $\tau_m = 20$ ms, $E_L = -70$ mV $V_r = -80$ mV
+  $V_t = -54$ mV $R_mI_e = 18$ mV and their synapses should also have
+  the same parameters: $R_m \bar{g}_s = 0.15$, $P = 0.5$, $\tau_s= 10$
+  ms; don't get confused by being given $R_m\bar{g}_s$ rather than
+  $\bar{g}_s$ on its own, to get $\tau_m$ rather than the capacitance
+  on the left hand side of the integrate and fire equation everything
+  is multiplied by $R_m$. For simplicity take the synaptic conductance
+\begin{equation}
+g_s=\bar{g}_s s
+\end{equation}
+to satisfy
+\begin{equation}
+\tau_s\frac{ds}{dt}=-s
+\end{equation}
+with a spike arriving causing $s$ to increase by $P$. This is
+equivalent to the simple synapse model in the lectures. Simulate two
+cases: a) assuming that the synapses are excitatory with $E_s = 0$ mV,
+and b) assuming that the synapses are inhibitory with $E_s = -80$
+mV. For each simulation set the initial membrane potentials of the
+neurons $V$ to different values chosen randomly from between $V_r$ and
+$V_t$ and simulate 1 s of activity. For each case plot the voltages of
+the two neurons on the same graph (with different colours).
+
+\subsection*{COMSM2127}
+
+\begin{enumerate}
+
+\item Compute analytically the minimum current $I_e$ required for the
+  neuron with the above parameters to produce an action
+  potential.
+
+\item Simulate the neuron for 1 s for the input current with amplitude
+  $I_e$ which is 0.1 [nA] lower than the minimum current computed
+  above, and plot the voltage as a functions of time.
+
+\item Simulate the neuron for 1s for currents ranging from 2 [nA] to 5
+  [nA] in steps of 0.1 [nA]. For each amplitude of current count the
+  number of spikes produced, that is the firing rate. Plot the firing
+  rate as the function of the input current. 
+
+\end{enumerate}
+
+\end{document}
+

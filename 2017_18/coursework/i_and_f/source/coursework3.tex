@@ -27,17 +27,18 @@ using gnuplot or whatever.
 
 \subsection*{Question 1}
 
-Simulate an integrate and fire model with the following
-  parameters for 1 s: $\tau_m = 10 $ms, $E_L = V_r = -70$ mV, $V_t =
-  -40$ mV, $R_m= 10$ M$\Omega$, $I_e = 3.1 $ nA. Use Euler's method
-  with timestep $\delta t = 1$ ms. Here $E_L$ is the leak potential,
-  $V_r$ is the reset voltage, $V_t$ is the threshold, $R_m$ is the
-  membrane resistance, that is one over the conductance, and $\tau_m$
-  is the membrane time constant. Plot the voltage as a function of
-  time. For simplicity assume that the neuron does not have a
-  refractory period after producing a spike. You do not need to plot
-  spikes - once membrane potential exceeds threshold, simply set the
-  membrane potential to $V_r$.
+Simulate an integrate and fire model with the following parameters for
+1 s: $\tau_m = 10 $ms, $E_L = V_r = -70$ mV, $V_t = -40$ mV, $R_m= 10$
+M$\Omega$, $I_e = 3.1 $ nA. Use Euler's method with timestep $\delta t
+= 1$ ms. Here $E_L$ is the leak potential, $V_r$ is the reset voltage,
+$V_t$ is the threshold, $R_m$ is the membrane resistance, that is one
+over the conductance, and $\tau_m$ is the membrane time constant. Plot
+the voltage as a function of time. For simplicity assume that the
+neuron does not have a refractory period after producing a spike. You
+do not need to plot spikes - once membrane potential exceeds
+threshold, simply set the membrane potential to $V_r$. [3 marks for
+  correct; 1 for some spiking but not at correct rate etc, 1 mark lost
+  if graphs hard to read, figure legends missings, units missing]
 
 \subsection*{Question 2}
 
@@ -65,7 +66,11 @@ and b) assuming that the synapses are inhibitory with $E_s = -80$
 mV. For each simulation set the initial membrane potentials of the
 neurons $V$ to different values chosen randomly from between $V_r$ and
 $V_t$ and simulate 1 s of activity. For each case plot the voltages of
-the two neurons on the same graph (with different colours).
+the two neurons on the same graph (with different colours). [7 marks;
+  3 for correct general approach but neurons connected up wrong,
+  synapses coupled to the wrong voltage etc, 2 each for the inhibitory
+  and excitatory graphs correct, 2 marks lost for problems with the
+  graphs, eg no units, tiny script, cut and pasted screen shot, etc].
 
 \subsection*{COMSM2127}
 
@@ -73,16 +78,16 @@ the two neurons on the same graph (with different colours).
 
 \item Compute analytically the minimum current $I_e$ required for the
   neuron with the above parameters to produce an action
-  potential.
+  potential. [2 marks]
 
 \item Simulate the neuron for 1 s for the input current with amplitude
   $I_e$ which is 0.1 [nA] lower than the minimum current computed
-  above, and plot the voltage as a functions of time.
+  above, and plot the voltage as a functions of time. [1 mark]
 
 \item Simulate the neuron for 1s for currents ranging from 2 [nA] to 5
   [nA] in steps of 0.1 [nA]. For each amplitude of current count the
   number of spikes produced, that is the firing rate. Plot the firing
-  rate as the function of the input current. 
+  rate as the function of the input current. [2 marks]
 
 \end{enumerate}
 

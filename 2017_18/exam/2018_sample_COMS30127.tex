@@ -2,8 +2,8 @@
 
 
 \newif\ifsoln
-\solnfalse
-%\solntrue
+%\solnfalse
+\solntrue
 
 
 %MSM: unit specific Latex commands 
@@ -190,7 +190,18 @@ Show using the Taylor expansion that this is accurate to $O(\delta t^3)$. [8 mar
 \item Now consider there are just two input neurons with firing rates $x_1 = 3$ and $x_2 = 5$. If the synaptic weights change according to the BCM-like plasticity rule from the previous question, what is the eventual steady-state value of $w_1$ as a function of the steady-state value of $w_2$? [4 marks]
 \end{enumerate}
 
-\ifsoln Solution:  To follow soon.\fi
+\ifsoln 
+
+Solution: 
+\begin{enumerate}
+\item Unstable. $\Delta w$ is always $\geq 0$, so the weights grow without bound. The rule encourages positive feedback since increasing $w$ will increase $y$, which further increases $w$. [3 marks, one mark for correctly stating `unstable', two more mark for a correct justification.]
+\item $w_{1new} = \frac{3}{4}$ and $w_{2new} = \frac{5}{4}$ [4 marks, two marks for each correct answer].
+\item Subtractive scaling gives $w_{1new} = \frac{1}{4}$ and $w_{2new} = \frac{3}{4}$, divisive scaling gives $w_{1new} = \frac{3}{8}$ and $w_{2new} = \frac{5}{8}$. Subtractive normalisation results in the bigger difference between the weights (1/2 vs 1/4). [5 marks, 2 marks for each pair of correct weight values, and one further mark for a correct statement that subtractive normalisation gives a greater difference. If the student carried forward a mistake from the previous question, do not penalise them.]
+\item Steady-state $\theta_\infty = y^2$. [3 marks for correct answer.]
+\item $w_{1 \infty} = (1-5w_{2 \infty})/3$. [5 marks for correct answer.]
+\end{enumerate}
+
+\fi
 
 \item This question is about the Hodgkin-Huxley equation.
 
@@ -212,7 +223,51 @@ Show using the Taylor expansion that this is accurate to $O(\delta t^3)$. [8 mar
 
 \end{enumerate}
 
-\ifsoln Solution:  To follow soon. \fi
+\ifsoln Solution:  
+
+The sketch shows a spike like in this picture from wikipedia:
+\begin{center}
+\includegraphics[width=5cm]{Action_potential_basic_shape.png}
+\end{center}
+with the up swing, the up bit being due to sodium influx, the down bit is due to the sodium influx being switched off and potassium ions leaving the cell.
+
+The Hodgkin Huxley eqn is
+\begin{equation}
+C_m\frac{dV}{dt}=g_l(E_l-V)+\bar{g}_\text{Na}m^3h(E_\text{Na}-V)+\bar{g}_\text{K}n^4(E_\text{K}-V)
+\end{equation}
+and this is the equation for the squid giant axon. For each of these eqns:
+\begin{equation}
+\frac{d\l}{dt} =\alpha_{\l} (1-\l)-\beta_{\l} \l
+\end{equation}
+where $\l$ is standing for $n$, $m$ or $h$ and $\alpha_{\l}$ and
+$\beta_{\l}$ are the transition probabilities. This can be rewriten as
+\begin{equation}
+\frac{d\l}{dt} =\alpha_{\l}-(\alpha_{\l}+\beta_{\l}) \l
+\end{equation}
+or
+\begin{equation}
+\frac{1}{\alpha_{\l}+\beta_{\l}}\frac{d\l}{dt} =\frac{\alpha_{\l}}{\alpha_{\l}+\beta_{\l}}- \l
+\end{equation}
+so 
+\begin{equation}
+\tau_{\l}=\frac{1}{\alpha_{\l}+\beta_{\l}}
+\end{equation}
+and
+\begin{equation}
+\l_\infty=\frac{\alpha_{\l}}{\alpha_{\l}+\beta_{\l}}
+\end{equation}
+are the time constant and asymptotic value respectively with
+\begin{equation}
+\tau_{\l}\frac{d\l}{dt} =\l_\infty- \l
+\end{equation}
+
+
+The asymptotic values of $n$, $m$ and $h$ are given in, for example\\
+\\
+\texttt{cdn.comsol.com/wordpress/2016/11/asymptotic-values-Hodgkin-Huxley.png}\\
+\\
+and we see that as voltage increases $m$ and $n$ switch on, but $h$ switches off; the difference in the timescale for $m$ and $n$ is what allows the sodium to switch on first.
+ \fi
 
 \end{enumerate}
 

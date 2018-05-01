@@ -92,7 +92,23 @@ other neurons this could be changed.
 
 The Morris-Lacer model is
 \begin{equation}
-C_m\frac{dV}{dt}=g_{\text{l}} (E_{\text{l}}-V)+g_{\text{m}} 
+C_m\frac{dV}{dt}=g_{\text{l}} (E_{\text{l}}-V)+g_{\text{Ca}}m_\infty(E_{\text{Ca}} -V)+g_{\text{K}}n(E_{\text{K}} -V)+I
+\end{equation}
+and
+\begin{equation}
+\tau_n\frac{dn}{dt}=n_\infty-n
+\end{equation}
+where
+\begin{eqnarray}
+m_\infty&=&\frac{1}{2}\left(1+\tanh\left[\frac{V-V_1}{V_2}\right]\right)\cr
+n_\infty&=&\frac{1}{2}\left(1+\tanh\left[\frac{V-V_3}{V_4}\right]\right)\cr
+\tau_n&=&1/\left(\phi\cosh\left[\frac{V-V_3}{2V_4}\right]\right)
+\end{eqnarray}
+Obviously there are lots of parameters here, and changing the
+parameters changes the behaviour of the model; here we will look specifically at $g_l= 2$, $E_l=-60$, 
+$g_{\text{Ca}}=4$, $E_{\text{Ca}}= 120$, $g_{\text{K}}= 8$, $E_{\text{K}}=-84$,$C= 20$,$I= 0$,$V_1=-1.2$,$V_2= 18$,$V_3= 2$,$V_4= 30$,$\phi= 0.04$.
+
+
 
 
 

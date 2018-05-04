@@ -249,7 +249,7 @@ If $a$ labels lots of input, $\textbf{x}^a$, desired output $d^a$
 pairs, with $y^a$ the actual output; the angle brackets are an average
 over these pairs. Now consider the gradient of $E$ with $w_{i}$:
 \begin{equation}
-\frac{\partial E}{\partial w_{i}}=2\left\langle (d^a-y_a) \frac{\partial y^a}{\partial w_{i}}\right\rangle
+\frac{\partial E}{\partial w_{i}}=-2\left\langle (d^a-y_a) \frac{\partial y^a}{\partial w_{i}}\right\rangle
 \end{equation}
 Now if we ignore for the moment the fact that the activation function for the McCulloch-Pitt neuron isn't differentiable and write
 \begin{equation}
@@ -265,7 +265,7 @@ we have
 \end{equation}
 so using
 \begin{equation}
-\frac{\partial r}{\partial w_i}=-x_i
+\frac{\partial r}{\partial w_i}=x_i
 \end{equation}
 we get
 \begin{equation}

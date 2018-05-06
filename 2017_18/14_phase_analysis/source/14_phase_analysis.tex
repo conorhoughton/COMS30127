@@ -144,8 +144,7 @@ n_\infty&=&\frac{1}{2}\left(1+\tanh\left[\frac{V-V_3}{V_4}\right]\right)\cr
 \tau_n&=&1/\left(\phi\cosh\left[\frac{V-V_3}{2V_4}\right]\right)
 \end{eqnarray}
 Obviously there are lots of parameters here, and changing the
-parameters changes the behaviour of the model; a set of typical values would be
-$\tau_m=10\ms$, $R_mg_{\text{Ca}}=2$, $E_{\text{Ca}}= 120\mV$, $R_mg_{\text{K}}= 8$, $E_{\text{K}}=-84\mV$,$V_1=-1.2\mV$,$V_2= 18\mV$,$V_3= 2\mV$,$V_4= 30\mV$,$\phi= 0.04\kHz$.
+parameters changes the behaviour of the model.
 
 Now, to understand how this equation works we will examine the
 nullclines, the lines where the derivatives are zero:
@@ -159,13 +158,21 @@ n=n_\infty
 \end{equation}
 for the $n$-nullcline. The key point is that the $V$-nullcline has a
 sort of cubic shape which for many parameter values is cut by the
-$n$-nullcline, an example is given in Fig.~\ref{ML_phase}.
+$n$-nullcline, examples is given in Fig.~\ref{60} and Fig.~\ref{40}.
 
 \begin{figure}
 \begin{center}
   \include{60}
 \end{center}
-\caption{This shows the phase space for the Morris-Lecar equation, it is a temporary figure taken from DOI10.1007/s002850050157 which uses a lower case $v$ for $V$ and uses $w$ where we use $n$. \label{ML_phase}}
+\caption{This shows the phase space for the Morris-Lecar equation
+  along with a solution. In \textbf{A} the solid grey line is the
+  $n$-nullcline, the dotted grey line is the $V$-nullcline; the two
+  nullclines cross between the local minimum and maximum of the
+  $V$-nullcline, so the equilibrium point is unstable. The dotted
+  black line shows a solution, it starts from $V=-40\mV$ and $n=0$ and
+  quickly reaches a stable orbit. The corresponding solution is in
+  \textbf{B}. This diagram was produced using \texttt{simulation.jl}
+  and all the parameter values can bee found there. \label{60}}
 \end{figure}
 
 
@@ -173,30 +180,28 @@ $n$-nullcline, an example is given in Fig.~\ref{ML_phase}.
 \begin{center}
 \include{40}
 \end{center}
-\caption{This shows the phase space for the Morris-Lecar equation, it is a temporary figure taken from DOI10.1007/s002850050157 which uses a lower case $v$ for $V$ and uses $w$ where we use $n$. \label{ML_phase}}
+\caption{This shows another solution for the Morris-Lecar equation. As before in \textbf{A} the solid grey line is the
+  $n$-nullcline, the dotted grey line is the $V$-nullcline; but here the two
+  nullclines cross to the left of the local minimum and maximum of the
+  $V$-nullcline and the equilibrium point is stable. The dotted
+  black line shows a solution, it starts from $V=-40\mV$ and $n=0$ and
+  is carried around in a big loop, corresponding to a single spike, before spirals in towards the equilibrium point. The corresponding solution is in
+  \textbf{B}.  \label{40}}
 \end{figure}
 
 
-It is possible to understand different spiking regimes from this
+It is possible to understand different spiking regimes from these
 figure. Remember the nullclines separate areas with different signs
 for $dV/dt$ and $dn/dt$, to the left of the $dn/dt$ nullcline $n$
 increases, to the right it decreases, above the $dV/dt$ nullcline $V$
-decreases, below it, it increases. In Fig.~\ref{ML_phase}A there is a
+decreases, below it, it increases. In Fig.~\ref{60}A there is a
 single equilibrium point where the two lines cross, but it is easy to
 see from the arrow directions that this is unstable, in fact there is
 a limit cycle and the equation with this phase diagram exhibits
-regular spiking, this is shown in Fig.~\ref{ML_spike}. In
-Fig.~\ref{ML_phase}B the equilibrium point is stable so this time the
+regular spiking, this is shown in Fig.~\ref{60}B. In
+Fig.~\ref{40}A the equilibrium point is stable so this time the
 model does not spike regularly, however if the system is moved away
 from the equilibrium point it sometimes returns there by spiking.
-
-
-\begin{figure}
-\begin{center}
-\includegraphics[width=8cm]{ML_spike.jpg}
-\end{center}
-\caption{This is a sketch for the Morris-Lecar limit cycle. \label{ML_spike}}
-\end{figure}
 
 \subsection*{FitzHugh-Nagumo model}
 

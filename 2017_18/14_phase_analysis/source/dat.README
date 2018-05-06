@@ -1,0 +1,14 @@
+
+nullclines_xx.dat
+
+shows the nullclines V:(V-nullcline):(n-nullcline)
+
+for two values of ie in the simulation.jl programme
+
+trajectory_xx.dat
+
+shows a solution t:V:n
+
+all voltages in V
+
+used to make the 40 / 60 figures.

@@ -52,6 +52,7 @@ v3=2*mv::Float64
 v4=30*mv::Float64
 phi=0.04.*kHz::Float64
 ie=60.0*mv::Float64
+#ie=40.0*mv::Float64
 tau_m=10*ms::Float64
 
 m_inf=asy(v1,v2)
@@ -67,17 +68,15 @@ while v<55*mv
     v+=1*mv
 end
 
-
 dv=make_dv(el,gca,m_inf,eca,gk,ek,ie,tau_m)
 dn=make_dn(n_inf,tau_n)
 
 dvn=make_derivative(dv,dn)
 
 vn0=[-40*mv,0.0]
-tspan = (0.0,5.0)
+tspan = (0.0,1.0)
 prob = ODEProblem(dvn,vn0,tspan)
-sol = solve(prob,savat=0.1)    
-
+sol = solve(prob,saveat=0.001)    
 
 for (i,t) in enumerate(sol.t)
     println(t," ",sol[i][1]," ",sol[i][2])

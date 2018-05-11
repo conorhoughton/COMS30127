@@ -47,12 +47,32 @@ with
 \end{equation}
 and
 \begin{equation}
-k_\infty=\frac{\alpha}{\alpha_k+\beta_k}
+k_\infty=\frac{\alpha_k}{\alpha_k+\beta_k}
 \end{equation}
 Hence the ion channels relax towards some asymptotic value $n_\infty$,
 $m_\infty$ and $h_\infty$ with some time scale $\tau_n$, $\tau_m$ and
 $\tau_h$; however all these quantities depend on the voltage so the
 equations are coupled to the voltage equation.
+
+This is a complicated non-linear equation; in fact, real neurons are
+likely to be even more complicated. As was mentioned before; the
+Hodgkin-Huxley equation as described here describes the voltage
+dynamics of the squid giant axon. The same name is often used to
+describe the more complex versions of these models
+\begin{equation}
+C_m\frac{dV}{dt}=\mbox{lots of different ionic currents}
+\end{equation}
+used to describe real neurons. These typically include other channels,
+often more than one potassium channel which adds other timescales to
+the dynamics, calcium channels which play some of the same role as the
+sodium channels, other sodium channels with more complex dynamics,
+calcium-gated potassium channels whose open and closing depends not on
+the voltage but on the concentration of calium ions, and so on. All of
+this complexity emphasises the neuron itself as a site of computation,
+rather than as a node in a network. As such, it is important to
+understand the dynamics of the neurons models, however, their
+complexity makes this hard and so we start not by allowing the
+Hodgkin-Huxley model to become more complex, but by simplifying it.
 
 When it is recognized as a system of four non-linear differential
 equation it is clear that it may prove hard to analyse the
@@ -72,26 +92,42 @@ still a rich enough to model spiking.
 
 \subsection*{The Morris-Lecar model}
 
-The key idea behind the Morris-Lecar model \cite{MorrisLecar1981} is that $\tau_m$ is very
-small. When we looked at the behaviour of equations like the equation
-for $m$ we saw that the functions track their asymptotic value, with
-the $\tau$ value governing how closely it succeeds in reaching the
-equilibrium situation where $m$ equals $m_\infty$. Thus in the
-Morris-Lecar model $m^3$ is replaced by an asymptotic value. Next the
-effect of $h$ is ignored, or lumped in with $n$. Altogether this gives
-a two-dimensional model of the neuron which is much easier to think
-about.  The model is simplified further by ignoring the indices on
-the gating variables, so the single gating variable appears with a
-single power.
 
-Just as the Hodgkin-Huxley model is a model of a specific axon, the
-squid giant axon, that is adapted to wider use, the Morris-Lecar is a
-model of a muscle fibre in the barnacle. Like Hodgkin and Huxley, they
-wrote down an equation of the form they expected to work and then
-adjust parameters to fit the actual data. In the barnacle the main ion
-responsible for depolarization is calcium rather than by sodium, so
-the model has calcium rather than sodium, in applying the model to
-other neurons this could be changed.
+Morris and Lecar  \cite{MorrisLecar1981} developed their model in a direct way as a good model
+of the dynamics of a muscle fibre in the barnacle.  However, just as
+the Hodgkin-Huxley model is a model of a specific axon, the squid
+giant axon, that is adapted to wider use, the Morris-Lecar is a model
+of a muscle fibre in the barnacle. Like Hodgkin and Huxley, they wrote
+down an equation of the form they expected to work and then adjust
+parameters to fit the actual data. Here, however, we will talk about
+the way this model could approximate the Hodgkin-Huxley model.
+
+The key idea is that $\tau_m$ is very small. When we looked at the
+behaviour of equations like the equation for $m$ we saw that the
+functions track their asymptotic value, with the $\tau$ value
+governing how closely it succeeds in reaching the equilibrium
+situation where $m$ equals $m_\infty$. Since $\tau_m$ tends to be very
+small, often less than a milisecond, it is reasonable to replace $m$
+by $m_\infty$. Next the effect of $h$ is ignored, or lumped in with
+$n$, in short, from a mathematical point of view stopping the influx
+of sodium ions and increasing the flow of potassium is similar to
+allowing the sodium ions to continue flowing inwards while increasing
+the potassium flow even more.
+
+Altogether this gives a two-dimensional model of the neuron which is
+much easier to think about.  The model is simplified further by
+ignoring the indices on the gating variables, so the single gating
+variable appears with a single power. The sub-gate structure of ion
+channels gives a very sharp response curve, with gating variables like
+$m$ and $n$ changing rapidly from near zero to near one; however, a
+similar behaviour can be introduced mathematically by just changing
+the shape of the asymptotic value.
+
+In the barnacle the main ion responsible for depolarization is calcium
+rather than by sodium, so the model has calcium rather than sodium, in
+applying the model to other neurons this could be changed but here we
+will describe the channel with a positive reversal potential as a
+calcium channel.
 
 The Morris-Lacer model is
 \begin{equation}
@@ -108,43 +144,64 @@ n_\infty&=&\frac{1}{2}\left(1+\tanh\left[\frac{V-V_3}{V_4}\right]\right)\cr
 \tau_n&=&1/\left(\phi\cosh\left[\frac{V-V_3}{2V_4}\right]\right)
 \end{eqnarray}
 Obviously there are lots of parameters here, and changing the
-parameters changes the behaviour of the model; a set of typical values would be
-$\tau_m=10\ms$, $R_mg_{\text{Ca}}=2$, $E_{\text{Ca}}= 120\mV$, $R_mg_{\text{K}}= 8$, $E_{\text{K}}=-84\mV$,$V_1=-1.2\mV$,$V_2= 18\mV$,$V_3= 2\mV$,$V_4= 30\mV$,$\phi= 0.04\kHz$.
+parameters changes the behaviour of the model.
 
 Now, to understand how this equation works we will examine the
 nullclines, the lines where the derivatives are zero:
-$dV/dt=dn/dt=0$. This is actually quite difficult to work out because
-the formulas are so complicated, but the key point is that the
-$V$-nullcline has a sort of cubic shape which for many parameter
-values is cut by the $n$-nullcline, an example is given in Fig.~\ref{ML_phase}.
+$dV/dt=dn/dt=0$. These nullclines are easily found, they are
+\begin{equation}
+n=-\frac{E_{\text{l}}-V+R_mg_{\text{Ca}}m_\infty(E_{\text{Ca}} -V)+R_mI}{R_mg_{\text{K}}(E_{\text{K}} -V)}
+\end{equation}
+for the $v$-nullcline and 
+\begin{equation}
+n=n_\infty
+\end{equation}
+for the $n$-nullcline. The key point is that the $V$-nullcline has a
+sort of cubic shape which for many parameter values is cut by the
+$n$-nullcline, examples is given in Fig.~\ref{60} and Fig.~\ref{40}.
 
 \begin{figure}
 \begin{center}
-\includegraphics[width=8cm]{ML.png}
+  \include{60}
 \end{center}
-\caption{This shows the phase space for the Morris-Lecar equation, it is a temporary figure taken from DOI10.1007/s002850050157 which uses a lower case $v$ for $V$ and uses $w$ where we use $n$. \label{ML_phase}}
+\caption{This shows the phase space for the Morris-Lecar equation
+  along with a solution. In \textbf{A} the solid grey line is the
+  $n$-nullcline, the dotted grey line is the $V$-nullcline; the two
+  nullclines cross between the local minimum and maximum of the
+  $V$-nullcline, so the equilibrium point is unstable. The dotted
+  black line shows a solution, it starts from $V=-40\mV$ and $n=0$ and
+  quickly reaches a stable orbit. The corresponding solution is in
+  \textbf{B}. This diagram was produced using \texttt{simulation.jl}
+  and all the parameter values can bee found there. \label{60}}
 \end{figure}
 
-It is possible to understand different spiking regimes from this
+
+\begin{figure}
+\begin{center}
+\include{40}
+\end{center}
+\caption{This shows another solution for the Morris-Lecar equation. As before in \textbf{A} the solid grey line is the
+  $n$-nullcline, the dotted grey line is the $V$-nullcline; but here the two
+  nullclines cross to the left of the local minimum and maximum of the
+  $V$-nullcline and the equilibrium point is stable. The dotted
+  black line shows a solution, it starts from $V=-40\mV$ and $n=0$ and
+  is carried around in a big loop, corresponding to a single spike, before spirals in towards the equilibrium point. The corresponding solution is in
+  \textbf{B}.  \label{40}}
+\end{figure}
+
+
+It is possible to understand different spiking regimes from these
 figure. Remember the nullclines separate areas with different signs
 for $dV/dt$ and $dn/dt$, to the left of the $dn/dt$ nullcline $n$
 increases, to the right it decreases, above the $dV/dt$ nullcline $V$
-decreases, below it, it increases. In Fig.~\ref{ML_phase}A there is a
+decreases, below it, it increases. In Fig.~\ref{60}A there is a
 single equilibrium point where the two lines cross, but it is easy to
 see from the arrow directions that this is unstable, in fact there is
 a limit cycle and the equation with this phase diagram exhibits
-regular spiking, this is shown in Fig.~\ref{ML_spike}. In
-Fig.~\ref{ML_phase}B the equilibrium point is stable so this time the
+regular spiking, this is shown in Fig.~\ref{60}B. In
+Fig.~\ref{40}A the equilibrium point is stable so this time the
 model does not spike regularly, however if the system is moved away
 from the equilibrium point it sometimes returns there by spiking.
-
-
-\begin{figure}
-\begin{center}
-\includegraphics[width=8cm]{ML_spike.jpg}
-\end{center}
-\caption{This is a sketch for the Morris-Lecar limit cycle. \label{ML_spike}}
-\end{figure}
 
 \subsection*{FitzHugh-Nagumo model}
 
@@ -152,11 +209,11 @@ One advantage of the FitzHugh-Nagumo model
 \cite{FitzHugh1955,Nagumo1962} is that it is clear how it derived from
 the Hodgkin-Huxley equation, though a formal derivation yields
 slightly different results. However, one disadvantage is that the
-actual mathematical form of the equations is quite complicated; for
-example, there is no easy way to solve for the nullclines. Although
-its origin is quite different one way to think of the FitzHugh-Nagumo
-model is as a model that has a similar phase plane as the
-Morris-Lecar, but a much simpler form. The FitzHugh-Nagumo model is
+actual mathematical form of the equations is quite
+complicated. Although its origin is quite different one way to think
+of the FitzHugh-Nagumo model is as a model that has a similar phase
+plane as the Morris-Lecar, but a much simpler form. The
+FitzHugh-Nagumo model is
 \begin{eqnarray}
 \frac{dw}{dt}&=&v-\frac{1}{3}v^3-w+I\cr
 \tau\frac{dw}{dt}&=&v+a-bw

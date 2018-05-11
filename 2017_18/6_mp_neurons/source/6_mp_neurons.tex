@@ -133,7 +133,7 @@ $w_{ij}$ are the connection strengths weighting the inputs from the
 other neurons. The McCulloch Pitts neuron was the first example of an
 artificial neuron and had a step function for $\phi$:
 \begin{equation}
-x_i=\left\{\begin{array}{ll}1&\sum_j w_{ij} x_j>\theta_i\\0&\mbox{otherwise}\end{array}\right.
+x_i=\left\{\begin{array}{ll}1&\sum_j w_{ij} x_j>\theta_i\\-1&\mbox{otherwise}\end{array}\right.
 \end{equation}
 Thus, the neuron has two states, it is in the on state, $x_i=1$ if the
 weighted input exceeds a threshold $\theta_i$ and an off state,

@@ -1,0 +1,27 @@
+Q01: an auto-associative network
+Q02: N^2
+Q03: B
+Q04: 1 and 4 are correct
+Q05: they allow cerebellum to learn complex associations . . .
+Q06: A - cerebellum, B - hippocampus and basal gangli, C - neocortex
+Q07: 4
+Q08: Gamma
+Q09: an animal is presented with an unexpected reward
+Q10: TTFT
+Q11: corrected in the exam with f->b, the answer is h(t)=[h(0)-b]\exp{(-t/a)}+b
+Q12: Aphasia
+Q13: The creation of independent codes
+Q14: place cells
+Q15: Hodgkin Huxley
+Q16: 1, any particular neuron only has one type carrying its signals . . . 
+Q17: \log{(1+x^2)}
+Q18: note this uses a different convention for MP neurons, 7 to 10 has
+\delta w = -0.5*0.2*0.8 = - 0.02 so w= 0.02
+Q19: the first statement, sodium goes in as m increases, h cuts it off by decreasing.
+Q20: understanding fear
+Q21: A is Purkinje and B is granule
+Q22: sd is 2 in both cases and the difference in mu's is 10, so 5
+Q23: -70 mV / -55 mV / 12 ms / 4 ms
+Q24: Purkinje cell
+Q25: O(h^2) 
+  

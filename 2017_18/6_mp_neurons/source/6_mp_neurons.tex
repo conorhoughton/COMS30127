@@ -525,20 +525,20 @@ and negative. This means that updating the neurons will tend to reduce
 the energy. In fact, this can be proved and that the system will
 evolve to a local minimum.
 
-Now the question is how to create the local minima? Here are two
-similar rules to achieve this:
+Now the question is how to create the local minima? Here is a rules to
+achieve this:
 \begin{equation}
 w_{ij}=\frac{1}{N}\sum_a x^a_ix^a_j
 \end{equation}
-or 
-\begin{equation}
-\delta w_{ij}=\eta (x_i-\alpha)(x_j-\alpha)
-\end{equation}
 where $N$ is the number of patterns to be stored, and $a$ indexes the
 patterns. There are other rules, in fact there are rules that can
-store more patterns, but these two rules, the first a sort of \lq{}top
-down\rq{} rule and the second a more on-line rule, are inspired by
-Hebbian plasticity.
+store more patterns, but rule, a sort of \lq{}top down\rq{} rule is
+inspired by Hebbian plasticity. There is an online rule that is even
+closer to Hebbian plasticity where $w_{ij}$ is changed for each
+presentation:
+\begin{equation}
+\delta w_{ij}=\eta (x_i^a+1-2\alpha)(x_j^a+1-2\alpha)
+\end{equation}
 
 We will discuss synapses in much more detail later on; synapses are
 the connections from one neuron to another; an \textsl{excitatory
@@ -587,21 +587,22 @@ where $w_{ij}$ is the strength of the synapse from neuron $i$ to
 neuron $j$, $x_i$ and $x_j$ are the states of the two neurons and
 $\eta$ is a learning rate. Another version is
 \begin{equation}
-\delta w_{ij}=\eta (x_i-\alpha)(x_j-\alpha)
-\end{equation}
-where having $\alpha$ allows negative changes, when $x_i>\alpha$ and
-$x_j<\alpha$, or vice versa.
-
-This plasticity rule clearly matches the on-line Hopfield learning
-rule; in fact, in the Hopfield network $\alpha$ has to be set equal to
-the average density of the patterns, that is, the average number of
-ones, for convergence. So, to recap, during learning the patterns are
-activated and plastic changes are made to the synapse strength
-according to a simple correlation based Hebbian plasticity rule.
-\begin{equation}
 \delta w_{ij}=\eta (x_i-a)(x_j-a)
 \end{equation}
-Typically $a$ is very small for real networks so there will be a large
+where having $\alpha$ allows for different cut-off points between the behaviour that causes potentiation or depression. 
+
+
+This is clearly, up to a choice of $a$, the same as the rule 
+\begin{equation}
+\delta w_{ij}=\eta (x_i^a+1-2\alpha)(x_j^a+1-2\alpha)
+\end{equation}
+mentioned for Hopfield networks; in fact, in the Hopfield network
+$\alpha$ has to be set equal to the average density of the patterns,
+that is, the average number of ones, for convergence. So, to recap,
+during learning the patterns are activated and plastic changes are
+made to the synapse strength according to a simple correlation based
+Hebbian plasticity rule.
+Typically $\alpha$ is very small for real networks so there will be a large
 increase for the connection between two neurons that are active at the
 same time, a tiny increase for pairs neurons that are inactive at the
 same time and a medium size decrease for pairs of neurons where one is
@@ -656,7 +657,7 @@ active and one inactive. See Fig.~\ref{fig:hebb}.
 \path (7) edge[bend right,color=gray] (8);
 \end{tikzpicture}
 \end{center}
-\caption{Learning in the associate network. The pattern has been imposed and connection strengths are changed. The red links increase by $\eta(1-a)^2$ and the gray by $\eta(-a)^2$, the yellow links decrease by $\eta a(1-a)$.\label{fig:hebb}}
+\caption{Learning in the associate network. The pattern has been imposed and connection strengths are changed. The red links increase by $4\eta(1-\alpha)^2$ and the gray by $\eta(-\alpha)^2$, the yellow links decrease by $2\eta \alpha(1-\alpha)$.\label{fig:hebb}}
 \end{figure}
 
 During recall some of the neurons are held in the active state and the
@@ -757,14 +758,14 @@ number of patterns that can be stored is $N^2/N=N$ \cite{Amit1992a}.
 
 The capacity is also larger if there is sparseness; one way to think
 of this is to observe the weight decrease between an active and
-inactive connection is $\delta w_{ij}=-\eta \alpha (1-\alpha)$ so the smaller
-$a$ is the smaller the amount these links are decreased. Links are
-decreased if, in the pattern, one neuron is active and one inactive,
-they are strengthened if both neurons are active, the increase is
-$\eta (1-\alpha)^2$. Hence, it takes $1/\alpha$ patterns where a connection is
-weakened to wipe out the strengthening that results if the connection is
-part of a pattern. In fact, it is estimated that the capacity of a
-network is
+inactive connection is $\delta w_{ij}=-2\eta \alpha (1-\alpha)$ so the
+smaller $\alpha$ is the smaller the amount these links are
+decreased. Links are decreased if, in the pattern, one neuron is
+active and one inactive, they are strengthened if both neurons are
+active, the increase is $\eta (1-\alpha)^2$. Hence, it takes of the
+order of $1/\alpha$ patterns where a connection is weakened to wipe
+out the strengthening that results if the connection is part of a
+pattern. In fact, it is estimated that the capacity of a network is
 \begin{equation}
 P=\frac{k}{\alpha}N
 \end{equation}

@@ -537,7 +537,7 @@ inspired by Hebbian plasticity. There is an online rule that is even
 closer to Hebbian plasticity where $w_{ij}$ is changed for each
 presentation:
 \begin{equation}
-\delta w_{ij}=\eta (x_i^a+1-2\alpha)(x_j^a+1-2\alpha)
+\delta w_{ij}=\frac{\eta}{4} (x_i^a+1-2\alpha)(x_j^a+1-2\alpha)
 \end{equation}
 
 We will discuss synapses in much more detail later on; synapses are
@@ -592,9 +592,10 @@ $\eta$ is a learning rate. Another version is
 where having $\alpha$ allows for different cut-off points between the behaviour that causes potentiation or depression. 
 
 
-This is clearly, up to a choice of $a$, the same as the rule 
+This is clearly, up to a choice of $a$ and rescaling of $\eta$, the
+same as the rule
 \begin{equation}
-\delta w_{ij}=\eta (x_i^a+1-2\alpha)(x_j^a+1-2\alpha)
+\delta w_{ij}=\frac{\eta}{4} (x_i^a+1-2\alpha)(x_j^a+1-2\alpha)
 \end{equation}
 mentioned for Hopfield networks; in fact, in the Hopfield network
 $\alpha$ has to be set equal to the average density of the patterns,
@@ -657,7 +658,7 @@ active and one inactive. See Fig.~\ref{fig:hebb}.
 \path (7) edge[bend right,color=gray] (8);
 \end{tikzpicture}
 \end{center}
-\caption{Learning in the associate network. The pattern has been imposed and connection strengths are changed. The red links increase by $4\eta(1-\alpha)^2$ and the gray by $\eta(-\alpha)^2$, the yellow links decrease by $2\eta \alpha(1-\alpha)$.\label{fig:hebb}}
+\caption{Learning in the associate network. The pattern has been imposed and connection strengths are changed. The red links increase by $\eta(1-\alpha)^2$ and the gray by $\eta(-\alpha)^2$, the yellow links decrease by $\eta \alpha(1-\alpha)$.\label{fig:hebb}}
 \end{figure}
 
 During recall some of the neurons are held in the active state and the
@@ -758,7 +759,7 @@ number of patterns that can be stored is $N^2/N=N$ \cite{Amit1992a}.
 
 The capacity is also larger if there is sparseness; one way to think
 of this is to observe the weight decrease between an active and
-inactive connection is $\delta w_{ij}=-2\eta \alpha (1-\alpha)$ so the
+inactive connection is $\delta w_{ij}=-\eta \alpha (1-\alpha)$ so the
 smaller $\alpha$ is the smaller the amount these links are
 decreased. Links are decreased if, in the pattern, one neuron is
 active and one inactive, they are strengthened if both neurons are

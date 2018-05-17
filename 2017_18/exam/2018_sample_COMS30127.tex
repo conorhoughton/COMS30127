@@ -2,8 +2,8 @@
 
 
 \newif\ifsoln
-%\solnfalse
-\solntrue
+\solnfalse
+%\solntrue
 
 
 %MSM: unit specific Latex commands 
@@ -53,9 +53,9 @@ the stimulus location, simple cell responses are not.  \fi
 \ifsoln Solution:  It ignores the temporal structure; spike timing effects are now considered important.\fi
 
 %3
-\item Visual neurons receptive fields can often be modelled as a 2D sine wave multiplied by a 2D Gaussian. What is the common name for this compound function? 
+\item What are the principal cells of the cerebellar cortex?
 
-\ifsoln Solution:  Gabor function/filter. \fi
+\ifsoln Solution:  Purkinje cells. \fi
 
 %4
 \item  Neurons cannot fire at arbitrarily high rates because after a spike there is typically a short period of time, usually several milliseconds, where they are resistant to spiking again. What is this time period called? 
@@ -124,10 +124,9 @@ Solved by ansatz or integrating factor this give $v=\exp{(-t/3)}$.
 
 %14 
 
-\item What is meant by a central pattern generator?  
+\item What is meant by spike rate adaptation.
 
-\ifsoln Solution:  It is an intrinsically spiking network of neuron which creates
-a rhythmic activity.\fi
+\ifsoln Solution: When ongoing stimulation causes a neuron to fire the firing rate often drops even if the stimulation does not.\fi
 
 %15 
 \item Define the energy of a pattern in the Hopfield network and
@@ -172,33 +171,46 @@ Show using the Taylor expansion that this is accurate to $O(\delta t^3)$. [8 mar
 \ifsoln Solution:  a) and c) see notes; b) because of the reset. \fi
 
  
-\item This question is about synaptic plasticity.
-\begin{enumerate}
-\item Let each synapse's weight $w_i$ be plastic, and change according
-  to a Hebbian rule: $w(t+1) = w(t) + 0.1 \times x_i y$. Is this
-  plasticity rule stable or unstable? Explain your answer. [4 marks]
- 
-\item Now consider a case where there are just two input neurons with
-  firing rates $x_1 = 2$ and $x_2 = 4$, and respective synaptic
-  weights initially both equal to one, $w_1 = w_2 = 0.5$. Compute the
-  synaptic weights after one update. [4 marks]
- 
-\item Let's assume that we always want the sum of the weights to remain $w_1 + w_2 = 1$. This can be achieved by renormalising the synaptic strengths after each update, either by subtracting some fixed amount from each weight, or by dividing both weights by some fixed amount. Compute the normalised synaptic weights after one weight update for each case. Which method (additive scaling or multiplicative scaling) leads to a greater difference between synaptic strengths? [4 marks]
- 
-\item Now consider a new plasticity rule (similar to the ``BCM'' rule), where $\frac{dw_i}{dt} = x_i(y-\theta)$ where $\theta$ is a threshold that determines whether the synapse increases or decreases in strength. The threshold itself changes on a slow timescale, according to $\frac{d \theta}{dt} = y^2 - \theta$. What is the steady state value of the threshold in terms of $y$? [4 marks]
+\item This question is about synapses.
 
-\item Now consider there are just two input neurons with firing rates $x_1 = 3$ and $x_2 = 5$. If the synaptic weights change according to the BCM-like plasticity rule from the previous question, what is the eventual steady-state value of $w_1$ as a function of the steady-state value of $w_2$? [4 marks]
+\begin{enumerate}
+
+\item Let each synapse's weight $w_i$ be plastic, and change according to a Hebbian rule: $w(t+1) = w(t) + \frac{1}{8} x_i y$ where $t$ indexes time. Is this plasticity rule stable or unstable? Explain your answer. [3 marks]
+
+ 
+
+\item Now consider a case where there are just two input neurons with firing rates $x_1 = 1$ and $x_2 = 3$, and respective synaptic weights initially both equal to one half, $w_1 = w_2 = \frac{1}{2}$. Compute the synaptic weights after one update. [4 marks]
+
+ 
+
+\item Let's assume that we always want the sum of the weights to remain $w_1 + w_2 = 1$. This can be achieved by renormalising the synaptic strengths after each update, either by subtracting some fixed amount from each weight, or by dividing both weights by some fixed amount. Normalise the updated synaptic weights from the previous question, first using subtractive normalisation, then compare it with the result obtained with divisive normalisation. Report the resulting weight values for each case. Which method (subtractive or divisive normalisation) leads to a greater difference between $w_1$ and $w_2$? [5 marks]
+
+ 
+
+\item Now consider a new plasticity rule (similar to the ``BCM'' rule), where $\frac{dw_i}{dt} = x_i(y-\theta)$ where $\theta$ is a threshold that determines whether the synapse increases or decreases in strength. The threshold itself changes on a slow timescale, according to $\frac{d \theta}{dt} = y^2 - \theta$. What is the steady state value of the threshold in terms of $y$? [3 marks]
+
+ 
+
+\item Now consider there are just two input neurons with firing rates $x_1 = 3$ and $x_2 = 5$. If the synaptic weights change according to the BCM-like plasticity rule from the previous question, what is the eventual steady-state value of $w_1$ as a function of the steady-state value of $w_2$? [5 marks]
+
+ 
+
 \end{enumerate}
 
-\ifsoln 
+\ifsoln Solution
 
-Solution: 
 \begin{enumerate}
+
 \item Unstable. $\Delta w$ is always $\geq 0$, so the weights grow without bound. The rule encourages positive feedback since increasing $w$ will increase $y$, which further increases $w$. [3 marks, one mark for correctly stating `unstable', two more mark for a correct justification.]
+
 \item $w_{1new} = \frac{3}{4}$ and $w_{2new} = \frac{5}{4}$ [4 marks, two marks for each correct answer].
+
 \item Subtractive scaling gives $w_{1new} = \frac{1}{4}$ and $w_{2new} = \frac{3}{4}$, divisive scaling gives $w_{1new} = \frac{3}{8}$ and $w_{2new} = \frac{5}{8}$. Subtractive normalisation results in the bigger difference between the weights (1/2 vs 1/4). [5 marks, 2 marks for each pair of correct weight values, and one further mark for a correct statement that subtractive normalisation gives a greater difference. If the student carried forward a mistake from the previous question, do not penalise them.]
+
 \item Steady-state $\theta_\infty = y^2$. [3 marks for correct answer.]
+
 \item $w_{1 \infty} = (1-5w_{2 \infty})/3$. [5 marks for correct answer.]
+
 \end{enumerate}
 
 \fi

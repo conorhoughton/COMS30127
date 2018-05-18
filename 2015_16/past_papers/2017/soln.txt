@@ -1,0 +1,26 @@
+Q1: about 9.5Hz
+Q2: A Purkinje, B granule
+Q3: zero (we didn't do conditioning in 2017-18)
+Q4: Left system
+Q5: Donald Hebb
+Q6: Sodium for the rise, potassium for the fall
+Q7: creation of independent codes
+Q8: Hippocampus (more specifically, the Dentate Gyrus)
+Q9: N^2
+Q10: Hippocampus
+Q11: 10 ln(4) ms
+Q12: first option, more K outside, more Na inside, potential lower inside.
+Q13: Dopamine (we didn't do Basal Ganglia in 2017-18)
+Q14: A (we didn't do Basal Ganglia in 2017-18)
+Q15: Purkinje cell
+Q16: -70 mV / -55 mV / 12 ms / 4 ms
+Q17: Broca's area
+Q18: plot handed out in the exam, it was the classic Bi and Poo plot with pre before post corresponding to positive change.
+Q19: log(1+x^2)
+Q20: a perceptron (we didn't do the Basal Ganglia in 2017-18)
+Q21: sometimes
+Q22: 6/3=2
+Q23: error is 2  and x1=1 so delta w = - 0.1*2=-0.2 so it will be w1=0.8 afterwards
+Q24: 1.5
+Q25: V=E_L+I/G
+

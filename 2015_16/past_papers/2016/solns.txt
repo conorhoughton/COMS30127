@@ -1,5 +1,5 @@
 Q01: an auto-associative network
-Q02: N^2
+Q02: N
 Q03: B
 Q04: 1 and 4 are correct
 Q05: they allow cerebellum to learn complex associations . . .

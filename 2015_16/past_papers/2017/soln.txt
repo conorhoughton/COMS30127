@@ -6,10 +6,10 @@ Q5: Donald Hebb
 Q6: Sodium for the rise, potassium for the fall
 Q7: creation of independent codes
 Q8: Hippocampus (more specifically, the Dentate Gyrus)
-Q9: N^2
+Q9: N
 Q10: Hippocampus
 Q11: 10 ln(4) ms
-Q12: first option, more K outside, more Na inside, potential lower inside.
+Q12: more Na outside, more K inside, potential lower inside.
 Q13: Dopamine (we didn't do Basal Ganglia in 2017-18)
 Q14: A (we didn't do Basal Ganglia in 2017-18)
 Q15: Purkinje cell

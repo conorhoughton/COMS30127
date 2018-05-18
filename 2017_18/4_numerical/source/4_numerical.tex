@@ -212,15 +212,15 @@ k_2=G\left(f_n+\frac{\delta t k_1}{2}\right)
 \end{equation}
 Now, using the Taylor expansion
 \begin{equation}
-k_2=G(f_n+\delta t f_1/2)=G(f_n)+\left.\frac{dG}{df}\right|_{f=f_n}\delta t\frac{k_1}{2}+\ldots
+k_2=G(f_n+\delta t k_1/2)=G(f_n)+\left.\frac{dG}{df}\right|_{f=f_n}\delta t\frac{k_1}{2}+\ldots
 \end{equation}
 Substituting back for $k_1$ this gives
 \begin{equation}
-k_2=G(f_n)+\frac{1}{2}\left.\frac{dG}{df}\right|_{g=g_n}\left.\frac{df}{dt}\right|_{t=t_n}\delta t+\ldots
+k_2=G(f_n)+\frac{1}{2}\left.\frac{dG}{df}\right|_{f=f_n}\left.\frac{df}{dt}\right|_{t=t_n}\delta t+\ldots
 \end{equation}
 Using the chain rule
 \begin{equation}
-\frac{d^2g}{dt^2}=\frac{dG}{dt}=\frac{dG}{df}\frac{df}{dt}
+\frac{d^2f}{dt^2}=\frac{dG}{dt}=\frac{dG}{df}\frac{df}{dt}
 \end{equation}
 so
 \begin{equation}
@@ -232,9 +232,9 @@ f(n\delta t + \delta t)=f_n+\left.\frac{df}{dt}\right|_{t=t_n}\delta t+\frac{1}{
 \end{equation}
 and from the formula for $k_1$ and $k_2$ we see that this can be written as
 \begin{equation}
-y_{n+1}=y_n+k_2\delta t
+f_{n+1}=f_n+k_2\delta t
 \end{equation}
-This means that the calculation of $y_{n+1}$ takes into account
+This means that the calculation of $f_{n+1}$ takes into account
 more of the Taylor expansion than the Euler method, it includes the
 $\delta t^2$ part and so the errors will come in at $\delta t^3$.
 This is the \textsl{second order Runge Kutta method}, it is called

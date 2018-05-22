@@ -157,7 +157,7 @@ for the $v$-nullcline and
 n=n_\infty
 \end{equation}
 for the $n$-nullcline. The key point is that the $V$-nullcline has a
-sort of cubic shape which for many parameter values is cut by the
+sort of cubic shape which is cut by the
 $n$-nullcline, examples is given in Fig.~\ref{60} and Fig.~\ref{40}.
 
 \begin{figure}
@@ -192,16 +192,28 @@ $n$-nullcline, examples is given in Fig.~\ref{60} and Fig.~\ref{40}.
 
 It is possible to understand different spiking regimes from these
 figure. Remember the nullclines separate areas with different signs
-for $dV/dt$ and $dn/dt$, to the left of the $dn/dt$ nullcline $n$
-increases, to the right it decreases, above the $dV/dt$ nullcline $V$
-decreases, below it, it increases. In Fig.~\ref{60}A there is a
-single equilibrium point where the two lines cross, but it is easy to
-see from the arrow directions that this is unstable, in fact there is
-a limit cycle and the equation with this phase diagram exhibits
-regular spiking, this is shown in Fig.~\ref{60}B. In
-Fig.~\ref{40}A the equilibrium point is stable so this time the
-model does not spike regularly, however if the system is moved away
-from the equilibrium point it sometimes returns there by spiking.
+for $dV/dt$ and $dn/dt$. Since $dn/dt$ is proportional to $n_\infty-n$
+if $n>n_\infty$ then $dn/dt<0$; this is the region above the
+$n$-nullcline and because the nullcline is almost vertical, this is
+the area on the left of the graph in the figure. Similarly with the
+$V$-nullcline, $V$ decreases above the nullcline and below it, it
+increases. This is harder to see from the equation, but we do know
+that the coefficient of $n$ is negative for $V>E_{\text{K}}$ so increase $n$
+should eventually make $dV/dt$ negative.
+
+In Fig.~\ref{60}A there is a single equilibrium point where the two
+lines cross, but it is possible to guess from the arrow directions
+that this point is unstable. For example, a small perturbation
+increasing $V$ moves the neuron to the region below the $V$-nullcline
+so $V$ decreases, moving the neuron further away from the equilibium
+point. In fact there is a limit cycle and the equation with this phase
+diagram exhibits regular spiking, this is shown in Fig.~\ref{60}B. In
+Fig.~\ref{40}A the equilibrium point is stable, for example, if $V$
+increases a tiny bit the neuron is still above the $V$-nullcline so
+that $V$ decreases again, send the neuron back towards the equilibrium
+point. This time the model does not spike regularly, however if the
+system is moved away from the equilibrium point it sometimes returns
+there by spiking.
 
 \subsection*{FitzHugh-Nagumo model}
 
@@ -235,8 +247,6 @@ We see clearly that the $v$-nullcline has the same cubic shape as is
 the case of the Morris-Lecar, the $w$-nullcline is a straight line
 now, before it was a sort of sigmoid shape, but it has the same
 property of crossing the $v$-nullcline at exactly one place. This gives a similar limit cycle as before: Fig.~\ref{FHN_phase}.
-
-
 
 \begin{figure}
 \begin{center}

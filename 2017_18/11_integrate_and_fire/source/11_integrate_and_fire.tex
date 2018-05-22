@@ -282,6 +282,19 @@ Finally, this is the time between spikes, so the frequency is one over this. It 
   the firing increases very quickly. \label{f_i_curve}}
 \end{figure}
 
+In fact, neurons tend not to have a regular firing rate; they often,
+for example, show spike rate adaptation. This means that the firing
+rate decreases even if the incoming current remains constant. As we
+have seen this isn't modelling in the integrate and fire model, in the
+integrate and fire model the response to a constant current is a
+constant firing rate. The model can be extended to include it. For
+example a slow potassium current could be added, a slow potassium
+current is a current that would increase every time there is a spike
+and decrease between spikes. Since a potassium current reduces the
+voltage inside the cell, it decreases the firing rate; thus, if the
+cell fires quickly the potassium current increases, decreasing the
+firing rate until the increase in the potassium when there is a spike
+balances the decrease between spikes.
 
 \begin{thebibliography}{99}
 \bibitem{Lapicque1907a}

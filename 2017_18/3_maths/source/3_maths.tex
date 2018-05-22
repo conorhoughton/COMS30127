@@ -16,7 +16,7 @@ inhomogeneous first order differential equations
 \tau\frac{df}{dt}=g(t)-f(t)
 \end{equation}
 where $f(t)$ is some function of $t$ we are interested, $g(t)$ is some
-outside \textsl{driving function} and $\tau$ is a con|stant. One
+outside \textsl{driving function} and $\tau$ is a constant. One
 example we will examine is the integrate and fire equation:
 \begin{equation}
 \tau_m\frac{dV}{dt}=E_l-V(t)+g_lI(t)
@@ -49,7 +49,7 @@ This gives
 \begin{equation}
 \tau e^{t/\tau}\frac{df}{dt}+e^{t/\tau}f=e^{t/\tau}g(t)
 \end{equation}
-The clever bit, now, is that the two terms on the right hand side can
+The clever bit, now, is that the two terms on the left hand side can
 be rewritten in product form
 \begin{equation}
 \tau \frac{d}{dt}\left(e^{t/\tau}f\right)=e^{t/\tau}g(t)
@@ -146,7 +146,7 @@ to convert it into a second order equation and solve that; the first
 way is more general but the second is quicker. Let's start by making
 the equation homogeneous and going from there, so let
 \begin{eqnarray}
-f'&=&f-\bar{f}-\bar{w}\\
+f'&=&f-\bar{f}+\bar{w}\\
 w'&=&w-\bar{w}
 \end{eqnarray}
 giving
